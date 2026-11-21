@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+    <interface>
+      <GigabitEthernet>
+        <name>1/0/5</name>
+        <description>Clients</description>
+        <switchport-config>
+          <switchport>
+            <access xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+              <vlan>
+                <vlan>123</vlan>
+              </vlan>
+            </access>
+            <mode xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+              <access/>
+            </mode>
+            <voice xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+              <vlan>
+                <vlan>500</vlan>
+              </vlan>
+            </voice>
+          </switchport>
+        </switchport-config>
+        <storm-control>
+          <action>
+            <trap/>
+          </action>
+          <multicast>
+            <level>
+              <threshold>
+                <rising-threshold>30.0</rising-threshold>
+                <falling-threshold>0.0</falling-threshold>
+              </threshold>
+            </level>
+          </multicast>
+          <unicast>
+            <level>
+              <threshold>
+                <rising-threshold>3.0</rising-threshold>
+              </threshold>
+            </level>
+          </unicast>
+        </storm-control>
+        <service-policy xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-policy">
+          <output>raus</output>
+        </service-policy>
+        <spanning-tree xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-spanning-tree">
+          <bpduguard>
+            <enable/>
+          </bpduguard>
+          <portfast-v2>
+            <access/>
+          </portfast-v2>
+          <portfast/>
+        </spanning-tree>
+      </GigabitEthernet>
+    </interface>
+  </native>
+</data>

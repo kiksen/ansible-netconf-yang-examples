@@ -1,0 +1,63 @@
+---
+- name: Interface per NETCONF schreiben
+  hosts: switch
+  gather_facts: false
+
+  vars:
+    interface_id: "1/0/5"
+    interface_description: Clients
+    access_vlan: 123
+    voice_vlan: 500
+    storm_unicast_level: "3.0"
+    service_policy_out: raus
+
+  tasks:
+    - name: GigabitEthernet{{ interface_id }} per edit-config (merge) schreiben
+      ansible.netcommon.netconf_config:
+        target: running
+        default_operation: merge
+        content: |
+          <config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+            <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+              <interface>
+                <GigabitEthernet>
+                  <name>{{ interface_id }}</name>
+                  <description>{{ interface_description }}</description>
+                  <switchport-config>
+                    <switchport>
+                      <access xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+                        <vlan><vlan>{{ access_vlan }}</vlan></vlan>
+                      </access>
+                      <mode xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+                        <access/>
+                      </mode>
+                      <voice xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+                        <vlan><vlan>{{ voice_vlan }}</vlan></vlan>
+                      </voice>
+                    </switchport>
+                  </switchport-config>
+                  <storm-control>
+                    <unicast>
+                      <level>
+                        <threshold>
+                          <rising-threshold>{{ storm_unicast_level }}</rising-threshold>
+                        </threshold>
+                      </level>
+                    </unicast>
+                  </storm-control>
+                  <service-policy xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-policy">
+                    <output>{{ service_policy_out }}</output>
+                  </service-policy>
+                  <spanning-tree xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-spanning-tree">
+                    <bpduguard><enable/></bpduguard>
+                    <portfast/>
+                  </spanning-tree>
+                </GigabitEthernet>
+              </interface>
+            </native>
+          </config>
+      register: result
+
+    - name: Ergebnis ausgeben
+      ansible.builtin.debug:
+        var: result.changed

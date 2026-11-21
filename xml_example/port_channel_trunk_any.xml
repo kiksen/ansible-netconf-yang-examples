@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+    <interface>
+      <Port-channel>
+        <name>1</name>
+        <description>Verb.XXXX</description>
+        <switchport-config>
+          <switchport>
+            <mode xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+              <trunk/>
+            </mode>
+          </switchport>
+        </switchport-config>
+        <ip>
+          <dhcp>
+            <snooping xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-dhcp">
+              <trust/>
+            </snooping>
+          </dhcp>
+        </ip>
+        <storm-control>
+          <action>
+            <trap/>
+          </action>
+          <multicast>
+            <level>
+              <threshold>
+                <rising-threshold>3.0</rising-threshold>
+              </threshold>
+            </level>
+          </multicast>
+          <unicast>
+            <level>
+              <threshold>
+                <rising-threshold>3.0</rising-threshold>
+              </threshold>
+            </level>
+          </unicast>
+        </storm-control>
+      </Port-channel>
+    </interface>
+  </native>
+</data>

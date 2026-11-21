@@ -1,0 +1,11 @@
+---
+all:
+  hosts:
+    switch:
+      ansible_host: 10.10.10.144
+      ansible_port: 830
+      ansible_user: test
+      ansible_password: test
+      ansible_connection: ansible.netcommon.netconf
+      ansible_network_os: cisco.ios.ios
+      ansible_netconf_host_key_checking: false

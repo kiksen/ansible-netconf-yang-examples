@@ -1,0 +1,65 @@
+{% set port_access_if_type = port_access_interface | interface_part('type') %}
+{% set port_access_if_id = port_access_interface | interface_part('id') %}
+<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+    <interface>
+      <{{ port_access_if_type }}>
+        <name>{{ port_access_if_id }}</name>
+        <description>{{ port_access_description }}</description>
+        <switchport-config>
+          <switchport>
+            <access xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+              <vlan>
+                <vlan>{{ port_access_vlan }}</vlan>
+              </vlan>
+            </access>
+            <mode xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+              <access/>
+            </mode>
+{% if port_access_voice_vlan is not none %}
+            <voice xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+              <vlan>
+                <vlan>{{ port_access_voice_vlan }}</vlan>
+              </vlan>
+            </voice>
+{% else %}
+            <voice xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch" nc:operation="remove"/>
+{% endif %}
+          </switchport>
+        </switchport-config>
+        <storm-control>
+          <action>
+            <trap/>
+          </action>
+          <multicast>
+            <level>
+              <threshold>
+                <rising-threshold>30.0</rising-threshold>
+                <falling-threshold>0.0</falling-threshold>
+              </threshold>
+            </level>
+          </multicast>
+          <unicast>
+            <level>
+              <threshold>
+                <rising-threshold>3.0</rising-threshold>
+              </threshold>
+            </level>
+          </unicast>
+        </storm-control>
+        <service-policy xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-policy">
+          <output>raus</output>
+        </service-policy>
+        <spanning-tree xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-spanning-tree">
+          <bpduguard>
+            <enable/>
+          </bpduguard>
+          <portfast-v2>
+            <access/>
+          </portfast-v2>
+          <portfast/>
+        </spanning-tree>
+      </{{ port_access_if_type }}>
+    </interface>
+  </native>
+</config>

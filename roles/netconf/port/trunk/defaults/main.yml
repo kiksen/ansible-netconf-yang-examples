@@ -1,0 +1,3 @@
+---
+# Pflicht: port_trunk_interface, port_trunk_description, port_trunk_allowed_vlans
+port_trunk_native_vlan: null

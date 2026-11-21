@@ -1,0 +1,22 @@
+---
+argument_specs:
+  main:
+    short_description: Access-Port per NETCONF schreiben
+    options:
+      port_access_interface:
+        type: str
+        required: true
+        description: Interface-Name, z.B. GigabitEthernet1/0/5 (auch Gi1/0/5).
+      port_access_vlan:
+        type: int
+        required: true
+        description: Access-VLAN.
+      port_access_voice_vlan:
+        type: int
+        required: false
+        default: null
+        description: Voice-VLAN. Ohne Angabe wird ein vorhandenes Voice-VLAN entfernt.
+      port_access_description:
+        type: str
+        required: true
+        description: Interface-Description.

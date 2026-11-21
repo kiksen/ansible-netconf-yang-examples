@@ -1,0 +1,13 @@
+---
+- name: Trunk per NETCONF schreiben
+  hosts: switch
+  gather_facts: false
+
+  vars:
+    port_trunk_interface: GigabitEthernet1/0/6
+    port_trunk_description: Uplink
+    port_trunk_allowed_vlans: [100, 200, 300]  # or: all
+    port_trunk_native_vlan: 100  # remove or set to null for no native VLAN
+
+  roles:
+    - role: netconf/port/trunk

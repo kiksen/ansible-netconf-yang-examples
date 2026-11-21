@@ -1,0 +1,20 @@
+---
+- name: Validate trunk VLAN parameters
+  ansible.builtin.assert:
+    that:
+      - >-
+        port_trunk_allowed_vlans == 'all' or
+        (port_trunk_allowed_vlans is sequence and port_trunk_allowed_vlans is not string
+        and port_trunk_allowed_vlans | length > 0)
+    fail_msg: "port_trunk_allowed_vlans must be 'all' or a non-empty list of VLAN IDs"
+    quiet: true
+
+- name: "Write physical port trunk with edit-config (merge) on {{ port_trunk_interface }}"
+  ansible.netcommon.netconf_config:
+    target: running
+    default_operation: merge
+    content: "{{ lookup('ansible.builtin.template', 'trunk_port.xml.j2') }}"
+  register: port_trunk_edit_result
+  retries: 5
+  delay: 5
+  until: port_trunk_edit_result is not failed or 'locked' not in (port_trunk_edit_result.msg | default(''))

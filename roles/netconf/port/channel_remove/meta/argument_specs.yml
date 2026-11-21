@@ -1,0 +1,9 @@
+---
+argument_specs:
+  main:
+    short_description: Port-Channel per NETCONF entfernen
+    options:
+      port_channel_remove_interface:
+        type: str
+        required: true
+        description: Name des Port-Channels, z.B. Port-channel2. Andere Interface-Typen werden abgelehnt.

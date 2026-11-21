@@ -1,0 +1,24 @@
+---
+argument_specs:
+  main:
+    short_description: physical port als Trunk per NETCONF schreiben
+    options:
+      port_trunk_interface:
+        type: str
+        required: true
+        description: Interface-Name, z.B. GigabitEthernet1/0/6.
+      port_trunk_description:
+        type: str
+        required: true
+        description: Interface-Description.
+      port_trunk_allowed_vlans:
+        type: raw
+        required: true
+        description: >-
+          Liste der erlaubten VLANs (z.B. [100, 200, 300]) oder der String all
+          (NetBox tagged / tagged-all).
+      port_trunk_native_vlan:
+        type: int
+        required: false
+        default: null
+        description: Native-VLAN (NetBox untagged). Ohne Angabe wird ein vorhandenes Native-VLAN entfernt.

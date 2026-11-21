@@ -1,0 +1,52 @@
+{% set port_trunk_if_type = port_trunk_interface | interface_part('type') %}
+{% set port_trunk_if_id = port_trunk_interface | interface_part('id') %}
+<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+    <interface>
+      <{{ port_trunk_if_type }}>
+        <name>{{ port_trunk_if_id }}</name>
+        <description>{{ port_trunk_description }}</description>
+        <switchport-config>
+          <switchport>
+            <mode xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+              <trunk/>
+            </mode>
+            <trunk xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+{% if port_trunk_allowed_vlans == 'all' %}
+              <allowed nc:operation="remove"/>
+{% else %}
+              <allowed>
+                <vlan-v2>
+                  <vlan-choices>
+                    <vlans>{{ port_trunk_allowed_vlans | map('string') | join(',') }}</vlans>
+                  </vlan-choices>
+                </vlan-v2>
+              </allowed>
+{% endif %}
+{% if port_trunk_native_vlan is not none %}
+              <native>
+                <vlan>
+                  <vlan-id>{{ port_trunk_native_vlan }}</vlan-id>
+                </vlan>
+              </native>
+{% else %}
+              <native nc:operation="remove"/>
+{% endif %}
+            </trunk>
+          </switchport>
+        </switchport-config>
+        <ip>
+          <dhcp>
+            <snooping xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-dhcp">
+              <trust/>
+            </snooping>
+          </dhcp>
+        </ip>
+        <service-policy xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-policy">
+          <output>raus</output>
+        </service-policy>
+        <vtp xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-vtp">false</vtp>
+      </{{ port_trunk_if_type }}>
+    </interface>
+  </native>
+</config>

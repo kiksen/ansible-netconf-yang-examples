@@ -1,0 +1,19 @@
+---
+argument_specs:
+  main:
+    short_description: Port als Port-Channel-Mitglied schreiben
+    options:
+      port_channel_member_interface:
+        type: str
+        required: true
+        description: Interface-Name des physischen Ports, z.B. GigabitEthernet1/0/7.
+      port_channel_member_number:
+        type: int
+        required: true
+        description: Nummer des Port-Channels (channel-group).
+      port_channel_member_mode:
+        type: str
+        required: false
+        default: active
+        choices: [active, passive, "on"]
+        description: Channel-Modus (LACP active/passive oder on).

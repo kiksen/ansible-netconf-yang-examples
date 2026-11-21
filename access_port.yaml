@@ -1,0 +1,13 @@
+---
+- name: Access-Port per NETCONF schreiben
+  hosts: switch
+  gather_facts: false
+
+  vars:
+    port_access_interface: GigabitEthernet1/0/5
+    port_access_vlan: 123
+    port_access_voice_vlan: 500  # remove or set to null for no voice VLAN
+    port_access_description: Clients
+
+  roles:
+    - role: netconf/port/access

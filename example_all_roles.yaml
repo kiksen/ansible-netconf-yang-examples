@@ -1,0 +1,83 @@
+---
+- name: Beispiel - alle Port-Rollen, teils mehrfach aufgerufen
+  hosts: switch
+  gather_facts: false
+
+  vars:
+    access_ports:
+      - interface: GigabitEthernet1/0/2
+        vlan: 123
+        voice_vlan: 500
+        description: Arbeitsplatz
+      - interface: GigabitEthernet1/0/3
+        vlan: 123
+        description: Drucker  # ohne Voice-VLAN
+
+    trunk_ports:
+      - interface: GigabitEthernet1/0/4
+        description: AP-Raum-1
+        allowed_vlans: [100, 200, 300]
+        native_vlan: 100
+      - interface: GigabitEthernet1/0/6
+        description: Switch-Verbindung
+        allowed_vlans: all  # NetBox tagged-all
+
+    port_channels:
+      - interface: Port-channel2
+        description: Uplink-Core
+        allowed_vlans: [100, 200, 300]
+        native_vlan: 100
+        members:
+          - GigabitEthernet1/0/7
+          - GigabitEthernet1/0/8
+
+  tasks:
+    - name: Access-Ports schreiben
+      ansible.builtin.include_role:
+        name: netconf/port/access
+      vars:
+        port_access_interface: "{{ port_entry.interface }}"
+        port_access_vlan: "{{ port_entry.vlan }}"
+        port_access_voice_vlan: "{{ port_entry.voice_vlan | default(None) }}"
+        port_access_description: "{{ port_entry.description }}"
+      loop: "{{ access_ports }}"
+      loop_control:
+        loop_var: port_entry
+        label: "{{ port_entry.interface }}"
+
+    - name: Trunk-Ports schreiben
+      ansible.builtin.include_role:
+        name: netconf/port/trunk
+      vars:
+        port_trunk_interface: "{{ port_entry.interface }}"
+        port_trunk_description: "{{ port_entry.description }}"
+        port_trunk_allowed_vlans: "{{ port_entry.allowed_vlans }}"
+        port_trunk_native_vlan: "{{ port_entry.native_vlan | default(None) }}"
+      loop: "{{ trunk_ports }}"
+      loop_control:
+        loop_var: port_entry
+        label: "{{ port_entry.interface }}"
+
+    - name: Port-Channels schreiben
+      ansible.builtin.include_role:
+        name: netconf/port/channel
+      vars:
+        port_channel_interface: "{{ channel_entry.interface }}"
+        port_channel_description: "{{ channel_entry.description }}"
+        port_channel_allowed_vlans: "{{ channel_entry.allowed_vlans }}"
+        port_channel_native_vlan: "{{ channel_entry.native_vlan | default(None) }}"
+      loop: "{{ port_channels }}"
+      loop_control:
+        loop_var: channel_entry
+        label: "{{ channel_entry.interface }}"
+
+    - name: Mitglieder in die Port-Channels aufnehmen
+      ansible.builtin.include_role:
+        name: netconf/port/channel_member
+      vars:
+        port_channel_member_interface: "{{ item.1 }}"
+        port_channel_member_number: "{{ item.0.interface | interface_part('id') }}"
+        port_channel_member_mode: active
+      loop: "{{ port_channels | subelements('members') }}"
+      loop_control:
+        label: "{{ item.1 }} -> {{ item.0.interface }}"

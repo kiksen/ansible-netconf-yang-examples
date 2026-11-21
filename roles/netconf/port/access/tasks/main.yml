@@ -1,0 +1,10 @@
+---
+- name: "Write access port with edit-config (merge) on {{ port_access_interface }}"
+  ansible.netcommon.netconf_config:
+    target: running
+    default_operation: merge
+    content: "{{ lookup('ansible.builtin.template', 'access_port.xml.j2') }}"
+  register: port_access_edit_result
+  retries: 5
+  delay: 5
+  until: port_access_edit_result is not failed or 'locked' not in (port_access_edit_result.msg | default(''))

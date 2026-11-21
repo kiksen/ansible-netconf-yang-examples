@@ -1,0 +1,12 @@
+<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+    <interface>
+{% for port_channel_remove_member in port_channel_remove_member_list %}
+      <{{ port_channel_remove_member | interface_part('type') }}>
+        <name>{{ port_channel_remove_member | interface_part('id') }}</name>
+        <channel-group xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-ethernet" nc:operation="remove"/>
+      </{{ port_channel_remove_member | interface_part('type') }}>
+{% endfor %}
+    </interface>
+  </native>
+</config>

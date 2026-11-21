@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  role_name: channel_member
+  namespace: netconf_port
+  author: Christian Knoblauch
+  description: Macht einen physischen Port per NETCONF zum Port-Channel-Mitglied
+  license: MIT
+  min_ansible_version: "2.20"
+  platforms:
+    - name: IOS
+      versions:
+        - all
+
+dependencies: []

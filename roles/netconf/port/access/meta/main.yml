@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  role_name: access
+  namespace: netconf_port
+  author: Christian Knoblauch
+  description: Konfiguriert einen Access-Port per NETCONF (Cisco-IOS-XE-native)
+  license: MIT
+  min_ansible_version: "2.20"
+  platforms:
+    - name: IOS
+      versions:
+        - all
+
+dependencies: []

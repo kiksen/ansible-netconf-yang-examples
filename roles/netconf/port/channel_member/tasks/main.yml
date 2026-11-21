@@ -1,0 +1,10 @@
+---
+- name: "Write port-channel member with edit-config (merge) on {{ port_channel_member_interface }}"
+  ansible.netcommon.netconf_config:
+    target: running
+    default_operation: merge
+    content: "{{ lookup('ansible.builtin.template', 'channel_member.xml.j2') }}"
+  register: port_channel_member_edit_result
+  retries: 5
+  delay: 5
+  until: port_channel_member_edit_result is not failed or 'locked' not in (port_channel_member_edit_result.msg | default(''))

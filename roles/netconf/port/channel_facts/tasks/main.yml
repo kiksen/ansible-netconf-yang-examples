@@ -1,0 +1,22 @@
+---
+- name: Read all port-channel names
+  ansible.netcommon.netconf_get:
+    source: running
+    display: xml
+    filter: |
+      <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+        <interface>
+          <Port-channel>
+            <name/>
+          </Port-channel>
+        </interface>
+      </native>
+  register: port_channel_facts_get_result
+
+- name: Build the port-channel list
+  ansible.builtin.set_fact:
+    port_channel_facts_list: >-
+      {{ port_channel_facts_get_result.stdout
+         | regex_findall('<name>([0-9]+)</name>')
+         | map('int') | sort
+         | map('regex_replace', '^', 'Port-channel') | list }}

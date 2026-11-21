@@ -1,0 +1,3 @@
+---
+# Pflicht: port_access_interface, port_access_vlan, port_access_description
+port_access_voice_vlan: null

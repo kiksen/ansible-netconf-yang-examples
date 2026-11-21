@@ -10,7 +10,7 @@
     dump: ""  # -e dump=<name> schreibt das XML nach xml_example/<name>.xml
 
   tasks:
-    - name: "{{ interface_type }}{{ interface_id }} aus dem Cisco-native Modell holen"
+    - name: "Read interface from the Cisco-native model {{ interface_name }}"
       ansible.netcommon.netconf_get:
         source: running
         display: xml
@@ -44,7 +44,7 @@
       when: dump | length > 0
       delegate_to: localhost
 
-    - name: XML nach xml_example/{{ dump | basename }}.xml schreiben
+    - name: Write the XML to the xml_example directory
       ansible.builtin.copy:
         content: "{{ pretty.stdout }}"
         dest: "{{ playbook_dir }}/xml_example/{{ dump | basename }}.xml"

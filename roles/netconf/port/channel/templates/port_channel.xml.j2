@@ -1,0 +1,67 @@
+{% set port_channel_if_type = port_channel_interface | interface_part('type') %}
+{% set port_channel_if_id = port_channel_interface | interface_part('id') %}
+<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+    <interface>
+      <{{ port_channel_if_type }}>
+        <name>{{ port_channel_if_id }}</name>
+        <description>{{ port_channel_description }}</description>
+        <switchport-config>
+          <switchport>
+            <mode xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+              <trunk/>
+            </mode>
+            <trunk xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+{% if port_channel_allowed_vlans == 'all' %}
+              <allowed nc:operation="remove"/>
+{% else %}
+              <allowed>
+                <vlan-v2>
+                  <vlan-choices>
+                    <vlans>{{ port_channel_allowed_vlans | map('string') | join(',') }}</vlans>
+                  </vlan-choices>
+                </vlan-v2>
+              </allowed>
+{% endif %}
+{% if port_channel_native_vlan is not none %}
+              <native>
+                <vlan>
+                  <vlan-id>{{ port_channel_native_vlan }}</vlan-id>
+                </vlan>
+              </native>
+{% else %}
+              <native nc:operation="remove"/>
+{% endif %}
+            </trunk>
+          </switchport>
+        </switchport-config>
+        <ip>
+          <dhcp>
+            <snooping xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-dhcp">
+              <trust/>
+            </snooping>
+          </dhcp>
+        </ip>
+        <storm-control>
+          <action>
+            <trap/>
+          </action>
+          <multicast>
+            <level>
+              <threshold>
+                <rising-threshold>3.0</rising-threshold>
+              </threshold>
+            </level>
+          </multicast>
+          <unicast>
+            <level>
+              <threshold>
+                <rising-threshold>3.0</rising-threshold>
+              </threshold>
+            </level>
+          </unicast>
+        </storm-control>
+      </{{ port_channel_if_type }}>
+    </interface>
+  </native>
+</config>

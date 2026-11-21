@@ -12,7 +12,7 @@
     service_policy_out: raus
 
   tasks:
-    - name: GigabitEthernet{{ interface_id }} per edit-config (merge) schreiben
+    - name: Write interface with edit-config (merge) on GigabitEthernet{{ interface_id }}
       ansible.netcommon.netconf_config:
         target: running
         default_operation: merge

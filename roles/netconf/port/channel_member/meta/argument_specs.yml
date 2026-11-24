@@ -17,3 +17,7 @@ argument_specs:
         default: active
         choices: [active, passive, "on"]
         description: Channel-Modus (LACP active/passive oder on).
+      port_channel_member_description:
+        type: str
+        required: false
+        description: Interface-Description. Ohne Angabe wird sie nicht geschrieben.

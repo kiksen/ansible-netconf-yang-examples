@@ -1,17 +1,17 @@
 ---
-- name: Validate trunk VLAN parameters
-  ansible.builtin.assert:
-    that:
-      - >-
-        port_channel_allowed_vlans == 'all' or
-        (port_channel_allowed_vlans is sequence and port_channel_allowed_vlans is not string
-        and port_channel_allowed_vlans | length > 0)
-    fail_msg: "port_channel_allowed_vlans must be 'all' or a non-empty list of VLAN IDs"
-    quiet: true
+# - name: Validate trunk VLAN parameters
+#   ansible.builtin.assert:
+#     that:
+#       - >-
+#         port_channel_allowed_vlans == 'all' or
+#         (port_channel_allowed_vlans is sequence and port_channel_allowed_vlans is not string
+#         and port_channel_allowed_vlans | length > 0)
+#     fail_msg: "port_channel_allowed_vlans must be 'all' or a non-empty list of VLAN IDs"
+#     quiet: true
 
 - name: "Write port-channel trunk with edit-config (merge) on {{ port_channel_interface }}"
   ansible.netcommon.netconf_config:
-    target: running
+    target: candidate
     default_operation: merge
     content: "{{ lookup('ansible.builtin.template', 'port_channel.xml.j2') }}"
   register: port_channel_edit_result

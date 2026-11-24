@@ -2,11 +2,8 @@
 - name: Validate trunk VLAN parameters
   ansible.builtin.assert:
     that:
-      - >-
-        port_trunk_allowed_vlans == 'all' or
-        (port_trunk_allowed_vlans is sequence and port_trunk_allowed_vlans is not string
-        and port_trunk_allowed_vlans | length > 0)
-    fail_msg: "port_trunk_allowed_vlans must be 'all' or a non-empty list of VLAN IDs"
+      - port_trunk_allowed_vlans == 'all' or (port_trunk_allowed_vlans | vlan_list | length > 0)
+    fail_msg: "port_trunk_allowed_vlans must be 'all', a VLAN list or a range such as 1,20-30"
     quiet: true
 
 - name: "Write physical port trunk with edit-config (merge) on {{ port_trunk_interface }}"

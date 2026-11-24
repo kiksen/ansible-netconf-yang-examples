@@ -18,7 +18,7 @@
               <allowed>
                 <vlan-v2>
                   <vlan-choices>
-                    <vlans>{{ port_channel_allowed_vlans | map('string') | join(',') }}</vlans>
+                    <vlans>{{ port_channel_allowed_vlans | vlan_list }}</vlans>
                   </vlan-choices>
                 </vlan-v2>
               </allowed>

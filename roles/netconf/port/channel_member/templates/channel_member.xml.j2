@@ -5,6 +5,9 @@
     <interface>
       <{{ port_channel_member_if_type }}>
         <name>{{ port_channel_member_if_id }}</name>
+{% if port_channel_member_description is not none %}
+        <description>{{ port_channel_member_description }}</description>
+{% endif %}
         <channel-group xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-ethernet">
           <number>{{ port_channel_member_number }}</number>
           <mode>{{ port_channel_member_mode }}</mode>

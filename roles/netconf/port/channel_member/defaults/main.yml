@@ -1,3 +1,4 @@
 ---
 # Pflicht: port_channel_member_interface, port_channel_member_number
 port_channel_member_mode: active
+port_channel_member_description: null

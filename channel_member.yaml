@@ -7,6 +7,7 @@
     port_channel_member_interface: GigabitEthernet1/0/7
     port_channel_member_number: 2
     port_channel_member_mode: active
+    port_channel_member_description: Uplink zu Core
 
   roles:
     - role: netconf/port/channel_member

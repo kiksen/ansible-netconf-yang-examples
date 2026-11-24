@@ -6,7 +6,7 @@
   vars:
     port_trunk_interface: GigabitEthernet1/0/6
     port_trunk_description: Uplink
-    port_trunk_allowed_vlans: [100, 200, 300]  # or: all
+    port_trunk_allowed_vlans: [100, 200, 300]  # or: all, 2-4094, "1,20-30"
     port_trunk_native_vlan: 100  # remove or set to null for no native VLAN
 
   roles:

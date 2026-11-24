@@ -15,8 +15,9 @@ argument_specs:
         type: raw
         required: true
         description: >-
-          Liste der erlaubten VLANs (z.B. [100, 200, 300]) oder der String all
-          (NetBox tagged / tagged-all).
+          Erlaubte VLANs: der String all (NetBox tagged-all), eine Liste
+          (z.B. [100, 200, 300]), ein Range-String (z.B. 2-4094 oder 1,20-30)
+          oder eine gemischte Liste (z.B. [1, "20-30", 100]). Gueltig 1-4094.
       port_channel_native_vlan:
         type: int
         required: false

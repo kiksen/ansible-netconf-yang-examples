@@ -33,3 +33,6 @@
 - Before finishing: `uv run ansible-lint`, `uv run ruff check`, `uv run pytest` must pass.
 - A re-run with unchanged values must report `changed=0` where the module allows it.
 - Never commit credentials. The lab inventory uses test credentials only.
+
+## Language
+- create all comments and documentation in english

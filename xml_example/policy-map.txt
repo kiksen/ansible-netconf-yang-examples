@@ -1,0 +1,30 @@
+! --- Klassifizierung (Egress, DSCP-basiert) ---
+class-map match-any CM-VOICE
+ match dscp ef
+class-map match-any CM-VIDEO
+ match dscp af41 af42 af43 cs4
+class-map match-any CM-SIGNALING
+ match dscp cs3 cs5
+class-map match-any CM-BUSINESS
+ match dscp af21 af22 af23 af31 af32 af33
+class-map match-any CM-SCAVENGER
+ match dscp cs1
+
+! --- Output Policy ---
+policy-map raus
+ class CM-VOICE
+  priority level 1 percent 10
+ class CM-VIDEO
+  bandwidth remaining percent 25
+ class CM-SIGNALING
+  bandwidth remaining percent 5
+ class CM-BUSINESS
+  bandwidth remaining percent 30
+ class CM-SCAVENGER
+  bandwidth remaining percent 1
+ class class-default
+  bandwidth remaining percent 39
+
+! --- Anhängen am Interface ---
+interface TenGigabitEthernet1/0/1
+ service-policy output raus

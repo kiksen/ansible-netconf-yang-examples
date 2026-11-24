@@ -3,7 +3,7 @@
 <config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
   <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
     <interface>
-      <{{ port_access_if_type }}>
+      <{{ port_access_if_type }} nc:operation="replace">
         <name>{{ port_access_if_id }}</name>
         <description>{{ port_access_description }}</description>
         <switchport-config>
@@ -22,8 +22,6 @@
                 <vlan>{{ port_access_voice_vlan }}</vlan>
               </vlan>
             </voice>
-{% else %}
-            <voice xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch" nc:operation="remove"/>
 {% endif %}
           </switchport>
         </switchport-config>
@@ -51,21 +49,17 @@
         <cdp xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-cdp">
           <enable>false</enable>
         </cdp>
-{% else %}
-        <cdp xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-cdp" nc:operation="remove"/>
 {% endif %}
+{% if port_access_no_lldp_receive or port_access_no_lldp_transmit %}
         <lldp xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-lldp">
 {% if port_access_no_lldp_receive %}
           <receive>false</receive>
-{% else %}
-          <receive nc:operation="remove"/>
 {% endif %}
 {% if port_access_no_lldp_transmit %}
           <transmit>false</transmit>
-{% else %}
-          <transmit nc:operation="remove"/>
 {% endif %}
         </lldp>
+{% endif %}
         <service-policy xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-policy">
           <output>raus</output>
         </service-policy>

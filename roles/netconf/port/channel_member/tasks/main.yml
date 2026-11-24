@@ -3,6 +3,7 @@
   ansible.netcommon.netconf_config:
     target: running
     default_operation: merge
+    get_filter: "{{ lookup('ansible.builtin.template', 'get_filter.xml.j2') }}"
     content: "{{ lookup('ansible.builtin.template', 'channel_member.xml.j2') }}"
   register: port_channel_member_edit_result
   retries: 5

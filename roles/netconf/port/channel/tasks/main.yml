@@ -11,8 +11,9 @@
 
 - name: "Write port-channel trunk with edit-config (merge) on {{ port_channel_interface }}"
   ansible.netcommon.netconf_config:
-    target: candidate
+    target: running
     default_operation: merge
+    get_filter: "{{ lookup('ansible.builtin.template', 'get_filter.xml.j2') }}"
     content: "{{ lookup('ansible.builtin.template', 'port_channel.xml.j2') }}"
   register: port_channel_edit_result
   retries: 5

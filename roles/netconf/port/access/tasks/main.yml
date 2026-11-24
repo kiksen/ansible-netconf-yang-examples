@@ -1,10 +1,13 @@
 ---
-- name: "Write access port with edit-config (merge) on {{ port_access_interface }}"
+# get_filter limits the module's before/after get-config (changed detection) to this interface;
+# without it the module reads the whole running config twice per task (~20 s).
+- name: "Write access port with edit-config (replace in template) on {{ port_access_interface }}"
   ansible.netcommon.netconf_config:
     target: running
     default_operation: merge
+    get_filter: "{{ lookup('ansible.builtin.template', 'get_filter.xml.j2') }}"
     content: "{{ lookup('ansible.builtin.template', 'access_port.xml.j2') }}"
   register: port_access_edit_result
-  retries: 5
+  #retries: 5
   delay: 5
   until: port_access_edit_result is not failed or 'locked' not in (port_access_edit_result.msg | default(''))

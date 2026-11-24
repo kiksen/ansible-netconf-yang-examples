@@ -1,3 +1,6 @@
 ---
 # Pflicht: port_access_interface, port_access_vlan, port_access_description
 port_access_voice_vlan: null
+port_access_no_cdp_enable: null
+port_access_no_lldp_transmit: null
+port_access_no_lldp_receive: null

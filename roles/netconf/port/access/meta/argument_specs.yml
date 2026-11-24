@@ -20,3 +20,18 @@ argument_specs:
         type: str
         required: true
         description: Interface-Description.
+      port_access_no_cdp_enable:
+        type: bool
+        required: false
+        default: null
+        description: CDP auf dem Port deaktivieren (cdp enable = false). Bei false/ohne Angabe wird die Einstellung entfernt.
+      port_access_no_lldp_transmit:
+        type: bool
+        required: false
+        default: null
+        description: LLDP-Senden deaktivieren (no lldp transmit). Bei false/ohne Angabe wird die Einstellung entfernt.
+      port_access_no_lldp_receive:
+        type: bool
+        required: false
+        default: null
+        description: LLDP-Empfang deaktivieren (no lldp receive). Bei false/ohne Angabe wird die Einstellung entfernt.

@@ -42,6 +42,25 @@
             </snooping>
           </dhcp>
         </ip>
+{% if port_trunk_no_cdp_enable %}
+        <cdp xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-cdp">
+          <enable>false</enable>
+        </cdp>
+{% else %}
+        <cdp xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-cdp" nc:operation="remove"/>
+{% endif %}
+        <lldp xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-lldp">
+{% if port_trunk_no_lldp_receive %}
+          <receive>false</receive>
+{% else %}
+          <receive nc:operation="remove"/>
+{% endif %}
+{% if port_trunk_no_lldp_transmit %}
+          <transmit>false</transmit>
+{% else %}
+          <transmit nc:operation="remove"/>
+{% endif %}
+        </lldp>
         <service-policy xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-policy">
           <output>raus</output>
         </service-policy>

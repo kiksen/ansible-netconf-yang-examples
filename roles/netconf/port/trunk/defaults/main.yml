@@ -4,3 +4,4 @@ port_trunk_native_vlan: null
 port_trunk_no_cdp_enable: null
 port_trunk_no_lldp_transmit: null
 port_trunk_no_lldp_receive: null
+port_trunk_rep: null

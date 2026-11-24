@@ -119,9 +119,46 @@ def interface_part(name: str, part: str, normalize: bool = True) -> str | None:
         raise AnsibleFilterError(f"interface_part: {err}") from err
 
 
+class RepSegment(NamedTuple):
+    """REP-Einstellungen, die aus einem Interface-Namen abgeleitet werden."""
+
+    id: int
+    edge: bool
+    no_neighbor: bool
+    primary: bool
+    preferred: bool
+
+
+def rep_segment(name: str) -> dict[str, int | bool]:
+    """Jinja-Filter: leitet die REP-Segmentdaten aus dem Interface-Namen ab.
+
+    Die Segment-ID ist die Port-Nummer ('1/0/5' -> 5). Die Rolle kommt vom Switch:
+    Switch 1 ist der aktive Flexlink+-Port (edge no-neighbor primary), Switch 2
+    der Standby-Port (edge no-neighbor preferred). Andere Switch-Nummern und
+    Namen ohne Switch-Nummer (z.B. 'Gi0') sind ungueltig.
+    """
+    try:
+        parsed = parse_interface(str(name))
+        if parsed.switch is None:
+            raise ValueError(f"Interface ohne Switch-Nummer: {name!r}")
+        switch = int(parsed.switch)
+        if switch not in (1, 2):
+            raise ValueError(f"REP nur fuer Switch 1 und 2 vorgesehen: {name!r}")
+        segment = RepSegment(
+            id=int(parsed.port),
+            edge=True,
+            no_neighbor=True,
+            primary=switch == 1,
+            preferred=switch == 2,
+        )
+    except ValueError as err:
+        raise AnsibleFilterError(f"rep_segment: {err}") from err
+    return segment._asdict()
+
+
 class FilterModule:
     """Registriert die Filter bei Ansible."""
 
     def filters(self) -> dict[str, object]:
         """Liefert die verfuegbaren Filter."""
-        return {"interface_part": interface_part}
+        return {"interface_part": interface_part, "rep_segment": rep_segment}

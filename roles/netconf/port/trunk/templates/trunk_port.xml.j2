@@ -1,5 +1,8 @@
 {% set port_trunk_if_type = port_trunk_interface | interface_part('type') %}
 {% set port_trunk_if_id = port_trunk_interface | interface_part('id') %}
+{% if port_trunk_rep %}
+{% set port_trunk_rep_segment = port_trunk_interface | rep_segment %}
+{% endif %}
 <config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
   <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
     <interface>
@@ -35,6 +38,26 @@
             </trunk>
           </switchport>
         </switchport-config>
+{% if port_trunk_rep %}
+        <rep xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-rep">
+          <segment>
+            <id>
+              <id>{{ port_trunk_rep_segment.id }}</id>
+              <edge/>
+              <no-neighbor_ch>
+                <no-neighbor/>
+{% if port_trunk_rep_segment.primary %}
+                <primary/>
+{% else %}
+                <preferred/>
+{% endif %}
+              </no-neighbor_ch>
+            </id>
+          </segment>
+        </rep>
+{% else %}
+        <rep xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-rep" nc:operation="remove"/>
+{% endif %}
         <ip>
           <dhcp>
             <snooping xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-dhcp">

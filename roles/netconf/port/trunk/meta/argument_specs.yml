@@ -38,3 +38,12 @@ argument_specs:
         required: false
         default: null
         description: LLDP-Empfang deaktivieren (no lldp receive). Bei false/ohne Angabe wird die Einstellung entfernt.
+      port_trunk_rep:
+        type: bool
+        required: false
+        default: null
+        description: >-
+          REP-Segment schreiben. Alles wird aus dem Interface abgeleitet:
+          Segment-ID = Port-Nummer (1/0/5 -> 5); Switch 1 = edge no-neighbor primary
+          (aktiver Flexlink+-Port), Switch 2 = edge no-neighbor preferred (Standby);
+          andere Switch-Nummern sind ein Fehler. Bei false/ohne Angabe wird REP entfernt.

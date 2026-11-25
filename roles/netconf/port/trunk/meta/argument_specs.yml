@@ -47,3 +47,10 @@ argument_specs:
           Segment-ID = Port-Nummer (1/0/5 -> 5); Switch 1 = edge no-neighbor primary
           (aktiver Flexlink+-Port), Switch 2 = edge no-neighbor preferred (Standby);
           andere Switch-Nummern sind ein Fehler. Bei false/ohne Angabe wird REP entfernt.
+      port_trunk_nonegotiate:
+        type: bool
+        required: false
+        default: null
+        description: >-
+          Konfiguriert bei bedarf 'switchport nonegotate' am Port.
+

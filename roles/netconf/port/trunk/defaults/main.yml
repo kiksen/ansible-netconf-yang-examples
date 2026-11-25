@@ -5,3 +5,7 @@ port_trunk_no_cdp_enable: null
 port_trunk_no_lldp_transmit: null
 port_trunk_no_lldp_receive: null
 port_trunk_rep: null
+port_trunk_nonegotiate: null
+port_trunk_cleanup_elements:
+  - name: rep
+    namespace: http://cisco.com/ns/yang/Cisco-IOS-XE-rep

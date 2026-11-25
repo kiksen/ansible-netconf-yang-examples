@@ -14,6 +14,9 @@
             <mode xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
               <trunk/>
             </mode>
+{% if port_trunk_nonegotiate is not none %}             
+            <nonegotiate xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch"/>",
+{% endif %}
             <trunk xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
 {% if port_trunk_allowed_vlans == 'all' %}
               <allowed nc:operation="remove"/>

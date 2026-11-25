@@ -8,9 +8,9 @@
     port_access_vlan: 123
     port_access_voice_vlan: 500  # remove or set to null for no voice VLAN
     port_access_description: Clients
-    port_access_no_cdp_enable: true
-    port_access_no_lldp_transmit: true
-    port_access_no_lldp_receive: true
+    # port_access_no_cdp_enable: false
+    # port_access_no_lldp_transmit: false
+    # port_access_no_lldp_receive: false
 
   roles:
     - role: netconf/port/access

@@ -6,6 +6,35 @@
     fail_msg: "port_trunk_allowed_vlans must be 'all', a VLAN list or a range such as 1,20-30"
     quiet: true
 
+- name: "Read current interface config of {{ port_trunk_interface }}"
+  ansible.netcommon.netconf_get:
+    source: running
+    filter: "{{ lookup('ansible.builtin.template', 'get_filter.xml.j2') }}"
+    display: xml
+  register: port_trunk_current_result
+
+# A namespace is unique per element, so a substring match on the reply is enough.
+- name: "Collect problem elements present on {{ port_trunk_interface }}"
+  ansible.builtin.set_fact:
+    port_access_cleanup_present: >-
+      {{ port_trunk_cleanup_elements
+         | selectattr('namespace', 'in', port_access_current_result.stdout)
+         | list }}
+
+- debug:
+    msg:
+      - "{{ port_access_cleanup_present }}"
+      - "{{ port_access_current_result }}"
+
+
+- name: "Remove problem elements on {{ port_trunk_interface }}"
+  ansible.netcommon.netconf_config:
+    target: running
+    default_operation: merge
+    get_filter: "{{ lookup('ansible.builtin.template', 'get_filter.xml.j2') }}"
+    content: "{{ lookup('ansible.builtin.template', 'cleaner.xml.j2') }}"
+  when: port_trunk_cleanup_present | length > 0
+
 - name: "Write physical port trunk with edit-config (merge) on {{ port_trunk_interface }}"
   ansible.netcommon.netconf_config:
     target: running

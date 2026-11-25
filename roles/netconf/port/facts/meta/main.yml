@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  role_name: facts
+  namespace: netconf_port
+  author: Christian Knoblauch
+  description: Reads all ports via NETCONF and returns them grouped by kind (Cisco-IOS-XE-native)
+  license: MIT
+  min_ansible_version: "2.20"
+  platforms:
+    - name: IOS
+      versions:
+        - all
+
+dependencies: []

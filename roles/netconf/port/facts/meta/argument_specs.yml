@@ -1,0 +1,28 @@
+---
+argument_specs:
+  main:
+    short_description: Read all ports and return them grouped by kind
+    description:
+      - Sets port_facts_all, port_facts_access, port_facts_trunk, port_facts_member,
+        port_facts_channel and port_facts_unconfigured.
+      - Every entry has interface, kind, mode (access, tagged, tagged-all), description,
+        untagged_vlan, voice_vlan, tagged_vlans, no_cdp_enable, no_lldp_transmit,
+        no_lldp_receive, channel_group and channel_group_mode.
+    options:
+      port_facts_kinds:
+        type: list
+        elements: str
+        required: false
+        default:
+          - access
+          - trunk
+          - member
+          - channel
+          - unconfigured
+        choices:
+          - access
+          - trunk
+          - member
+          - channel
+          - unconfigured
+        description: Kinds that are returned in port_facts_all.

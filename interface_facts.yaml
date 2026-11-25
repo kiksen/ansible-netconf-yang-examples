@@ -1,0 +1,48 @@
+---
+- name: Example - read all ports and group them by kind
+  hosts: switch
+  gather_facts: false
+
+  vars:
+    # Kinds to read: access, trunk, member, channel, unconfigured
+    port_facts_kinds:
+      - access
+      - trunk
+      - member
+      - channel
+    dump: ""  # -e dump=<name> writes all ports as JSON to xml_example/<name>.json
+
+  roles:
+    - role: netconf/port/facts
+
+  tasks:
+    - name: Show a one-line summary per port
+      ansible.builtin.debug:
+        msg: >-
+          {{ item.interface }}: {{ item.kind }}, mode={{ item.mode }},
+          untagged={{ item.untagged_vlan }}, voice={{ item.voice_vlan }},
+          tagged={{ (item.tagged_vlans | vlan_list) if item.tagged_vlans is not none else '-' }}
+      loop: "{{ port_facts_all }}"
+      loop_control:
+        label: "{{ item.interface }}"
+
+    - name: Show the access ports with a voice VLAN
+      ansible.builtin.debug:
+        msg: "{{ port_facts_access | selectattr('voice_vlan') | map(attribute='interface') | list }}"
+
+    - name: Show the members of each port-channel
+      ansible.builtin.debug:
+        msg: >-
+          Port-channel{{ item.key }}:
+          {{ item.value | map(attribute='interface') | list }}
+      loop: "{{ port_facts_member | groupby('channel_group') | items2dict(key_name=0, value_name=1) | dict2items }}"
+      loop_control:
+        label: "Port-channel{{ item.key }}"
+
+    - name: Write all ports as JSON (for a NetBox import)
+      ansible.builtin.copy:
+        content: "{{ port_facts_all | to_nice_json }}"
+        dest: "{{ playbook_dir }}/xml_example/{{ dump | basename }}.json"
+        mode: "0644"
+      when: dump | length > 0
+      delegate_to: localhost

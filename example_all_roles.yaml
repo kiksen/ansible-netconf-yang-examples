@@ -34,7 +34,7 @@
     #     loop_var: item
     #     label: "{{ item.interface }}"
 
-    - name: trunk
+    - name: Trunk
       ansible.builtin.include_role:
         name: netconf/port/trunk
       vars:
@@ -43,5 +43,3 @@
         port_trunk_description: AccessPoint
         port_trunk_interface: GigabitEthernet1/0/5
         port_trunk_rep: true
-
-

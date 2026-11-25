@@ -1,0 +1,513 @@
+<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+    <interface>
+      <GigabitEthernet>
+        <name>1/0/1</name>
+      </GigabitEthernet>
+      <GigabitEthernet>
+        <name>1/0/2</name>
+        <description>Arbeitsplatz</description>
+        <switchport-config>
+          <switchport>
+            <access xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+              <vlan>
+                <vlan>123</vlan>
+              </vlan>
+            </access>
+            <mode xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+              <access/>
+            </mode>
+            <voice xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+              <vlan>
+                <vlan>500</vlan>
+              </vlan>
+            </voice>
+          </switchport>
+        </switchport-config>
+        <switchport>
+          <access xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+            <vlan>
+              <vlan>123</vlan>
+            </vlan>
+          </access>
+          <voice xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+            <vlan>
+              <vlan>500</vlan>
+            </vlan>
+          </voice>
+        </switchport>
+        <storm-control>
+          <action>
+            <trap/>
+          </action>
+          <multicast>
+            <level>
+              <threshold>
+                <rising-threshold>30.0</rising-threshold>
+                <falling-threshold>0.0</falling-threshold>
+              </threshold>
+            </level>
+          </multicast>
+          <unicast>
+            <level>
+              <threshold>
+                <rising-threshold>3.0</rising-threshold>
+              </threshold>
+            </level>
+          </unicast>
+        </storm-control>
+        <service-policy xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-policy">
+          <output>raus</output>
+        </service-policy>
+        <spanning-tree xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-spanning-tree">
+          <bpduguard>
+            <enable/>
+          </bpduguard>
+          <portfast-v2>
+            <access/>
+          </portfast-v2>
+          <portfast/>
+        </spanning-tree>
+      </GigabitEthernet>
+      <GigabitEthernet>
+        <name>1/0/3</name>
+        <description>Drucker</description>
+        <switchport-config>
+          <switchport>
+            <access xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+              <vlan>
+                <vlan>123</vlan>
+              </vlan>
+            </access>
+            <mode xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+              <access/>
+            </mode>
+          </switchport>
+        </switchport-config>
+        <switchport>
+          <access xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+            <vlan>
+              <vlan>123</vlan>
+            </vlan>
+          </access>
+        </switchport>
+        <storm-control>
+          <action>
+            <trap/>
+          </action>
+          <multicast>
+            <level>
+              <threshold>
+                <rising-threshold>30.0</rising-threshold>
+                <falling-threshold>0.0</falling-threshold>
+              </threshold>
+            </level>
+          </multicast>
+          <unicast>
+            <level>
+              <threshold>
+                <rising-threshold>3.0</rising-threshold>
+              </threshold>
+            </level>
+          </unicast>
+        </storm-control>
+        <service-policy xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-policy">
+          <output>raus</output>
+        </service-policy>
+        <spanning-tree xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-spanning-tree">
+          <bpduguard>
+            <enable/>
+          </bpduguard>
+          <portfast-v2>
+            <access/>
+          </portfast-v2>
+          <portfast/>
+        </spanning-tree>
+      </GigabitEthernet>
+      <GigabitEthernet>
+        <name>1/0/4</name>
+        <description>Drucker</description>
+        <switchport-config>
+          <switchport>
+            <access xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+              <vlan>
+                <vlan>123</vlan>
+              </vlan>
+            </access>
+            <mode xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+              <access/>
+            </mode>
+            <nonegotiate xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch"/>
+          </switchport>
+        </switchport-config>
+        <switchport>
+          <access xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+            <vlan>
+              <vlan>123</vlan>
+            </vlan>
+          </access>
+          <nonegotiate xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch"/>
+        </switchport>
+        <storm-control>
+          <action>
+            <trap/>
+          </action>
+          <multicast>
+            <level>
+              <threshold>
+                <rising-threshold>30.0</rising-threshold>
+                <falling-threshold>0.0</falling-threshold>
+              </threshold>
+            </level>
+          </multicast>
+          <unicast>
+            <level>
+              <threshold>
+                <rising-threshold>3.0</rising-threshold>
+              </threshold>
+            </level>
+          </unicast>
+        </storm-control>
+        <cdp xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-cdp">
+          <enable>false</enable>
+        </cdp>
+        <lldp xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-lldp">
+          <receive>false</receive>
+          <transmit>false</transmit>
+        </lldp>
+        <service-policy xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-policy">
+          <output>raus</output>
+        </service-policy>
+        <spanning-tree xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-spanning-tree">
+          <bpduguard>
+            <enable/>
+          </bpduguard>
+          <portfast-v2>
+            <access/>
+          </portfast-v2>
+          <portfast/>
+        </spanning-tree>
+      </GigabitEthernet>
+      <GigabitEthernet>
+        <name>1/0/5</name>
+        <description>Clients</description>
+        <switchport-config>
+          <switchport>
+            <access xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+              <vlan>
+                <vlan>123</vlan>
+              </vlan>
+            </access>
+            <mode xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+              <access/>
+            </mode>
+            <nonegotiate xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch"/>
+            <voice xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+              <vlan>
+                <vlan>500</vlan>
+              </vlan>
+            </voice>
+          </switchport>
+        </switchport-config>
+        <switchport>
+          <access xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+            <vlan>
+              <vlan>123</vlan>
+            </vlan>
+          </access>
+          <nonegotiate xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch"/>
+          <voice xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+            <vlan>
+              <vlan>500</vlan>
+            </vlan>
+          </voice>
+        </switchport>
+        <storm-control>
+          <action>
+            <trap/>
+          </action>
+          <multicast>
+            <level>
+              <threshold>
+                <rising-threshold>30.0</rising-threshold>
+                <falling-threshold>0.0</falling-threshold>
+              </threshold>
+            </level>
+          </multicast>
+          <unicast>
+            <level>
+              <threshold>
+                <rising-threshold>3.0</rising-threshold>
+              </threshold>
+            </level>
+          </unicast>
+        </storm-control>
+        <service-policy xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-policy">
+          <output>raus</output>
+        </service-policy>
+        <spanning-tree xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-spanning-tree">
+          <bpduguard>
+            <enable/>
+          </bpduguard>
+          <portfast-v2>
+            <access/>
+          </portfast-v2>
+          <portfast/>
+        </spanning-tree>
+      </GigabitEthernet>
+      <GigabitEthernet>
+        <name>1/0/6</name>
+        <description>Uplink</description>
+        <switchport-config>
+          <switchport>
+            <mode xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+              <trunk/>
+            </mode>
+            <trunk xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+              <allowed>
+                <vlan-v2>
+                  <vlan-choices>
+                    <vlans>100,200,300</vlans>
+                  </vlan-choices>
+                </vlan-v2>
+              </allowed>
+              <native>
+                <vlan>
+                  <vlan-id>100</vlan-id>
+                </vlan>
+              </native>
+            </trunk>
+          </switchport>
+        </switchport-config>
+        <switchport>
+          <trunk xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+            <native>
+              <vlan-config>
+                <vlan-id>100</vlan-id>
+              </vlan-config>
+              <vlan>100</vlan>
+            </native>
+          </trunk>
+        </switchport>
+        <ip>
+          <dhcp>
+            <snooping xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-dhcp">
+              <trust/>
+            </snooping>
+          </dhcp>
+        </ip>
+        <service-policy xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-policy">
+          <output>raus</output>
+        </service-policy>
+        <vtp xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-vtp">false</vtp>
+      </GigabitEthernet>
+      <GigabitEthernet>
+        <name>1/0/7</name>
+        <description>Uplink zu Core</description>
+        <switchport-config>
+          <switchport>
+            <trunk xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+              <allowed>
+                <vlan-v2>
+                  <vlan-choices>
+                    <vlans>5,100-200,204,205</vlans>
+                  </vlan-choices>
+                </vlan-v2>
+              </allowed>
+              <native>
+                <vlan>
+                  <vlan-id>101</vlan-id>
+                </vlan>
+              </native>
+            </trunk>
+          </switchport>
+        </switchport-config>
+        <switchport>
+          <trunk xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+            <native>
+              <vlan-config>
+                <vlan-id>101</vlan-id>
+              </vlan-config>
+              <vlan>101</vlan>
+            </native>
+          </trunk>
+        </switchport>
+        <ip>
+          <dhcp>
+            <snooping xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-dhcp">
+              <trust/>
+            </snooping>
+          </dhcp>
+        </ip>
+        <channel-group xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-ethernet">
+          <number>2</number>
+          <mode>active</mode>
+        </channel-group>
+      </GigabitEthernet>
+      <GigabitEthernet>
+        <name>1/0/8</name>
+        <description>TrunkAll</description>
+        <switchport-config>
+          <switchport>
+            <mode xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+              <trunk/>
+            </mode>
+            <nonegotiate xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch"/>
+            <trunk xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+              <native>
+                <vlan>
+                  <vlan-id>1</vlan-id>
+                </vlan>
+              </native>
+            </trunk>
+          </switchport>
+        </switchport-config>
+        <switchport>
+          <mode xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+            <trunk/>
+          </mode>
+          <nonegotiate xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch"/>
+          <trunk xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+            <native>
+              <vlan-config>
+                <vlan-id>1</vlan-id>
+              </vlan-config>
+              <vlan>1</vlan>
+            </native>
+          </trunk>
+        </switchport>
+        <ip>
+          <dhcp>
+            <snooping xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-dhcp">
+              <trust/>
+            </snooping>
+          </dhcp>
+        </ip>
+        <cdp xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-cdp">
+          <enable>false</enable>
+        </cdp>
+        <lldp xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-lldp">
+          <transmit>false</transmit>
+        </lldp>
+        <service-policy xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-policy">
+          <output>raus</output>
+        </service-policy>
+        <vtp xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-vtp">false</vtp>
+      </GigabitEthernet>
+      <GigabitEthernet>
+        <name>1/1/1</name>
+      </GigabitEthernet>
+      <GigabitEthernet>
+        <name>1/1/2</name>
+      </GigabitEthernet>
+      <TenGigabitEthernet>
+        <name>1/1/3</name>
+      </TenGigabitEthernet>
+      <TenGigabitEthernet>
+        <name>1/1/4</name>
+      </TenGigabitEthernet>
+      <Port-channel>
+        <name>1</name>
+        <description>sdf</description>
+      </Port-channel>
+      <Port-channel>
+        <name>2</name>
+        <description>Uplink</description>
+        <switchport-config>
+          <switchport>
+            <mode xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+              <trunk/>
+            </mode>
+            <trunk xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+              <allowed>
+                <vlan-v2>
+                  <vlan-choices>
+                    <vlans>5,100-200,204,205</vlans>
+                  </vlan-choices>
+                </vlan-v2>
+              </allowed>
+              <native>
+                <vlan>
+                  <vlan-id>101</vlan-id>
+                </vlan>
+              </native>
+            </trunk>
+          </switchport>
+        </switchport-config>
+        <switchport>
+          <trunk xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+            <native>
+              <vlan-config>
+                <vlan-id>101</vlan-id>
+              </vlan-config>
+              <vlan>101</vlan>
+            </native>
+          </trunk>
+        </switchport>
+        <ip>
+          <dhcp>
+            <snooping xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-dhcp">
+              <trust/>
+            </snooping>
+          </dhcp>
+        </ip>
+        <storm-control>
+          <action>
+            <trap/>
+          </action>
+          <multicast>
+            <level>
+              <threshold>
+                <rising-threshold>3.0</rising-threshold>
+              </threshold>
+            </level>
+          </multicast>
+          <unicast>
+            <level>
+              <threshold>
+                <rising-threshold>3.0</rising-threshold>
+              </threshold>
+            </level>
+          </unicast>
+        </storm-control>
+      </Port-channel>
+      <Port-channel>
+        <name>7</name>
+      </Port-channel>
+      <Port-channel>
+        <name>30</name>
+        <switchport-config>
+          <switchport>
+            <access xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+              <vlan>
+                <vlan>123</vlan>
+              </vlan>
+            </access>
+          </switchport>
+        </switchport-config>
+        <switchport>
+          <access xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+            <vlan>
+              <vlan>123</vlan>
+            </vlan>
+          </access>
+        </switchport>
+      </Port-channel>
+      <Vlan>
+        <name>1</name>
+        <ip>
+          <address>
+            <dhcp/>
+          </address>
+          <dhcp>
+            <client xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-dhcp">
+              <client-id>
+                <ascii>cisco-4c01.f705.48c7-Vl1</ascii>
+              </client-id>
+            </client>
+          </dhcp>
+        </ip>
+      </Vlan>
+    </interface>
+  </native>
+</data>

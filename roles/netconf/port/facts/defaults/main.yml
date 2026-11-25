@@ -1,0 +1,8 @@
+---
+# Kinds that are returned in port_facts_all (the per-kind lists are always set).
+port_facts_kinds:
+  - access
+  - trunk
+  - member
+  - channel
+  - unconfigured

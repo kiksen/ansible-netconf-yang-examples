@@ -3,7 +3,7 @@
 <config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
   <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
     <interface>
-      <{{ port_access_if_type }} nc:operation="replace">
+      <{{ port_access_if_type }}{% if port_access_reset %} nc:operation="replace"{% endif %}>
         <name>{{ port_access_if_id }}</name>
         <description>{{ port_access_description }}</description>
         <switchport-config>

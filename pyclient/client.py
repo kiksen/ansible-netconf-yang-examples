@@ -1,7 +1,7 @@
-"""Mini-Client: rendert access_port.xml.j2 und schreibt es per NETCONF auf den Switch.
+"""Mini client: renders access_port.xml.j2 and writes it to the switch via NETCONF.
 
 Start: uv run python pyclient/client.py
-Bei einem Fehler wird die komplette rpc-error-Antwort des Switches ausgegeben.
+On an error the complete rpc-error reply of the switch is printed.
 """
 
 import re
@@ -11,12 +11,12 @@ from jinja2 import Environment, FileSystemLoader, StrictUndefined
 from ncclient import manager
 from ncclient.operations import RPCError
 
-HOST = "10.10.10.144"
-PORT = 830
-USER = "test"
-PASSWORD = "test"
+HOST: str = "10.10.10.144"
+PORT: int = 830
+USER: str = "test"
+PASSWORD: str = "test"
 
-# Variablen der Rolle netconf/port/access
+# Variables of the role netconf/port/access
 PARAMS: dict[str, object] = {
     "port_access_interface": "GigabitEthernet1/0/5",
     "port_access_vlan": 123,
@@ -25,32 +25,42 @@ PARAMS: dict[str, object] = {
     "port_access_no_cdp_enable": True,
     "port_access_no_lldp_transmit": True,
     "port_access_no_lldp_receive": True,
+    # Test flag only (not a role variable): True resets the interface in the same
+    # edit-config via nc:operation="replace" (like "default interface"), False merges.
+    "port_access_reset": True,
 }
 
 _INTERFACE_RE = re.compile(r"^(?P<type>[A-Za-z][A-Za-z-]*?)\s*(?P<id>\d+(?:/\d+)*)$")
+_ROLE_TEMPLATES = Path(__file__).parent.parent / "roles/netconf/port/access/templates"
 
 
 def interface_part(name: str, part: str) -> str:
-    """Minimal-Version des Ansible-Filters: liefert 'type' oder 'id' des Interface-Namens."""
+    """Return 'type' or 'id' of an interface name (minimal version of the Ansible filter)."""
     match = _INTERFACE_RE.match(name.strip())
     if match is None:
-        raise ValueError(f"Ungueltiger Interface-Name: {name!r}")
+        raise ValueError(f"Invalid interface name: {name!r}")
     return match[part]
 
 
-def render() -> str:
-    """Rendert das Template mit PARAMS."""
+def render(template_name: str) -> str:
+    """Render a template from pyclient/ or the access role with PARAMS."""
     env = Environment(
-        loader=FileSystemLoader(Path(__file__).parent),
+        loader=FileSystemLoader([Path(__file__).parent, _ROLE_TEMPLATES]),
         undefined=StrictUndefined,
     )
     env.filters["interface_part"] = interface_part
-    return env.get_template("access_port.xml.j2").render(PARAMS)
+    return env.get_template(template_name).render(PARAMS)
+
+
+def get_running(session: manager.Manager, subtree: str) -> str:
+    """Read the running config limited to the given subtree filter."""
+    return session.get_config(source="running", filter=("subtree", subtree)).data_xml
 
 
 def main() -> None:
-    """Schreibt die gerenderte Konfiguration und zeigt Erfolg oder Fehlerdetails."""
-    payload = render()
+    """Write the rendered config and report changed/unchanged or error details."""
+    payload = render("access_port.xml.j2")
+    get_filter = render("get_filter.xml.j2")
     print(payload)
     with manager.connect(
         host=HOST,
@@ -62,14 +72,18 @@ def main() -> None:
         allow_agent=False,
         timeout=120,
     ) as session:
+        before = get_running(session, get_filter)
         try:
             reply = session.edit_config(target="running", config=payload)
         except RPCError as err:
-            print("FEHLER:", err.type, err.tag, err.severity)
-            print("Meldung:", err.message)
+            print("ERROR:", err.type, err.tag, err.severity)
+            print("Message:", err.message)
             print("Details:", err.info)
             return
+        after = get_running(session, get_filter)
         print("OK:", reply.ok)
+        print("changed" if before != after else "unchanged")
+        print(after)
 
 
 if __name__ == "__main__":

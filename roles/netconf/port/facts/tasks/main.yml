@@ -9,7 +9,7 @@
 
 - name: Build the port facts
   ansible.builtin.set_fact:
-    port_facts_all: "{{ port_facts_get_result.stdout | port_facts(port_facts_kinds) }}"
+    port_facts_all: "{{ port_facts_get_result.stdout | port_facts(expand=port_facts_expand_vlans) }}"
 
 - name: Group the port facts by kind
   ansible.builtin.set_fact:

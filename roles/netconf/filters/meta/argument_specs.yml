@@ -1,0 +1,5 @@
+---
+argument_specs:
+  main:
+    short_description: Provides the shared Jinja filters (interface_part, rep_segment, vlan_list); has no parameters.
+    options: {}

@@ -13,3 +13,4 @@ galaxy_info:
 
 dependencies:
   - role: netconf/write_mem
+  - role: netconf/filters

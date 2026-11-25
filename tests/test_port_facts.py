@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 from ansible.errors import AnsibleFilterError
-from port_facts import expand_vlans, port_facts
+from port_facts import expand_vlans, port_facts, split_ranges
 
 _EXAMPLE = Path(__file__).parent.parent / "xml_example" / "all_interfaces.xml"
 
@@ -83,18 +83,15 @@ def test_member_reports_channel_group(ports: dict[str, dict[str, object]]) -> No
     assert port["channel_group"] == 2
     assert port["channel_group_mode"] == "active"
     assert port["mode"] == "tagged"
+    assert port["vlan_has_range"] is True
 
 
 def test_port_channels(ports: dict[str, dict[str, object]]) -> None:
     """Port-channels are kind channel; mode is inferred without explicit mode."""
     assert ports["Port-channel2"]["kind"] == "channel"
-    assert ports["Port-channel2"]["tagged_vlans"] == [
-        5,
-        *range(100, 101),
-        *range(102, 201),
-        204,
-        205,
-    ]
+    assert ports["Port-channel2"]["tagged_vlans"] == [5, 100, 204, 205]
+    assert ports["Port-channel2"]["tagged_vlan_ranges"] == ["102-200"]
+    assert ports["Port-channel2"]["vlan_has_range"] is True
     assert ports["Port-channel30"]["mode"] == "access"
     assert ports["Port-channel30"]["untagged_vlan"] == 123
     assert ports["Port-channel7"]["mode"] is None
@@ -150,3 +147,39 @@ def test_invalid_xml_raises_filter_error() -> None:
     """Broken XML becomes an AnsibleFilterError."""
     with pytest.raises(AnsibleFilterError):
         port_facts("<data")
+
+
+def test_expand_lists_every_vlan() -> None:
+    """With expand=True all VLANs are listed and no range is reported."""
+    result = {
+        str(port["interface"]): port
+        for port in port_facts(_EXAMPLE.read_text(), expand=True)
+    }
+    port = result["Port-channel2"]
+    assert port["tagged_vlans"] == [5, *range(100, 101), *range(102, 201), 204, 205]
+    assert port["tagged_vlan_ranges"] == []
+    assert port["vlan_has_range"] is False
+
+
+@pytest.mark.parametrize(
+    ("vlans", "singles", "ranges"),
+    [
+        ([], [], []),
+        ([10, 11, 12], [10, 11, 12], []),
+        ([10, 11, 12, 13], [], ["10-13"]),
+        ([5, 10, 11, 12, 13, 20], [5, 20], ["10-13"]),
+        ([1, 2, 3, 4, 6, 7, 8, 9, 10], [], ["1-4", "6-10"]),
+    ],
+)
+def test_split_ranges(vlans: list[int], singles: list[int], ranges: list[str]) -> None:
+    """Only runs of at least four consecutive VLANs become a range."""
+    assert split_ranges(vlans) == (singles, ranges)
+
+
+def test_access_and_tagged_all_have_no_ranges(
+    ports: dict[str, dict[str, object]],
+) -> None:
+    """Ports without a tagged list report no ranges."""
+    for name in ("GigabitEthernet1/0/2", "GigabitEthernet1/0/8"):
+        assert ports[name]["tagged_vlan_ranges"] is None
+        assert ports[name]["vlan_has_range"] is False

@@ -9,6 +9,8 @@ from lxml.etree import _Element as Element
 
 VLAN_MIN = 1
 VLAN_MAX = 4094
+# Runs of at least this many consecutive VLANs are reported as a range.
+MIN_RANGE = 4
 
 # Interface containers below native/interface that carry no switchport facts.
 _SKIPPED_TYPES = frozenset({"Vlan", "Loopback", "Tunnel", "Null", "BDI"})
@@ -43,6 +45,8 @@ class PortFacts:
     untagged_vlan: int | None
     voice_vlan: int | None
     tagged_vlans: list[int] | None
+    tagged_vlan_ranges: list[str] | None
+    vlan_has_range: bool
     no_cdp_enable: bool
     no_lldp_transmit: bool
     no_lldp_receive: bool
@@ -84,6 +88,25 @@ def expand_vlans(value: str) -> list[int]:
             raise ValueError(f"Invalid VLAN range {token!r}")
         vlans.update(range(low, high + 1))
     return sorted(vlans)
+
+
+def split_ranges(vlans: list[int]) -> tuple[list[int], list[str]]:
+    """Split sorted VLAN IDs into single VLANs and ranges like '102-200'.
+
+    Only runs of at least ``MIN_RANGE`` consecutive VLANs become a range.
+    """
+    singles: list[int] = []
+    ranges: list[str] = []
+    run: list[int] = []
+    for vlan in [*vlans, VLAN_MAX + 2]:  # sentinel flushes the last run
+        if run and vlan != run[-1] + 1:
+            if len(run) >= MIN_RANGE:
+                ranges.append(f"{run[0]}-{run[-1]}")
+            else:
+                singles.extend(run)
+            run = []
+        run.append(vlan)
+    return singles, ranges
 
 
 def _allowed_vlans(trunk: Element | None) -> tuple[Mode, list[int] | None]:
@@ -133,7 +156,7 @@ def _switchport_mode(switchport: Element | None) -> str | None:
     return None
 
 
-def _parse_interface(entry: Element) -> PortFacts:
+def _parse_interface(entry: Element, expand: bool) -> PortFacts:
     """Build the facts of one interface entry below native/interface.
 
     The tag of the entry is the interface type, e.g. ``GigabitEthernet``.
@@ -155,6 +178,10 @@ def _parse_interface(entry: Element) -> PortFacts:
         mode, tagged = _allowed_vlans(trunk)
         if tagged is not None and untagged is not None:
             tagged = [vlan for vlan in tagged if vlan != untagged]
+    ranges: list[str] | None = None
+    if tagged is not None:
+        singles, ranges = ([*tagged], []) if expand else split_ranges(tagged)
+        tagged = singles
 
     group = entry.find("{*}channel-group")
     group_number = _int(group, "{*}number")
@@ -177,6 +204,8 @@ def _parse_interface(entry: Element) -> PortFacts:
         untagged_vlan=untagged,
         voice_vlan=_int(switchport, "{*}voice/{*}vlan/{*}vlan"),
         tagged_vlans=tagged,
+        tagged_vlan_ranges=ranges,
+        vlan_has_range=bool(ranges),
         no_cdp_enable=_text(entry, "{*}cdp/{*}enable") == "false",
         no_lldp_transmit=_text(entry, "{*}lldp/{*}transmit") == "false",
         no_lldp_receive=_text(entry, "{*}lldp/{*}receive") == "false",
@@ -185,7 +214,7 @@ def _parse_interface(entry: Element) -> PortFacts:
     )
 
 
-def parse_ports(xml: str) -> list[PortFacts]:
+def parse_ports(xml: str, expand: bool = False) -> list[PortFacts]:
     """Parse a get/get-config reply containing native/interface into port facts."""
     parser = etree.XMLParser(resolve_entities=False, no_network=True)
     root = etree.fromstring(xml.encode(), parser)
@@ -194,19 +223,23 @@ def parse_ports(xml: str) -> list[PortFacts]:
         name = _text(entry, "{*}name")
         if _local(entry) in _SKIPPED_TYPES or name is None or "." in name:
             continue  # no switchport facts or sub-interface
-        ports.append(_parse_interface(entry))
+        ports.append(_parse_interface(entry, expand))
     return ports
 
 
-def port_facts(xml: str, kinds: list[str] | None = None) -> list[dict[str, object]]:
+def port_facts(
+    xml: str, kinds: list[str] | None = None, expand: bool = False
+) -> list[dict[str, object]]:
     """Jinja filter: return the port facts of a native interface reply as dicts.
 
     ``kinds`` limits the result to the given kinds (access, trunk, member,
-    channel, unconfigured). Example: ``reply.stdout | port_facts(['trunk'])``.
+    channel, unconfigured). Runs of consecutive tagged VLANs are reported in
+    ``tagged_vlan_ranges`` (e.g. '102-200'); with ``expand=True`` every VLAN is
+    listed in ``tagged_vlans`` instead. Example: ``reply.stdout | port_facts(expand=true)``.
     """
     try:
         wanted = {Kind(kind) for kind in kinds} if kinds is not None else None
-        ports = parse_ports(str(xml))
+        ports = parse_ports(str(xml), expand)
     except (ValueError, etree.XMLSyntaxError) as err:
         raise AnsibleFilterError(f"port_facts: {err}") from err
     return [

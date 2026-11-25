@@ -1,8 +1,4 @@
 ---
-# Kinds that are returned in port_facts_all (the per-kind lists are always set).
-port_facts_kinds:
-  - access
-  - trunk
-  - member
-  - channel
-  - unconfigured
+# false: runs of consecutive tagged VLANs are reported as ranges (tagged_vlan_ranges).
+# true: every tagged VLAN is listed in tagged_vlans.
+port_facts_expand_vlans: false

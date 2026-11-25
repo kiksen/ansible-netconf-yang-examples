@@ -8,7 +8,7 @@
 - Roles live in `roles/<area>/<object>/<variant>/`, e.g. `roles/netconf/port/access`. Reference them with the full path: `role: netconf/port/access`.
 - Every role has `meta/main.yml`, `meta/argument_specs.yml`, `defaults/main.yml`, `tasks/main.yml` and a Jinja template in `templates/`.
 - Example XML (output of `read_interface.yaml -e dump=<name>`) goes in `xml_example/`. Build templates from these files.
-- Custom Jinja filters live in `filter_plugins/`.
+- Custom Jinja filters live in the role that uses them (`roles/<area>/<object>/<variant>/filter_plugins/`). Filters shared by several roles live in the role `netconf/filters`, which those roles list as a dependency.
 
 ## Variable naming
 - **Every** variable defined by a role starts with the role path joined by underscores, without the first directory: `roles/netconf/port/access` -> `port_access_`.

@@ -9,6 +9,9 @@
     interface_id: "{{ interface_name | interface_part('id') }}"
     dump: ""  # -e dump=<name> schreibt das XML nach xml_example/<name>.xml
 
+  roles:
+    - role: netconf/filters
+
   tasks:
     - name: "Read interface from the Cisco-native model {{ interface_name }}"
       ansible.netcommon.netconf_get:

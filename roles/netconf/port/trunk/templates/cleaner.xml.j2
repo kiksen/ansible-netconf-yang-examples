@@ -1,15 +1,15 @@
-{# Removes the elements listed in port_access_cleanup_present from the interface. #}
-{% set port_access_if_type = port_access_interface | interface_part('type') %}
-{% set port_access_if_id = port_access_interface | interface_part('id') %}
+{# Removes the elements listed in port_trunk_cleanup_present from the interface. #}
+{% set port_trunk_if_type = port_trunk_interface | interface_part('type') %}
+{% set port_trunk_if_id = port_trunk_interface | interface_part('id') %}
 <config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
   <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
     <interface>
-      <{{ port_access_if_type }}>
-        <name>{{ port_access_if_id }}</name>
-{% for port_access_element in port_access_cleanup_present %}
-        <{{ port_access_element.name }} xmlns="{{ port_access_element.namespace }}" nc:operation="remove"/>
+      <{{ port_trunk_if_type }}>
+        <name>{{ port_trunk_if_id }}</name>
+{% for port_trunk_element in port_trunk_cleanup_present %}
+        <{{ port_trunk_element.name }} xmlns="{{ port_trunk_element.namespace }}" nc:operation="remove"/>
 {% endfor %}
-      </{{ port_access_if_type }}>
+      </{{ port_trunk_if_type }}>
     </interface>
   </native>
 </config>

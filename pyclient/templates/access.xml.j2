@@ -1,0 +1,15 @@
+{% set port_access_if_type = port_access_interface | interface_part('type') %}
+{% set port_access_if_id = port_access_interface | interface_part('id') %}
+<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
+
+  <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+    <interface>
+      <{{ port_access_if_type }} nc:operation="replace">
+        <name>{{ port_access_if_id }}</name>
+        <rep xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-rep"  nc:operation="remove" />
+        <description  nc:operation="replace">HalloXxx</description>
+      </{{ port_access_if_type }}>
+    </interface>
+  </native>
+  
+</config>

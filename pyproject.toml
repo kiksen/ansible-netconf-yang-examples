@@ -15,6 +15,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "lxml-stubs>=0.5.1",
     "pytest>=9.2.0",
     "ruff>=0.17.6",
 ]

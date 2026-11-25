@@ -21,24 +21,27 @@
 
 
   tasks:
-    - name: Access-Ports schreiben
-      ansible.builtin.include_role:
-        name: netconf/port/access
-      vars:
-        port_access_interface: "{{ item.interface }}"
-        port_access_vlan: "{{ item.vlan }}"
-        port_access_voice_vlan: "{{ item.voice_vlan | default(None) }}"
-        port_access_description: "{{ item.description }}"
-      loop: "{{ access_ports }}"
-      loop_control:
-        loop_var: item
-        label: "{{ item.interface }}"
+    # - name: Access-Ports schreiben
+    #   ansible.builtin.include_role:
+    #     name: netconf/port/access
+    #   vars:
+    #     port_access_interface: "{{ item.interface }}"
+    #     port_access_vlan: "{{ item.vlan }}"
+    #     port_access_voice_vlan: "{{ item.voice_vlan | default(None) }}"
+    #     port_access_description: "{{ item.description }}"
+    #   loop: "{{ access_ports }}"
+    #   loop_control:
+    #     loop_var: item
+    #     label: "{{ item.interface }}"
 
-    - name: AccessPiont
+    - name: trunk
       ansible.builtin.include_role:
-        name: netconf.trunk
+        name: netconf/port/trunk
       vars:
         port_trunk_allowed_vlans: 2-4094
         port_trunk_native_vlan: 920
         port_trunk_description: AccessPoint
-        port_trunk_interface: GigabitEthernet1/0/6
+        port_trunk_interface: GigabitEthernet1/0/5
+        port_trunk_rep: true
+
+

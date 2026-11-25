@@ -1,0 +1,5 @@
+---
+# Intentionally empty: this role only provides the handler in handlers/main.yml.
+# Writing roles list it as a dependency so the handler is known in the play.
+- name: Load the save config handler
+  ansible.builtin.meta: noop

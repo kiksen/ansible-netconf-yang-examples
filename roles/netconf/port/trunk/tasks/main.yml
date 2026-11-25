@@ -19,14 +19,14 @@
   ansible.builtin.set_fact:
     port_trunk_cleanup_present: >-
       {{ port_trunk_cleanup_elements
-         | selectattr('namespace', 'in', port_trunk_current_result.stdout)
-         | rejectattr('name', 'in', ['rep'] if port_trunk_rep else [])
-         | list }}
+        | selectattr('namespace', 'in', port_trunk_current_result.stdout)
+        | rejectattr('name', 'in', ['rep'] if port_trunk_rep else [])
+        | list }}
 
-- ansible.builtin.debug:
-    msg:
-      - "{{ port_trunk_cleanup_present }}"
-      - "{{ port_trunk_current_result }}"
+# - ansible.builtin.debug:
+#     msg:
+#       - "{{ port_trunk_cleanup_present }}"
+#       - "{{ port_trunk_current_result }}"
 
 
 - name: "Remove problem elements on {{ port_trunk_interface }}"
@@ -36,6 +36,7 @@
     get_filter: "{{ lookup('ansible.builtin.template', 'get_filter.xml.j2') }}"
     content: "{{ lookup('ansible.builtin.template', 'cleaner.xml.j2') }}"
   when: port_trunk_cleanup_present | length > 0
+  notify: netconf save config
 
 - name: "Write physical port trunk with edit-config (merge) on {{ port_trunk_interface }}"
   ansible.netcommon.netconf_config:
@@ -47,3 +48,4 @@
   retries: 5
   delay: 5
   until: port_trunk_edit_result is not failed or 'locked' not in (port_trunk_edit_result.msg | default(''))
+  notify: netconf save config

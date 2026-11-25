@@ -1,0 +1,12 @@
+---
+# Runs once per host at the end of the play (or on flush_handlers) after any
+# notifying task reported a change. cisco-ia:save-config is "write memory".
+- name: Save running configuration
+  ansible.netcommon.netconf_rpc:
+    rpc: save-config
+    xmlns: http://cisco.com/yang/cisco-ia
+  register: write_mem_save_result
+  retries: 5
+  delay: 5
+  until: write_mem_save_result is not failed or 'locked' not in (write_mem_save_result.msg | default(''))
+  listen: netconf save config

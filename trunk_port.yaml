@@ -11,7 +11,7 @@
     port_trunk_no_cdp_enable: false
     port_trunk_no_lldp_transmit: false
     port_trunk_no_lldp_receive: false
-    port_trunk_rep: true
+    #port_trunk_rep: true
 
   roles:
     - role: netconf/port/trunk

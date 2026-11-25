@@ -9,3 +9,4 @@
   retries: 5
   delay: 5
   until: port_channel_member_edit_result is not failed or 'locked' not in (port_channel_member_edit_result.msg | default(''))
+  notify: netconf save config

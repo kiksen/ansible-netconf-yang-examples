@@ -12,6 +12,9 @@
           <number>{{ port_channel_member_number }}</number>
           <mode>{{ port_channel_member_mode }}</mode>
         </channel-group>
+        <service-policy xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-policy">
+          <output>{{ port_channel_member_service_policy_out }}</output>
+        </service-policy>
       </{{ port_channel_member_if_type }}>
     </interface>
   </native>

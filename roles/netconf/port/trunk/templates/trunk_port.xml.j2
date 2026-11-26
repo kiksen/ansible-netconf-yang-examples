@@ -90,7 +90,7 @@
 {% endif %}
         </lldp>
         <service-policy xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-policy">
-          <output>raus</output>
+          <output>{{ port_trunk_service_policy_out }}</output>
         </service-policy>
         <vtp xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-vtp">false</vtp>
       </{{ port_trunk_if_type }}>

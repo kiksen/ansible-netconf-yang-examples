@@ -49,3 +49,8 @@ argument_specs:
             type: str
             required: true
             description: XML namespace of the element, e.g. http://cisco.com/ns/yang/Cisco-IOS-XE-rep.
+      port_access_service_policy_out:
+        type: str
+        required: false
+        default: QUEUE-OUT
+        description: Name of the policy-map applied as output service-policy.

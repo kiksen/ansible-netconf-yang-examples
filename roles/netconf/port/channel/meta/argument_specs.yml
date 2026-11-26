@@ -23,3 +23,8 @@ argument_specs:
         required: false
         default: null
         description: Native-VLAN (NetBox untagged). Ohne Angabe wird ein vorhandenes Native-VLAN entfernt.
+      port_channel_enabled:
+        type: bool
+        required: false
+        default: true
+        description: Administrative state of the interface; false writes shutdown, true removes it.

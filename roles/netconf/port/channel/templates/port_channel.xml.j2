@@ -6,6 +6,11 @@
       <{{ port_channel_if_type }}>
         <name>{{ port_channel_if_id }}</name>
         <description>{{ port_channel_description }}</description>
+{% if not port_channel_enabled %}
+        <shutdown/>
+{% else %}
+        <shutdown nc:operation="remove"/>
+{% endif %}
         <switchport-config>
           <switchport>
             <mode xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">

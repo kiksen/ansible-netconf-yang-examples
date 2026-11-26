@@ -1,0 +1,9 @@
+---
+argument_specs:
+  main:
+    short_description: Shut down a port
+    options:
+      port_shutdown_interface:
+        type: str
+        required: true
+        description: Interface name of the port, e.g. GigabitEthernet1/1/1.

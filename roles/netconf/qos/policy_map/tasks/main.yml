@@ -1,0 +1,11 @@
+---
+- name: "Write class-maps and policy-map with edit-config (merge) on {{ qos_policy_map_name }}"
+  ansible.netcommon.netconf_config:
+    target: running
+    default_operation: merge
+    content: "{{ lookup('ansible.builtin.template', 'policy_map.xml.j2') }}"
+  register: qos_policy_map_edit_result
+  retries: 5
+  delay: 5
+  until: qos_policy_map_edit_result is not failed or 'locked' not in (qos_policy_map_edit_result.msg | default(''))
+  notify: netconf save config

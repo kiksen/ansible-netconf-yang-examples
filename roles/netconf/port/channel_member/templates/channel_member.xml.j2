@@ -1,12 +1,17 @@
 {% set port_channel_member_if_type = port_channel_member_interface | interface_part('type') %}
 {% set port_channel_member_if_id = port_channel_member_interface | interface_part('id') %}
-<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
   <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
     <interface>
       <{{ port_channel_member_if_type }}>
         <name>{{ port_channel_member_if_id }}</name>
 {% if port_channel_member_description is not none %}
         <description>{{ port_channel_member_description }}</description>
+{% endif %}
+{% if not port_channel_member_enabled %}
+        <shutdown/>
+{% else %}
+        <shutdown nc:operation="remove"/>
 {% endif %}
         <channel-group xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-ethernet">
           <number>{{ port_channel_member_number }}</number>

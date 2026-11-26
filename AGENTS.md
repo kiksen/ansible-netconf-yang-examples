@@ -34,5 +34,8 @@
 - A re-run with unchanged values must report `changed=0` where the module allows it.
 - Never commit credentials. The lab inventory uses test credentials only.
 
+## YAML formatting
+- Indent YAML in steps of 2 spaces only. Continuation lines of folded (`>-`) or literal scalars use the indent of the first line plus a multiple of 2; do not align them under an opening bracket. VS Code (indent-rainbow) marks odd indents red.
+
 ## Language
 - create all comments and documentation in english

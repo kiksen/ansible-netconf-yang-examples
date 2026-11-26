@@ -11,8 +11,10 @@
 
   tasks:
 
-    - debug:
+    - name: Show the port-channels
+      ansible.builtin.debug:
         msg: "{{ port_facts_channel }}"
+
     # - name: Show a one-line summary per port
     #   ansible.builtin.debug:
     #     msg: >-

@@ -1,0 +1,25 @@
+---
+# Name of the policy-map. The port roles reference it as output service-policy.
+qos_policy_map_name: QUEUE-OUT
+# Classes in policy order. dscp creates a match-any class-map of the same name;
+# class-default needs no class-map. Per class use either priority_percent
+# (with priority_level) or bandwidth_remaining_percent.
+qos_policy_map_classes:
+  - name: VOICE
+    dscp: [ef]
+    priority_level: 1
+    priority_percent: 10
+  - name: VIDEO
+    dscp: [af41, af42, af43, cs4]
+    bandwidth_remaining_percent: 25
+  - name: SIGNALING
+    dscp: [cs3]
+    bandwidth_remaining_percent: 5
+  - name: APP
+    dscp: [cs5]
+    bandwidth_remaining_percent: 30
+  - name: SCAVENGER
+    dscp: [cs1]
+    bandwidth_remaining_percent: 1
+  - name: class-default
+    bandwidth_remaining_percent: 39

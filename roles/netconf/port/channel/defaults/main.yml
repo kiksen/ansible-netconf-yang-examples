@@ -1,3 +1,4 @@
 ---
 # Pflicht: port_channel_interface, port_channel_description, port_channel_allowed_vlans
 port_channel_native_vlan: null
+port_channel_enabled: true

@@ -54,3 +54,8 @@ argument_specs:
         required: false
         default: QUEUE-OUT
         description: Name of the policy-map applied as output service-policy.
+      port_access_enabled:
+        type: bool
+        required: false
+        default: true
+        description: Administrative state of the interface; false writes shutdown, true removes it.

@@ -1,0 +1,37 @@
+---
+argument_specs:
+  main:
+    short_description: Write class-maps and an egress policy-map per NETCONF
+    options:
+      qos_policy_map_name:
+        type: str
+        required: false
+        default: QUEUE-OUT
+        description: Name of the policy-map.
+      qos_policy_map_classes:
+        type: list
+        elements: dict
+        required: false
+        description: Classes of the policy-map in order. See defaults/main.yml for an example.
+        options:
+          name:
+            type: str
+            required: true
+            description: Class name. A class-map of this name is written when dscp is set.
+          dscp:
+            type: list
+            elements: str
+            required: false
+            description: DSCP values (e.g. ef, af41, cs3) matched by the class-map (match-any).
+          priority_percent:
+            type: int
+            required: false
+            description: Percent of the link for strict priority (priority percent).
+          priority_level:
+            type: int
+            required: false
+            description: Priority level 1 or 2. Used together with priority_percent.
+          bandwidth_remaining_percent:
+            type: int
+            required: false
+            description: Share of the remaining bandwidth in percent (bandwidth remaining percent).

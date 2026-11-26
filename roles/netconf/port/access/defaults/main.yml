@@ -10,3 +10,4 @@ port_access_cleanup_elements:
   - name: rep
     namespace: http://cisco.com/ns/yang/Cisco-IOS-XE-rep
 port_access_service_policy_out: QUEUE-OUT
+port_access_enabled: true

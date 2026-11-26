@@ -1,0 +1,47 @@
+<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+    <policy>
+{% for qos_policy_map_class in qos_policy_map_classes if qos_policy_map_class.dscp | default([]) | length > 0 %}
+      <class-map xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-policy">
+        <name>{{ qos_policy_map_class.name }}</name>
+        <prematch>match-any</prematch>
+        <match>
+{% for qos_policy_map_dscp in qos_policy_map_class.dscp %}
+          <dscp>{{ qos_policy_map_dscp }}</dscp>
+{% endfor %}
+        </match>
+      </class-map>
+{% endfor %}
+      <policy-map xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-policy">
+        <name>{{ qos_policy_map_name }}</name>
+{% for qos_policy_map_class in qos_policy_map_classes %}
+        <class>
+          <name>{{ qos_policy_map_class.name }}</name>
+{% if qos_policy_map_class.priority_percent is defined %}
+          <action-list>
+            <action-type>priority</action-type>
+            <priority>
+{% if qos_policy_map_class.priority_level is defined %}
+              <level>{{ qos_policy_map_class.priority_level }}</level>
+{% endif %}
+              <percent>{{ qos_policy_map_class.priority_percent }}</percent>
+            </priority>
+          </action-list>
+{% endif %}
+{% if qos_policy_map_class.bandwidth_remaining_percent is defined %}
+          <action-list>
+            <action-type>bandwidth</action-type>
+            <bandwidth>
+              <remaining>
+                <rem-option>percent</rem-option>
+                <percent>{{ qos_policy_map_class.bandwidth_remaining_percent }}</percent>
+              </remaining>
+            </bandwidth>
+          </action-list>
+{% endif %}
+        </class>
+{% endfor %}
+      </policy-map>
+    </policy>
+  </native>
+</config>

@@ -1,0 +1,143 @@
+---
+# Read the interfaces of one device from NetBox and write them to the switch with the NETCONF roles.
+#
+#   uv run ansible-playbook -i inventory/netbox_switch.py netbox2netconf.yaml
+#
+# Environment: NETBOX_ENDPOINT, NETBOX_TOKEN (read-only), optional NETBOX_DEVICE (default homidomi).
+# NetBox is only read. On the switch:
+#   - only LAG interfaces (type lag, Port-channelN) are created; virtual interfaces are ignored.
+#   - physical ports are modified: LAG members, access ports (mode access) and trunk ports
+#     (mode tagged / tagged-all). Ports without a NetBox mode and without a LAG are left alone,
+#     except disabled ones: they are shut down (role netconf/port/shutdown).
+#   - management and stack ports are ignored.
+- name: Write NetBox interfaces to the switch
+  hosts: switches
+  gather_facts: false
+
+  vars:
+    nb_ignored_types: [lag, virtual]
+    nb_member_mode: active
+
+  tasks:
+    - name: Read the interfaces of the device from NetBox
+      ansible.builtin.set_fact:
+        nb_interfaces: >-
+          {{ query('netbox.netbox.nb_lookup', 'interfaces',
+                  api_filter='device=' ~ netbox_device,
+                  api_endpoint=lookup('ansible.builtin.env', 'NETBOX_ENDPOINT'),
+                  token=lookup('ansible.builtin.env', 'NETBOX_TOKEN'))
+            | map(attribute='value') | list }}
+
+    - name: Sort the interfaces by role
+      ansible.builtin.set_fact:
+        nb_lags: >-
+          {{ nb_interfaces
+            | selectattr('type.value', 'eq', 'lag')
+            | selectattr('name', 'match', '^Port-channel[0-9]+$')
+            | selectattr('mode') | list }}
+        nb_lags_without_mode: >-
+          {{ nb_interfaces
+            | selectattr('type.value', 'eq', 'lag')
+            | rejectattr('mode') | map(attribute='name') | list }}
+        nb_ports: >-
+          {{ nb_interfaces
+            | rejectattr('mgmt_only')
+            | rejectattr('type.value', 'in', nb_ignored_types)
+            | rejectattr('type.value', 'match', '^cisco-stack') | list }}
+
+    - name: Sort the physical ports by mode
+      ansible.builtin.set_fact:
+        nb_members: "{{ nb_ports | selectattr('lag') | list }}"
+        nb_access_ports: >-
+          {{ nb_ports | rejectattr('lag') | selectattr('mode')
+            | selectattr('mode.value', 'eq', 'access') | list }}
+        nb_trunk_ports: >-
+          {{ nb_ports | rejectattr('lag') | selectattr('mode')
+            | selectattr('mode.value', 'in', ['tagged', 'tagged-all']) | list }}
+        nb_unused_ports: >-
+          {{ nb_ports | rejectattr('enabled') | rejectattr('lag') | rejectattr('mode') | list }}
+
+    - name: Check the NetBox data before anything is written
+      ansible.builtin.assert:
+        that:
+          - nb_access_ports | rejectattr('untagged_vlan') | list | length == 0
+          - nb_trunk_ports | selectattr('mode.value', 'eq', 'tagged') | selectattr('tagged_vlans', 'equalto', []) | list | length == 0
+          - nb_lags | selectattr('mode.value', 'eq', 'tagged') | selectattr('tagged_vlans', 'equalto', []) | list | length == 0
+          - nb_lags | selectattr('mode.value', 'eq', 'access') | list | length == 0
+        fail_msg: >-
+          NetBox data is incomplete: access ports need an untagged VLAN, tagged ports and LAGs
+          need tagged VLANs, and a LAG cannot be an access port.
+        quiet: true
+
+    - name: Report LAGs without a mode that are skipped
+      ansible.builtin.debug:
+        msg: "{{ nb_lags_without_mode | join(', ') }} have no 802.1Q mode in NetBox and are skipped"
+      when: nb_lags_without_mode | length > 0
+
+    - name: Write the QoS policy-map referenced by the ports
+      ansible.builtin.include_role:
+        name: netconf/qos/policy_map
+
+    - name: Create the LAG interfaces
+      ansible.builtin.include_role:
+        name: netconf/port/channel
+      vars:
+        port_channel_interface: "{{ item.name }}"
+        port_channel_description: "{{ item.description | default(item.name, true) }}"
+        port_channel_allowed_vlans: >-
+          {{ 'all' if item.mode.value == 'tagged-all'
+            else item.tagged_vlans | map(attribute='vid') | sort | list }}
+        port_channel_native_vlan: "{{ (item.untagged_vlan or {}).vid | default(none) }}"
+        port_channel_enabled: "{{ item.enabled }}"
+      loop: "{{ nb_lags }}"
+      loop_control:
+        label: "{{ item.name }}"
+
+    - name: Write the LAG members
+      ansible.builtin.include_role:
+        name: netconf/port/channel_member
+      vars:
+        port_channel_member_interface: "{{ item.name }}"
+        port_channel_member_number: "{{ item.lag.name | regex_replace('[^0-9]', '') | int }}"
+        port_channel_member_mode: "{{ nb_member_mode }}"
+        port_channel_member_description: "{{ item.description | default(item.name, true) }}"
+        port_channel_member_enabled: "{{ item.enabled }}"
+      loop: "{{ nb_members }}"
+      loop_control:
+        label: "{{ item.name }}"
+
+    - name: Write the access ports
+      ansible.builtin.include_role:
+        name: netconf/port/access
+      vars:
+        port_access_interface: "{{ item.name }}"
+        port_access_vlan: "{{ item.untagged_vlan.vid }}"
+        port_access_description: "{{ item.description | default(item.name, true) }}"
+        port_access_enabled: "{{ item.enabled }}"
+      loop: "{{ nb_access_ports }}"
+      loop_control:
+        label: "{{ item.name }}"
+
+    - name: Write the trunk ports
+      ansible.builtin.include_role:
+        name: netconf/port/trunk
+      vars:
+        port_trunk_interface: "{{ item.name }}"
+        port_trunk_description: "{{ item.description | default(item.name, true) }}"
+        port_trunk_allowed_vlans: >-
+          {{ 'all' if item.mode.value == 'tagged-all'
+            else item.tagged_vlans | map(attribute='vid') | sort | list }}
+        port_trunk_native_vlan: "{{ (item.untagged_vlan or {}).vid | default(none) }}"
+        port_trunk_enabled: "{{ item.enabled }}"
+      loop: "{{ nb_trunk_ports }}"
+      loop_control:
+        label: "{{ item.name }}"
+
+    - name: Shut down disabled ports without a mode
+      ansible.builtin.include_role:
+        name: netconf/port/shutdown
+      vars:
+        port_shutdown_interface: "{{ item.name }}"
+      loop: "{{ nb_unused_ports }}"
+      loop_control:
+        label: "{{ item.name }}"

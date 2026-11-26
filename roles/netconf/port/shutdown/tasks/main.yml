@@ -1,0 +1,12 @@
+---
+- name: "Shut down the port with edit-config (merge) on {{ port_shutdown_interface }}"
+  ansible.netcommon.netconf_config:
+    target: running
+    default_operation: merge
+    get_filter: "{{ lookup('ansible.builtin.template', 'get_filter.xml.j2') }}"
+    content: "{{ lookup('ansible.builtin.template', 'shutdown.xml.j2') }}"
+  register: port_shutdown_edit_result
+  retries: 5
+  delay: 5
+  until: port_shutdown_edit_result is not failed or 'locked' not in (port_shutdown_edit_result.msg | default(''))
+  notify: netconf save config

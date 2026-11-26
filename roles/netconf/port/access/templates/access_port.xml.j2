@@ -6,6 +6,9 @@
       <{{ port_access_if_type }} nc:operation="replace">
         <name>{{ port_access_if_id }}</name>
         <description>{{ port_access_description }}</description>
+{% if not port_access_enabled %}
+        <shutdown/>
+{% endif %}
         <switchport-config>
           <switchport>
             <access xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">

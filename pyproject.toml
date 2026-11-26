@@ -12,6 +12,7 @@ dependencies = [
     "mypy>=2.4.1",
     "ncclient>=0.7.1",
     "paramiko>=5.0.0",
+    "pynetbox>=7.9.0",
 ]
 
 [dependency-groups]
@@ -26,4 +27,5 @@ dev = [
 pythonpath = [
     "roles/netconf/filters/filter_plugins",
     "roles/netconf/port/facts/filter_plugins",
+    "inventory",
 ]

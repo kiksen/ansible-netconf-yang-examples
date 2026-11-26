@@ -10,3 +10,4 @@ port_trunk_cleanup_elements:
   - name: rep
     namespace: http://cisco.com/ns/yang/Cisco-IOS-XE-rep
 port_trunk_service_policy_out: QUEUE-OUT
+port_trunk_enabled: true

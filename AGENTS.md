@@ -39,3 +39,6 @@
 
 ## Language
 - create all comments and documentation in english
+
+## python client
+- This client is only for testing. General changes are not done to python unless you are instructued to.

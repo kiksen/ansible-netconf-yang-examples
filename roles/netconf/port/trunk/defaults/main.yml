@@ -6,11 +6,5 @@ port_trunk_no_lldp_transmit: null
 port_trunk_no_lldp_receive: null
 port_trunk_rep: null
 port_trunk_nonegotiate: null
-port_trunk_cleanup_elements: []
-  # - name: rep
-  #   namespace: http://cisco.com/ns/yang/Cisco-IOS-XE-rep
-  # - name: channel-group
-  #   namespace: http://cisco.com/ns/yang/Cisco-IOS-XE-ethernet
-
 port_trunk_service_policy_out: QUEUE-OUT
 port_trunk_enabled: true

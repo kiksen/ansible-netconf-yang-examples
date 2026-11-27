@@ -6,14 +6,11 @@
 <config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
   <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
     <interface>
-      <!-- GigabitEthernet1/0/5 needs the replace, so the entire interface is replaced, no matter what config is used -->
       <{{ port_trunk_if_type }} nc:operation="replace">
         <name>{{ port_trunk_if_id }}</name>
         <description>{{ port_trunk_description }}</description>
 {% if not port_trunk_enabled %}
         <shutdown/>
-{% else %}
-        <shutdown nc:operation="remove"/>
 {% endif %}
         <switchport-config>
           <switchport>
@@ -22,13 +19,9 @@
             </mode>
 {% if port_trunk_nonegotiate %}
             <nonegotiate xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch"/>
-{% else %}
-            <nonegotiate xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch" nc:operation="remove"/>
 {% endif %}
             <trunk xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
-{% if port_trunk_allowed_vlans == 'all' %}
-              <allowed nc:operation="remove"/>
-{% else %}
+{% if port_trunk_allowed_vlans != 'all' %}
               <allowed>
                 <vlan-v2>
                   <vlan-choices>
@@ -43,8 +36,6 @@
                   <vlan-id>{{ port_trunk_native_vlan }}</vlan-id>
                 </vlan>
               </native>
-{% else %}
-              <native nc:operation="remove"/>
 {% endif %}
             </trunk>
           </switchport>
@@ -66,8 +57,6 @@
             </id>
           </segment>
         </rep>
-{% else %}
-        <rep xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-rep" nc:operation="remove"/>
 {% endif %}
         <ip>
           <dhcp>
@@ -80,21 +69,17 @@
         <cdp xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-cdp">
           <enable>false</enable>
         </cdp>
-{% else %}
-        <cdp xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-cdp" nc:operation="remove"/>
 {% endif %}
+{% if port_trunk_no_lldp_receive or port_trunk_no_lldp_transmit %}
         <lldp xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-lldp">
 {% if port_trunk_no_lldp_receive %}
           <receive>false</receive>
-{% else %}
-          <receive nc:operation="remove"/>
 {% endif %}
 {% if port_trunk_no_lldp_transmit %}
           <transmit>false</transmit>
-{% else %}
-          <transmit nc:operation="remove"/>
 {% endif %}
         </lldp>
+{% endif %}
         <!-- <service-policy xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-policy">
           <output>{{ port_trunk_service_policy_out }}</output>
         </service-policy> -->

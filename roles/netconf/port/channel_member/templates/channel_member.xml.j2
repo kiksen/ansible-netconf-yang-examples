@@ -10,8 +10,6 @@
 {% endif %}
 {% if not port_channel_member_enabled %}
         <shutdown/>
-{% else %}
-        <shutdown nc:operation="remove"/>
 {% endif %}
         <channel-group xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-ethernet">
           <number>{{ port_channel_member_number }}</number>

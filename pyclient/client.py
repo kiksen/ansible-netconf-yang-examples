@@ -29,10 +29,6 @@ PARAMS: dict[str, object] = {
     # Test flag only (not a role variable): True resets the interface in the same
     # edit-config via nc:operation="replace" (like "default interface"), False merges.
     "port_access_reset": True,
-    # Problem elements removed before the write (only if present on the device).
-    "port_access_cleanup_elements": [
-        {"name": "rep", "namespace": "http://cisco.com/ns/yang/Cisco-IOS-XE-rep"},
-    ],
 }
 
 
@@ -69,12 +65,6 @@ def get_running(session: manager.Manager, subtree: str) -> str:
     return session.get_config(source="running", filter=("subtree", subtree)).data_xml
 
 
-def cleanup_present(running_xml: str) -> list[dict[str, str]]:
-    """Return the cleanup elements whose namespace occurs in the running config."""
-    elements: list[dict[str, str]] = PARAMS["port_access_cleanup_elements"]  # type: ignore[assignment]  # PARAMS is untyped
-    return [element for element in elements if element["namespace"] in running_xml]
-
-
 def open_session() -> Manager:
     return manager.connect(
         host=HOST,
@@ -96,13 +86,8 @@ def main() -> None:
     print(payload)
     with open_session() as session:
         before = get_running(session, get_filter)
-        # present = cleanup_present(before)
         before = pretty(before)
         try:
-            # if present:
-            #     cleaner = render("cleaner.xml.j2", port_access_cleanup_present=present)
-            #     print(cleaner)
-            #     session.edit_config(target="running", config=cleaner)
             reply = session.edit_config(target="running", config=payload)
             print(pretty(reply.xml))
 

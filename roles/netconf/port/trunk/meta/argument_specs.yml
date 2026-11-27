@@ -53,20 +53,6 @@ argument_specs:
         default: null
         description: >-
           Configure 'switchport nonegotiate' on the port. Bei false/ohne Angabe wird die Einstellung entfernt.
-      port_trunk_cleanup_elements:
-        type: list
-        elements: dict
-        required: false
-        description: Interface child elements that are removed before the port is written (only if present on the device).
-        options:
-          name:
-            type: str
-            required: true
-            description: Element name, e.g. rep.
-          namespace:
-            type: str
-            required: true
-            description: XML namespace of the element, e.g. http://cisco.com/ns/yang/Cisco-IOS-XE-rep.
       port_trunk_service_policy_out:
         type: str
         required: false

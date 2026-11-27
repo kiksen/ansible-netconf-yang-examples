@@ -35,20 +35,6 @@ argument_specs:
         required: false
         default: null
         description: LLDP-Empfang deaktivieren (no lldp receive). Bei false/ohne Angabe wird die Einstellung entfernt.
-      port_access_cleanup_elements:
-        type: list
-        elements: dict
-        required: false
-        description: Interface child elements that are removed before the port is written (only if present on the device).
-        options:
-          name:
-            type: str
-            required: true
-            description: Element name, e.g. rep.
-          namespace:
-            type: str
-            required: true
-            description: XML namespace of the element, e.g. http://cisco.com/ns/yang/Cisco-IOS-XE-rep.
       port_access_service_policy_out:
         type: str
         required: false

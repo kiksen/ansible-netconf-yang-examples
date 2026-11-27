@@ -1,0 +1,26 @@
+<storm-control>
+  <broadcast>
+    <level>
+      <threshold>
+        <rising-threshold>10.0</rising-threshold>
+        <falling-threshold>0.0</falling-threshold>
+      </threshold>
+    </level>
+  </broadcast>
+  <multicast>
+    <level>
+      <threshold>
+        <rising-threshold>10.0</rising-threshold>
+        <falling-threshold>0.0</falling-threshold>
+      </threshold>
+    </level>
+  </multicast>
+  <!-- <unicast>
+    <level>
+      <threshold>
+        <rising-threshold>10.0</rising-threshold>
+        <falling-threshold>0.0</falling-threshold>
+      </threshold>
+    </level>
+  </unicast> -->
+</storm-control>

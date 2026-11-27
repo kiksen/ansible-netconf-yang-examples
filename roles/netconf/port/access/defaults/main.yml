@@ -4,7 +4,5 @@ port_access_voice_vlan: null
 port_access_no_cdp_enable: null
 port_access_no_lldp_transmit: null
 port_access_no_lldp_receive: null
-# Elements that are removed from the interface before it is written. Add further
-# problem elements as {name, namespace}; only elements present on the device are touched.
 port_access_service_policy_out: QUEUE-OUT
 port_access_enabled: true

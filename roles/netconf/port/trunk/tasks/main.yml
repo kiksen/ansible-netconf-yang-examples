@@ -6,43 +6,9 @@
     fail_msg: "port_trunk_allowed_vlans must be 'all', a VLAN list or a range such as 1,20-30"
     quiet: true
 
-- name: "Read current interface config of {{ port_trunk_interface }}"
-  ansible.netcommon.netconf_get:
-    source: running
-    filter: "{{ lookup('ansible.builtin.template', 'get_filter.xml.j2') }}"
-    display: xml
-  register: port_trunk_current_result
-
-# A namespace is unique per element, so a substring match on the reply is enough.
-# rep is skipped when port_trunk_rep is set, because the trunk template writes it then.
-- name: "Collect problem elements present on {{ port_trunk_interface }}"
-  ansible.builtin.set_fact:
-    port_trunk_cleanup_present: >-
-      {{ port_trunk_cleanup_elements
-        | selectattr('namespace', 'in', port_trunk_current_result.stdout)
-        | rejectattr('name', 'in', ['rep'] if port_trunk_rep else [])
-        | list }}
-
-# - ansible.builtin.debug:
-#     msg:
-#       - "{{ port_trunk_cleanup_present }}"
-#       - "{{ port_trunk_current_result.stdout }}"
-      
-
-
-- name: "Remove problem elements on {{ port_trunk_interface }}"
+- name: "Write physical port trunk with edit-config (replace in template) on {{ port_trunk_interface }}"
   ansible.netcommon.netconf_config:
     target: running
-    default_operation: merge
-    get_filter: "{{ lookup('ansible.builtin.template', 'get_filter.xml.j2') }}"
-    content: "{{ lookup('ansible.builtin.template', 'cleaner.xml.j2') }}"
-  when: port_trunk_cleanup_present | length > 0
-  notify: netconf save config
-
-- name: "Write physical port trunk with edit-config (merge) on {{ port_trunk_interface }}"
-  ansible.netcommon.netconf_config:
-    target: running
-    #default_operation: replace
     get_filter: "{{ lookup('ansible.builtin.template', 'get_filter.xml.j2') }}"
     content: "{{ lookup('ansible.builtin.template', 'trunk_port.xml.j2') }}"
   register: port_trunk_edit_result

@@ -8,8 +8,6 @@
         <description>{{ port_channel_description }}</description>
 {% if not port_channel_enabled %}
         <shutdown/>
-{% else %}
-        <shutdown nc:operation="remove"/>
 {% endif %}
         <switchport-config>
           <switchport>
@@ -17,9 +15,7 @@
               <trunk/>
             </mode>
             <trunk xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
-{% if port_channel_allowed_vlans == 'all' %}
-              <allowed nc:operation="remove"/>
-{% else %}
+{% if port_channel_allowed_vlans != 'all' %}
               <allowed>
                 <vlan-v2>
                   <vlan-choices>
@@ -34,8 +30,6 @@
                   <vlan-id>{{ port_channel_native_vlan }}</vlan-id>
                 </vlan>
               </native>
-{% else %}
-              <native nc:operation="remove"/>
 {% endif %}
             </trunk>
           </switchport>

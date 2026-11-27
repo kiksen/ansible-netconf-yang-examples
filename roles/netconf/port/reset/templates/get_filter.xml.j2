@@ -1,0 +1,9 @@
+{% set port_reset_if_type = port_reset_interface | interface_part('type') %}
+{% set port_reset_if_id = port_reset_interface | interface_part('id') %}
+<native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+  <interface>
+    <{{ port_reset_if_type }}>
+      <name>{{ port_reset_if_id }}</name>
+    </{{ port_reset_if_type }}>
+  </interface>
+</native>

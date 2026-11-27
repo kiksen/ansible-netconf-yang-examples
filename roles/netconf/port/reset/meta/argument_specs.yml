@@ -1,0 +1,14 @@
+---
+argument_specs:
+  main:
+    short_description: Reset a port (shutdown, then no shutdown)
+    options:
+      port_reset_interface:
+        type: str
+        required: true
+        description: Interface name of the port, e.g. GigabitEthernet1/0/5.
+      port_reset_delay:
+        type: int
+        required: false
+        default: 3
+        description: Seconds the port stays shut down before it is brought up again.

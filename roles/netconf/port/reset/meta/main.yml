@@ -1,0 +1,16 @@
+---
+galaxy_info:
+  role_name: reset
+  namespace: netconf_port
+  author: Christian Knoblauch
+  description: Resets a physical port (shutdown, then no shutdown) per NETCONF, e.g. to renew a DHCP lease
+  license: MIT
+  min_ansible_version: "2.20"
+  platforms:
+    - name: IOS
+      versions:
+        - all
+
+# No write_mem: the port ends in the state it started in, so there is nothing to save.
+dependencies:
+  - role: netconf/filters

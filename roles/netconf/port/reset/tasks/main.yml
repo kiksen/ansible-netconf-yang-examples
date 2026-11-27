@@ -1,0 +1,31 @@
+---
+- name: "Shut down the port with edit-config (merge) on {{ port_reset_interface }}"
+  ansible.netcommon.netconf_config:
+    target: running
+    default_operation: merge
+    get_filter: "{{ lookup('ansible.builtin.template', 'get_filter.xml.j2') }}"
+    content: "{{ lookup('ansible.builtin.template', 'reset.xml.j2') }}"
+  vars:
+    port_reset_admin_state: down
+  register: port_reset_down_result
+  retries: 5
+  delay: 5
+  until: port_reset_down_result is not failed or 'locked' not in (port_reset_down_result.msg | default(''))
+
+# The link must stay down long enough for the connected device to notice it.
+- name: "Keep the port down for the configured delay on {{ port_reset_interface }}"
+  ansible.builtin.pause:
+    seconds: "{{ port_reset_delay }}"
+
+- name: "Bring the port up with edit-config (merge) on {{ port_reset_interface }}"
+  ansible.netcommon.netconf_config:
+    target: running
+    default_operation: merge
+    get_filter: "{{ lookup('ansible.builtin.template', 'get_filter.xml.j2') }}"
+    content: "{{ lookup('ansible.builtin.template', 'reset.xml.j2') }}"
+  vars:
+    port_reset_admin_state: up
+  register: port_reset_up_result
+  retries: 5
+  delay: 5
+  until: port_reset_up_result is not failed or 'locked' not in (port_reset_up_result.msg | default(''))

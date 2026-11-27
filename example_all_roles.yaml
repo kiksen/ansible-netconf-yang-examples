@@ -21,28 +21,24 @@
 
 
   tasks:
-    # - name: Access-Ports schreiben
-    #   ansible.builtin.include_role:
-    #     name: netconf/port/access
-    #   vars:
-    #     port_access_interface: "{{ item.interface }}"
-    #     port_access_vlan: "{{ item.vlan }}"
-    #     port_access_voice_vlan: "{{ item.voice_vlan | default(None) }}"
-    #     port_access_description: "{{ item.description }}"
-    #   loop: "{{ access_ports }}"
-    #   loop_control:
-    #     loop_var: item
-    #     label: "{{ item.interface }}"
-
-    - name: Trunk
+    - name: Access-Ports schreiben
       ansible.builtin.include_role:
-        name: netconf/port/trunk
+        name: netconf/port/access
       vars:
-        port_trunk_allowed_vlans: 2-4094
-        port_trunk_native_vlan: 920
-        port_trunk_description: AccessPoint
-        port_trunk_interface: GigabitEthernet1/0/5
-    #     port_trunk_rep: true
+        port_access_interface: GigabitEthernet1/0/5
+        port_access_vlan: 100
+        port_access_voice_vlan: 200
+        port_access_description: Client and phone!
+
+    # - name: Trunk
+    #   ansible.builtin.include_role:
+    #     name: netconf/port/trunk
+    #   vars:
+    #     port_trunk_allowed_vlans: 2-4094
+    #     port_trunk_native_vlan: 920
+    #     port_trunk_description: AccessPoint
+    #     port_trunk_interface: GigabitEthernet1/0/5
+    # #     port_trunk_rep: true
 
 
     # - name: Channel-Member
@@ -56,3 +52,18 @@
     # - name: output
     #   debug:
     #     msg: "{{ port_channel_member_edit_result }}"
+
+    # - name: Hostname
+    #   ansible.builtin.include_role:
+    #     name: netconf/system/hostname
+    #   vars:
+    #     system_hostname_name: sw-access-01
+
+    # Reset the port only when the write above changed something, e.g. to renew a DHCP lease.
+    # Check the result right after the role call: the register is overwritten by the next call.
+    # - name: Reset the port after a change
+    #   ansible.builtin.include_role:
+    #     name: netconf/port/reset
+    #   vars:
+    #     port_reset_interface: GigabitEthernet1/0/5
+    #   when: port_access_edit_result is changed

@@ -1,0 +1,16 @@
+{% set port_reset_if_type = port_reset_interface | interface_part('type') %}
+{% set port_reset_if_id = port_reset_interface | interface_part('id') %}
+<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+    <interface>
+      <{{ port_reset_if_type }}>
+        <name>{{ port_reset_if_id }}</name>
+{% if port_reset_admin_state == 'down' %}
+        <shutdown/>
+{% else %}
+        <shutdown nc:operation="remove"/>
+{% endif %}
+      </{{ port_reset_if_type }}>
+    </interface>
+  </native>
+</config>

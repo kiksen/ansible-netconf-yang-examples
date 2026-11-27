@@ -1,3 +1,0 @@
----
-# No parameters. Sets system_stack_members (one dict per stack node) and system_stack_info
-# (size, ring status, stack MAC). Keys keep the YANG names, e.g. item["node-state"].

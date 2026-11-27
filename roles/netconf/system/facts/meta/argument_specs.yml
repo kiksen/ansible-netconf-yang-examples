@@ -1,12 +1,17 @@
 ---
 argument_specs:
   main:
-    short_description: Read the data of show version and show inventory
+    short_description: Read the data of show version, show inventory and the stack
     description:
       - Has no parameters. Sets system_facts_hostname, system_facts_version,
-        system_facts_system and system_facts_inventory.
+        system_facts_system, system_facts_inventory, system_facts_stack_members and
+        system_facts_stack_info.
       - system_facts_system is a dict of the device-system-data leaves (software-version,
         boot-time, last-reboot-reason, ...).
       - system_facts_inventory is a list with one dict per device-inventory entry (hw-type,
         dev-name, hw-description, part-number, serial-number, ...).
+      - system_facts_stack_members is a list with one dict per stack node (chassis-number, role,
+        node-state, priority, mac-address, serial-number, stack-ports, ...), read from
+        Cisco-IOS-XE-stack-oper.
+      - system_facts_stack_info is a dict with size, ring-status, stack-mac-address and stack-boottime.
     options: {}

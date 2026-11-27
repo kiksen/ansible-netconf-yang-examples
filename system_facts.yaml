@@ -1,5 +1,8 @@
 ---
-- name: Example - read show version and show inventory per NETCONF
+# All system facts in one example: show version, show inventory and the stack.
+#   uv run ansible-playbook -i inventory.yaml system_facts.yaml
+# Interface facts have their own examples: interface_facts.yaml and channel_facts.yaml.
+- name: Example - read show version, show inventory and the stack per NETCONF
   hosts: switch
   gather_facts: false
 
@@ -19,3 +22,16 @@
       loop: "{{ system_facts_inventory }}"
       loop_control:
         label: "{{ item['dev-name'] | default(item['hw-type'] | default('')) }}"
+
+    - name: Show the stack members
+      ansible.builtin.debug:
+        msg: >-
+          Switch {{ item['chassis-number'] }}: {{ item.role }}, {{ item['node-state'] }},
+          priority={{ item.priority }}, mac={{ item['mac-address'] }}, sn={{ item['serial-number'] }}
+      loop: "{{ system_facts_stack_members }}"
+      loop_control:
+        label: "{{ item['chassis-number'] }}"
+
+    - name: Show the stack status
+      ansible.builtin.debug:
+        var: system_facts_stack_info

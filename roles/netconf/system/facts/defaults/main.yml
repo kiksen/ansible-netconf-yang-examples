@@ -1,3 +1,5 @@
 ---
 # No parameters. Sets system_facts_hostname, system_facts_version,
-# system_facts_system (show version) and system_facts_inventory (show inventory).
+# system_facts_system (show version), system_facts_inventory (show inventory),
+# system_facts_stack_members (one dict per stack node) and system_facts_stack_info
+# (size, ring status, stack MAC).

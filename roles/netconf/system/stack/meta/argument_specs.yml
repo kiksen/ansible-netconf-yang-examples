@@ -1,11 +1,11 @@
 ---
 argument_specs:
   main:
-    short_description: Read the stack members
+    short_description: Read the stack members and the stack status
     description:
-      - Has no parameters. Sets system_stack_all, system_stack_globals, system_stack_tables,
-        system_stack_members and system_stack_raw.
-      - Keys keep the names of CISCO-STACKWISE-MIB, e.g. cswSwitchRole. system_stack_members is
-        the list of cswSwitchInfoTable entries, one per stack member.
-      - system_stack_raw is the unparsed reply, useful to see the fields the device really returns.
+      - Has no parameters. Sets system_stack_members and system_stack_info (Cisco-IOS-XE-stack-oper).
+      - system_stack_members is a list with one dict per stack node (chassis-number, role,
+        node-state, priority, mac-address, serial-number, stack-ports, ...).
+      - system_stack_info is a dict with size, ring-status, stack-mac-address and stack-boottime.
+      - Keys keep the YANG names with hyphens; read them with item['node-state'].
     options: {}

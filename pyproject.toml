@@ -9,6 +9,7 @@ dependencies = [
     "ansible-core>=2.20.6",
     "ansible-pylibssh>=1.4.0",
     "argcomplete>=3.7.2",
+    "jxmlease>=1.0.3",
     "mypy>=2.4.1",
     "ncclient>=0.7.1",
     "paramiko>=5.0.0",
@@ -27,7 +28,5 @@ dev = [
 pythonpath = [
     "roles/netconf/filters/filter_plugins",
     "roles/netconf/port/facts/filter_plugins",
-    "roles/netconf/system/facts/filter_plugins",
-    "roles/netconf/system/stack/filter_plugins",
     "inventory",
 ]

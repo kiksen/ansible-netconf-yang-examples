@@ -1,3 +1,3 @@
 ---
-# No parameters. Sets system_stack_all, system_stack_globals, system_stack_tables,
-# system_stack_members and system_stack_raw (the unparsed reply).
+# No parameters. Sets system_stack_members (one dict per stack node) and system_stack_info
+# (size, ring status, stack MAC). Keys keep the YANG names, e.g. item["node-state"].

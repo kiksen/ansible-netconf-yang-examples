@@ -7,11 +7,15 @@
     - role: netconf/system/stack
 
   post_tasks:
-    # First run: look at the raw reply to see which fields the device returns.
-    - name: Show the raw reply
-      ansible.builtin.debug:
-        var: system_stack_raw
-
     - name: Show the stack members
       ansible.builtin.debug:
-        var: system_stack_members
+        msg: >-
+          Switch {{ item['chassis-number'] }}: {{ item.role }}, {{ item['node-state'] }},
+          priority={{ item.priority }}, mac={{ item['mac-address'] }}, sn={{ item['serial-number'] }}
+      loop: "{{ system_stack_members }}"
+      loop_control:
+        label: "{{ item['chassis-number'] }}"
+
+    - name: Show the stack status
+      ansible.builtin.debug:
+        var: system_stack_info

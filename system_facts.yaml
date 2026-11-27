@@ -14,8 +14,8 @@
     - name: Show the inventory
       ansible.builtin.debug:
         msg: >-
-          {{ item.dev_name | default('') }}: {{ item.hw_description | default('') }},
-          pid={{ item.part_number | default('') }}, sn={{ item.serial_number | default('') }}
+          {{ item['dev-name'] | default('') }}: {{ item['hw-description'] | default('') }},
+          pid={{ item['part-number'] | default('') }}, sn={{ item['serial-number'] | default('') }}
       loop: "{{ system_facts_inventory }}"
       loop_control:
-        label: "{{ item.dev_name | default(item.hw_type | default('')) }}"
+        label: "{{ item['dev-name'] | default(item['hw-type'] | default('')) }}"

@@ -100,6 +100,7 @@ dependencies = [
     { name = "ansible-core" },
     { name = "ansible-pylibssh" },
     { name = "argcomplete" },
+    { name = "jxmlease" },
     { name = "mypy" },
     { name = "ncclient" },
     { name = "paramiko" },
@@ -120,6 +121,7 @@ requires-dist = [
     { name = "ansible-core", specifier = ">=2.20.6" },
     { name = "ansible-pylibssh", specifier = ">=1.4.0" },
     { name = "argcomplete", specifier = ">=3.7.2" },
+    { name = "jxmlease", specifier = ">=1.0.3" },
     { name = "mypy", specifier = ">=2.4.1" },
     { name = "ncclient", specifier = ">=0.7.1" },
     { name = "paramiko", specifier = ">=5.0.0" },
@@ -623,6 +625,15 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/19/74/a633ee74eb36c44aa6d1095e7cc5569bebf04342ee146178e2d36600708b/jsonschema_specifications-2025.9.1.tar.gz", hash = "sha256:b540987f239e745613c7a9176f3edb72b832a4ac465cf02712288397832b5e8d", size = 32855, upload-time = "2025-09-08T01:34:59.186Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/41/45/1a4ed80516f02155c51f51e8cedb3c1902296743db0bbc66608a0db2814f/jsonschema_specifications-2025.9.1-py3-none-any.whl", hash = "sha256:98802fee3a11ee76ecaca44429fda8a41bff98b00a0f2838151b113f210cc6fe", size = 18437, upload-time = "2025-09-08T01:34:57.871Z" },
+]
+
+[[package]]
+name = "jxmlease"
+version = "1.0.3"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/8d/6a/b2944628e019c753894552c1499bf60e2cef9efea138756c5d66f0d5eb98/jxmlease-1.0.3.tar.gz", hash = "sha256:612c1575d8a87026dea096bb75acec7302dd69040fa23d9116e71e30d5e0839e", size = 50912, upload-time = "2020-05-29T12:56:24.493Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/0d/d5/bea8c0334cb8439ea6b9549d84333e18160ff1044113c846d2b11602af85/jxmlease-1.0.3-py2.py3-none-any.whl", hash = "sha256:6bbfaee0ecf7e287667c9b33fa70c2650265dcbf01518a2531a46b921c17cdaf", size = 37764, upload-time = "2020-05-29T12:56:22.511Z" },
 ]
 
 [[package]]

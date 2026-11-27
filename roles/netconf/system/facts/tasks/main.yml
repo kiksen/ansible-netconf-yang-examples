@@ -1,27 +1,30 @@
 ---
+# display json lets the module convert the reply, so no parser is needed.
 # A subtree filter needs a single root element, so native and hardware data are two reads.
 - name: Read the hostname and version
   ansible.netcommon.netconf_get:
     source: running
-    display: xml
+    display: json
     filter: "{{ lookup('ansible.builtin.template', 'get_filter_native.xml.j2') }}"
   register: system_facts_native_result
 
 # No source: the hardware data is operational state, so this is a <get>, not a <get-config>.
 - name: Read the version and inventory data
   ansible.netcommon.netconf_get:
-    display: xml
+    display: json
     filter: "{{ lookup('ansible.builtin.template', 'get_filter_hardware.xml.j2') }}"
   register: system_facts_hardware_result
 
+# The converter returns a dict for one element and a list for several, so the inventory is normalized.
 - name: Build the system facts
   ansible.builtin.set_fact:
-    system_facts_native: "{{ system_facts_native_result.stdout | system_facts }}"
-    system_facts_hardware: "{{ system_facts_hardware_result.stdout | system_facts }}"
-
-- name: Split the system facts
-  ansible.builtin.set_fact:
-    system_facts_hostname: "{{ system_facts_native.hostname }}"
-    system_facts_version: "{{ system_facts_native.version }}"
-    system_facts_system: "{{ system_facts_hardware.system }}"
-    system_facts_inventory: "{{ system_facts_hardware.inventory }}"
+    system_facts_hostname: "{{ system_facts_native.get('hostname') }}"
+    system_facts_version: "{{ system_facts_native.get('version') }}"
+    system_facts_system: "{{ system_facts_hardware.get('device-system-data', {}) }}"
+    system_facts_inventory: "{{ [system_facts_items] if system_facts_items is mapping else system_facts_items }}"
+  vars:
+    system_facts_native: "{{ system_facts_native_result.output.get('data', {}).get('native', {}) }}"
+    system_facts_hardware: >-
+      {{ system_facts_hardware_result.output.get('data', {})
+         .get('device-hardware-data', {}).get('device-hardware', {}) }}
+    system_facts_items: "{{ system_facts_hardware.get('device-inventory', []) }}"

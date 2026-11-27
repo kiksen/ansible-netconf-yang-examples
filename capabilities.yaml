@@ -1,0 +1,40 @@
+---
+# Read the YANG modules the device offers (ietf-netconf-monitoring) and write them to a file.
+#   uv run ansible-playbook -i inventory.yaml capabilities.yaml
+# Result: docs/netconf_modules_<inventory_hostname>.txt, one "name revision" per line.
+- name: Read the NETCONF capabilities and YANG modules
+  hosts: switch
+  gather_facts: false
+
+  vars:
+    capabilities_out_dir: "{{ playbook_dir }}/docs"
+
+  tasks:
+    # The hello capabilities of this device do not list the Cisco-IOS-XE-* modules,
+    # so the schema list of the monitoring model is the reliable source.
+    - name: Read the schema list
+      ansible.netcommon.netconf_get:
+        display: xml
+        filter: |
+          <netconf-state xmlns="urn:ietf:params:xml:ns:yang:ietf-netconf-monitoring">
+            <schemas/>
+          </netconf-state>
+      register: capabilities_schemas_result
+
+    - name: Build the module list
+      ansible.builtin.set_fact:
+        capabilities_modules: >-
+          {{ capabilities_schemas_result.stdout
+             | regex_findall('<identifier>([^<]+)</identifier>\s*<version>([^<]*)</version>')
+             | map('join', ' ') | sort | unique | list }}
+
+    - name: Show the number of modules
+      ansible.builtin.debug:
+        msg: "{{ capabilities_modules | length }} modules, {{ capabilities_modules | select('search', 'stack') | list }}"
+
+    - name: Write the module list
+      ansible.builtin.copy:
+        content: "{{ capabilities_modules | join('\n') }}\n"
+        dest: "{{ capabilities_out_dir }}/netconf_modules_{{ inventory_hostname }}.txt"
+        mode: "0644"
+      delegate_to: localhost

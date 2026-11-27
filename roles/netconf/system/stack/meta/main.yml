@@ -3,7 +3,7 @@ galaxy_info:
   role_name: stack
   namespace: netconf_system
   author: Christian Knoblauch
-  description: Reads the stack members (role, priority, state, MAC) via NETCONF (CISCO-STACKWISE-MIB)
+  description: Reads the stack members (role, priority, state, MAC, serial number) via NETCONF (Cisco-IOS-XE-stack-oper)
   license: MIT
   min_ansible_version: "2.20"
   platforms:

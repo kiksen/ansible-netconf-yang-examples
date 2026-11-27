@@ -8,3 +8,6 @@ port_trunk_rep: null
 port_trunk_nonegotiate: null
 port_trunk_service_policy_out: QUEUE-OUT
 port_trunk_enabled: true
+# Storm-control thresholds (percent), applied to both broadcast and multicast.
+port_trunk_storm_rising: 10.0
+port_trunk_storm_falling: 0.0

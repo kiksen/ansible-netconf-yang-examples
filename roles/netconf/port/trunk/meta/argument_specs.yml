@@ -63,3 +63,13 @@ argument_specs:
         required: false
         default: true
         description: Administrative state of the interface; false writes shutdown, true removes it.
+      port_trunk_storm_rising:
+        type: float
+        required: false
+        default: 10.0
+        description: Storm-control rising threshold in percent, used for broadcast and multicast.
+      port_trunk_storm_falling:
+        type: float
+        required: false
+        default: 0.0
+        description: Storm-control falling threshold in percent, used for broadcast and multicast.

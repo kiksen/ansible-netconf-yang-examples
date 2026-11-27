@@ -58,6 +58,27 @@
           </segment>
         </rep>
 {% endif %}
+        <storm-control>
+          <action>
+            <trap/>
+          </action>
+          <broadcast>
+            <level>
+              <threshold>
+                <rising-threshold>{{ port_trunk_storm_rising }}</rising-threshold>
+                <falling-threshold>{{ port_trunk_storm_falling }}</falling-threshold>
+              </threshold>
+            </level>
+          </broadcast>
+          <multicast>
+            <level>
+              <threshold>
+                <rising-threshold>{{ port_trunk_storm_rising }}</rising-threshold>
+                <falling-threshold>{{ port_trunk_storm_falling }}</falling-threshold>
+              </threshold>
+            </level>
+          </multicast>
+        </storm-control>
         <ip>
           <dhcp>
             <snooping xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-dhcp">

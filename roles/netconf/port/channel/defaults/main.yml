@@ -2,3 +2,6 @@
 # Pflicht: port_channel_interface, port_channel_description, port_channel_allowed_vlans
 port_channel_native_vlan: null
 port_channel_enabled: true
+# Storm-control thresholds (percent), applied to both broadcast and multicast.
+port_channel_storm_rising: 10.0
+port_channel_storm_falling: 0.0

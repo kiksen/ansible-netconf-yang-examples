@@ -8726,3 +8726,895 @@ b'\n#184\n<?xml version="1.0" encoding="UTF-8"?><nc:rpc xmlns:nc="urn:ietf:param
 2026-11-27 15:42:26,483 p=1067289 u=kiksen n=ansible INFO| resetting persistent connection for socket_path /home/kiksen/.ansible/pc/a352b7ef41
 2026-11-27 15:42:26,483 p=1067289 u=kiksen n=ansible INFO| reset call on connection instance
 2026-11-27 15:42:26,483 p=1067289 u=kiksen n=ansible INFO| shutdown complete
+2026-11-27 15:45:32,644 p=1082607 u=kiksen n=ansible WARNING| [WARNING]: Deprecation warnings can be disabled by setting `deprecation_warnings=False` in ansible.cfg.
+
+2026-11-27 15:45:32,644 p=1082607 u=kiksen n=ansible INFO| [DEPRECATION WARNING]: oneline has been deprecated. Use another callback plugin, or vendor and/or move the oneline callback to a collection. This feature will be removed from ansible-core version 2.23.
+Origin: <unknown>
+
+oneline
+
+
+2026-11-27 15:45:32,645 p=1082607 u=kiksen n=ansible INFO| [DEPRECATION WARNING]: tree has been deprecated. Use another callback plugin, or vendor and/or move the tree callback to a collection. This feature will be removed from ansible-core version 2.23.
+Origin: <unknown>
+
+tree
+
+
+2026-11-27 15:45:33,659 p=1082726 u=kiksen n=ansible WARNING| [WARNING]: Collection at '/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible/_internal/ansible_collections/ansible/_protomatter' does not have a MANIFEST.json file, nor has it galaxy.yml: cannot detect version.
+
+2026-11-27 15:45:33,665 p=1082726 u=kiksen n=ansible INFO| {"/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible/_internal/ansible_collections": {"ansible._protomatter": {"version": "*"}}, "/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible_collections": {"amazon.aws": {"version": "12.0.0"}, "ansible.mariadb": {"version": "6.0.2"}, "ansible.mysql": {"version": "5.2.0"}, "ansible.netcommon": {"version": "8.7.1"}, "ansible.posix": {"version": "2.2.2"}, "ansible.utils": {"version": "6.1.1"}, "ansible.windows": {"version": "3.9.2"}, "arista.eos": {"version": "12.3.0"}, "azure.azcollection": {"version": "4.2.0"}, "check_point.mgmt": {"version": "7.0.1"}, "chocolatey.chocolatey": {"version": "1.6.0"}, "cisco.aci": {"version": "3.0.0"}, "cisco.intersight": {"version": "2.23.0"}, "cisco.ios": {"version": "11.6.0"}, "cisco.iosxr": {"version": "13.0.0"}, "cisco.meraki": {"version": "2.25.1"}, "cisco.mso": {"version": "3.0.0"}, "cisco.nxos": {"version": "13.0.0"}, "cisco.ucs": {"version": "1.16.0"}, "cloudscale_ch.cloud": {"version": "2.8.0"}, "community.aws": {"version": "12.0.0"}, "community.ciscosmb": {"version": "1.0.12"}, "community.clickhouse": {"version": "2.4.0"}, "community.crypto": {"version": "3.5.1"}, "community.dns": {"version": "4.3.1"}, "community.docker": {"version": "5.4.0"}, "community.general": {"version": "14.0.1"}, "community.grafana": {"version": "2.3.0"}, "community.hashi_vault": {"version": "7.1.0"}, "community.hrobot": {"version": "2.8.0"}, "community.library_inventory_filtering_v1": {"version": "1.1.5"}, "community.libvirt": {"version": "2.4.0"}, "community.mongodb": {"version": "1.8.1"}, "community.mysql": {"version": "5.0.2"}, "community.okd": {"version": "6.0.0"}, "community.postgresql": {"version": "5.1.1"}, "community.proxmox": {"version": "2.1.0"}, "community.proxysql": {"version": "1.8.0"}, "community.rabbitmq": {"version": "1.7.0"}, "community.routeros": {"version": "3.23.0"}, "community.sap_libs": {"version": "1.7.1"}, "community.sops": {"version": "2.5.1"}, "community.vmware": {"version": "7.0.0"}, "community.windows": {"version": "3.3.0"}, "community.zabbix": {"version": "4.2.0"}, "containers.podman": {"version": "1.21.2"}, "cyberark.conjur": {"version": "1.3.14"}, "dellemc.enterprise_sonic": {"version": "4.1.0"}, "dellemc.openmanage": {"version": "11.0.0"}, "dellemc.powerflex": {"version": "3.2.0"}, "dellemc.unity": {"version": "2.1.0"}, "everpure.flasharray": {"version": "1.46.0"}, "everpure.flashblade": {"version": "1.29.0"}, "f5networks.f5_modules": {"version": "1.45.0"}, "fortinet.fortimanager": {"version": "2.15.0"}, "fortinet.fortios": {"version": "2.6.0"}, "google.cloud": {"version": "1.15.0"}, "grafana.grafana": {"version": "6.1.0"}, "graphiant.naas": {"version": "26.10.0"}, "hetzner.hcloud": {"version": "7.2.0"}, "hitachivantara.vspone_block": {"version": "4.9.0"}, "hitachivantara.vspone_object": {"version": "1.2.0"}, "ibm.storage_virtualize": {"version": "3.5.0"}, "ieisystem.inmanage": {"version": "4.0.0"}, "infinidat.infinibox": {"version": "1.8.6"}, "infoblox.nios_modules": {"version": "1.10.0"}, "inspur.ispim": {"version": "2.2.4"}, "kaytus.ksmanage": {"version": "4.0.0"}, "kubernetes.core": {"version": "6.6.0"}, "kubevirt.core": {"version": "2.3.0"}, "lowlydba.sqlserver": {"version": "3.1.0"}, "microsoft.ad": {"version": "1.12.1"}, "microsoft.iis": {"version": "1.3.0"}, "netapp.ontap": {"version": "24.0.0"}, "netapp.storagegrid": {"version": "21.17.0"}, "netapp_eseries.santricity": {"version": "2.0.3"}, "netbox.netbox": {"version": "3.23.1"}, "ngine_io.cloudstack": {"version": "3.3.0"}, "openstack.cloud": {"version": "2.6.0"}, "ovirt.ovirt": {"version": "3.2.2"}, "pcg.alpaca_operator": {"version": "2.2.0"}, "purestorage.flasharray": {"version": "1.45.0"}, "purestorage.flashblade": {"version": "1.28.0"}, "ravendb.ravendb": {"version": "1.0.4"}, "splunk.es": {"version": "6.0.1"}, "telekom_mms.icinga_director": {"version": "2.6.1"}, "theforeman.foreman": {"version": "6.0.0"}, "vmware.vmware": {"version": "2.12.0"}, "vmware.vmware_rest": {"version": "5.0.0"}, "vultr.cloud": {"version": "1.14.1"}, "vyos.vyos": {"version": "6.2.0"}, "wti.remote": {"version": "1.0.11"}}}
+2026-11-27 15:45:35,503 p=1082874 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:45:35,503 p=1082874 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:45:35,516 p=1082880 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:45:35,516 p=1082880 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:45:35,555 p=1082876 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:45:35,555 p=1082876 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:45:35,559 p=1082891 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:45:35,559 p=1082891 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:45:35,560 p=1082885 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:45:35,560 p=1082885 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:45:35,562 p=1082878 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:45:35,562 p=1082878 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:45:35,578 p=1082897 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:45:35,578 p=1082897 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:45:35,584 p=1082873 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:45:35,584 p=1082873 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:45:35,602 p=1082889 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:45:35,602 p=1082889 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:45:35,635 p=1082871 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:45:35,635 p=1082871 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:45:35,652 p=1082894 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:45:35,653 p=1082894 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:45:35,663 p=1082874 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:45:35,666 p=1082895 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:45:35,667 p=1082895 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:45:35,671 p=1082874 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:45:35,675 p=1082880 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:45:35,684 p=1082880 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:45:35,706 p=1082876 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:45:35,714 p=1082876 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:45:35,716 p=1082891 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:45:35,721 p=1082878 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:45:35,723 p=1082870 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:45:35,723 p=1082870 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:45:35,725 p=1082891 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:45:35,731 p=1082878 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:45:35,731 p=1082897 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:45:35,733 p=1082873 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:45:35,741 p=1082897 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:45:35,741 p=1082873 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:45:35,750 p=1082889 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:45:35,751 p=1082887 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:45:35,752 p=1082887 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:45:35,756 p=1082885 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:45:35,759 p=1082889 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:45:35,765 p=1082885 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:45:35,792 p=1082874 u=kiksen n=ansible INFO| 1 plays in /tmp/playkqjt_9oh.yml
+2026-11-27 15:45:35,794 p=1082874 u=kiksen n=ansible INFO| playbook: /tmp/playkqjt_9oh.yml
+2026-11-27 15:45:35,822 p=1082880 u=kiksen n=ansible INFO| 1 plays in /tmp/playrr_0neo9.yml
+2026-11-27 15:45:35,825 p=1082880 u=kiksen n=ansible INFO| playbook: /tmp/playrr_0neo9.yml
+2026-11-27 15:45:35,833 p=1082895 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:45:35,833 p=1082871 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:45:35,840 p=1082878 u=kiksen n=ansible INFO| 1 plays in channel_facts.yaml
+2026-11-27 15:45:35,841 p=1082878 u=kiksen n=ansible WARNING| [WARNING]: Could not match supplied host pattern, ignoring: switch
+
+2026-11-27 15:45:35,842 p=1082871 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:45:35,842 p=1082895 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:45:35,842 p=1082878 u=kiksen n=ansible INFO| playbook: channel_facts.yaml
+2026-11-27 15:45:35,849 p=1082876 u=kiksen n=ansible INFO| 1 plays in /tmp/play19v9ixaw.yml
+2026-11-27 15:45:35,852 p=1082876 u=kiksen n=ansible INFO| playbook: /tmp/play19v9ixaw.yml
+2026-11-27 15:45:35,852 p=1082891 u=kiksen n=ansible INFO| 1 plays in channel_member.yaml
+2026-11-27 15:45:35,853 p=1082891 u=kiksen n=ansible WARNING| [WARNING]: Could not match supplied host pattern, ignoring: switch
+
+2026-11-27 15:45:35,855 p=1082891 u=kiksen n=ansible INFO| playbook: channel_member.yaml
+2026-11-27 15:45:35,862 p=1082897 u=kiksen n=ansible INFO| 1 plays in /tmp/play4fa05q50.yml
+2026-11-27 15:45:35,864 p=1082897 u=kiksen n=ansible INFO| playbook: /tmp/play4fa05q50.yml
+2026-11-27 15:45:35,872 p=1082873 u=kiksen n=ansible INFO| 1 plays in /tmp/play2xutam9p.yml
+2026-11-27 15:45:35,873 p=1082894 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:45:35,874 p=1082873 u=kiksen n=ansible INFO| playbook: /tmp/play2xutam9p.yml
+2026-11-27 15:45:35,881 p=1082894 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:45:35,891 p=1082896 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:45:35,891 p=1082896 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:45:35,893 p=1082870 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:45:35,902 p=1082870 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:45:35,902 p=1082889 u=kiksen n=ansible INFO| 1 plays in channel_remove.yaml
+2026-11-27 15:45:35,903 p=1082889 u=kiksen n=ansible WARNING| [WARNING]: Could not match supplied host pattern, ignoring: switch
+
+2026-11-27 15:45:35,904 p=1082889 u=kiksen n=ansible INFO| playbook: channel_remove.yaml
+2026-11-27 15:45:35,909 p=1082882 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:45:35,909 p=1082882 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:45:35,933 p=1082895 u=kiksen n=ansible INFO| 1 plays in /tmp/playy2yy5sqe.yml
+2026-11-27 15:45:35,935 p=1082885 u=kiksen n=ansible INFO| 1 plays in access_port.yaml
+2026-11-27 15:45:35,935 p=1082895 u=kiksen n=ansible INFO| playbook: /tmp/playy2yy5sqe.yml
+2026-11-27 15:45:35,936 p=1082885 u=kiksen n=ansible WARNING| [WARNING]: Could not match supplied host pattern, ignoring: switch
+
+2026-11-27 15:45:35,938 p=1082885 u=kiksen n=ansible INFO| playbook: access_port.yaml
+2026-11-27 15:45:35,950 p=1082871 u=kiksen n=ansible INFO| 1 plays in read_interface.yaml
+2026-11-27 15:45:35,951 p=1082871 u=kiksen n=ansible WARNING| [WARNING]: Could not match supplied host pattern, ignoring: switch
+
+2026-11-27 15:45:35,953 p=1082871 u=kiksen n=ansible INFO| playbook: read_interface.yaml
+2026-11-27 15:45:35,965 p=1082887 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:45:35,982 p=1082887 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:45:35,997 p=1082894 u=kiksen n=ansible INFO| 1 plays in port_shutdown.yaml
+2026-11-27 15:45:35,998 p=1082894 u=kiksen n=ansible WARNING| [WARNING]: Could not match supplied host pattern, ignoring: switch
+
+2026-11-27 15:45:35,999 p=1082894 u=kiksen n=ansible INFO| playbook: port_shutdown.yaml
+2026-11-27 15:45:36,018 p=1082870 u=kiksen n=ansible INFO| 1 plays in /tmp/play67tsa69k.yml
+2026-11-27 15:45:36,020 p=1082870 u=kiksen n=ansible INFO| playbook: /tmp/play67tsa69k.yml
+2026-11-27 15:45:36,078 p=1082882 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:45:36,086 p=1082882 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:45:36,104 p=1082896 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:45:36,111 p=1082896 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:45:36,162 p=1082887 u=kiksen n=ansible INFO| 1 plays in /tmp/playxwp1p1vt.yml
+2026-11-27 15:45:36,164 p=1082887 u=kiksen n=ansible INFO| playbook: /tmp/playxwp1p1vt.yml
+2026-11-27 15:45:36,192 p=1082882 u=kiksen n=ansible INFO| 1 plays in interface_facts.yaml
+2026-11-27 15:45:36,193 p=1082882 u=kiksen n=ansible WARNING| [WARNING]: Could not match supplied host pattern, ignoring: switch
+
+2026-11-27 15:45:36,195 p=1082882 u=kiksen n=ansible INFO| playbook: interface_facts.yaml
+2026-11-27 15:45:36,242 p=1082896 u=kiksen n=ansible INFO| 1 plays in /tmp/play08n8ydth.yml
+2026-11-27 15:45:36,245 p=1082896 u=kiksen n=ansible INFO| playbook: /tmp/play08n8ydth.yml
+2026-11-27 15:45:36,654 p=1083008 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:45:36,654 p=1083008 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:45:36,683 p=1083013 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:45:36,684 p=1083013 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:45:36,698 p=1083015 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:45:36,698 p=1083015 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:45:36,714 p=1083012 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:45:36,714 p=1083012 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:45:36,716 p=1083018 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:45:36,716 p=1083018 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:45:36,717 p=1083014 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:45:36,717 p=1083014 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:45:36,737 p=1083017 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:45:36,738 p=1083017 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:45:36,748 p=1083008 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:45:36,754 p=1083008 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:45:36,783 p=1083015 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:45:36,788 p=1083015 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:45:36,807 p=1083012 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:45:36,808 p=1083016 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:45:36,808 p=1083016 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:45:36,812 p=1083014 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:45:36,813 p=1083012 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:45:36,814 p=1083018 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:45:36,816 p=1083008 u=kiksen n=ansible INFO| 1 plays in example_all_roles.yaml
+2026-11-27 15:45:36,817 p=1083008 u=kiksen n=ansible WARNING| [WARNING]: Could not match supplied host pattern, ignoring: switch
+
+2026-11-27 15:45:36,819 p=1083008 u=kiksen n=ansible INFO| playbook: example_all_roles.yaml
+2026-11-27 15:45:36,820 p=1083014 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:45:36,821 p=1083018 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:45:36,827 p=1083013 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:45:36,835 p=1083013 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:45:36,836 p=1083017 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:45:36,844 p=1083017 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:45:36,863 p=1083015 u=kiksen n=ansible INFO| 1 plays in write_interface.yaml
+2026-11-27 15:45:36,864 p=1083015 u=kiksen n=ansible WARNING| [WARNING]: Could not match supplied host pattern, ignoring: switch
+
+2026-11-27 15:45:36,866 p=1083015 u=kiksen n=ansible INFO| playbook: write_interface.yaml
+2026-11-27 15:45:36,903 p=1083014 u=kiksen n=ansible INFO| 1 plays in netbox2netconf.yaml
+2026-11-27 15:45:36,904 p=1083014 u=kiksen n=ansible WARNING| [WARNING]: Could not match supplied host pattern, ignoring: switches
+
+2026-11-27 15:45:36,904 p=1083018 u=kiksen n=ansible INFO| 1 plays in /tmp/playbze7y6ub.yml
+2026-11-27 15:45:36,905 p=1083014 u=kiksen n=ansible INFO| playbook: netbox2netconf.yaml
+2026-11-27 15:45:36,906 p=1083018 u=kiksen n=ansible INFO| playbook: /tmp/playbze7y6ub.yml
+2026-11-27 15:45:36,921 p=1083012 u=kiksen n=ansible INFO| 1 plays in /tmp/playbcxojcb4.yml
+2026-11-27 15:45:36,923 p=1083016 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:45:36,923 p=1083012 u=kiksen n=ansible INFO| playbook: /tmp/playbcxojcb4.yml
+2026-11-27 15:45:36,930 p=1083013 u=kiksen n=ansible INFO| 1 plays in policy_map.yaml
+2026-11-27 15:45:36,930 p=1083013 u=kiksen n=ansible WARNING| [WARNING]: Could not match supplied host pattern, ignoring: switch
+
+2026-11-27 15:45:36,931 p=1083016 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:45:36,932 p=1083013 u=kiksen n=ansible INFO| playbook: policy_map.yaml
+2026-11-27 15:45:36,957 p=1083017 u=kiksen n=ansible INFO| 1 plays in trunk_channel.yaml
+2026-11-27 15:45:36,957 p=1083017 u=kiksen n=ansible WARNING| [WARNING]: Could not match supplied host pattern, ignoring: switch
+
+2026-11-27 15:45:36,959 p=1083017 u=kiksen n=ansible INFO| playbook: trunk_channel.yaml
+2026-11-27 15:45:37,035 p=1083016 u=kiksen n=ansible INFO| 1 plays in trunk_port.yaml
+2026-11-27 15:45:37,035 p=1083016 u=kiksen n=ansible WARNING| [WARNING]: Could not match supplied host pattern, ignoring: switch
+
+2026-11-27 15:45:37,036 p=1083016 u=kiksen n=ansible INFO| playbook: trunk_port.yaml
+2026-11-27 15:45:37,977 p=1083157 u=kiksen n=ansible WARNING| [WARNING]: Collection at '/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible/_internal/ansible_collections/ansible/_protomatter' does not have a MANIFEST.json file, nor has it galaxy.yml: cannot detect version.
+
+2026-11-27 15:45:38,082 p=1083157 u=kiksen n=ansible INFO| {
+    "ansible.builtin.runas": "Run As user",
+    "ansible.builtin.su": "Substitute User",
+    "ansible.builtin.sudo": "Substitute User DO",
+    "ansible.netcommon.enable": "Switch to elevated permissions on a network device",
+    "community.general.doas": "Do As user",
+    "community.general.dzdo": "Centrify's Direct Authorize",
+    "community.general.ksu": "Kerberos substitute user",
+    "community.general.machinectl": "Systemd's machinectl privilege escalation",
+    "community.general.pbrun": "PowerBroker run",
+    "community.general.pfexec": "Profile based execution",
+    "community.general.pmrun": "Privilege Manager run",
+    "community.general.run0": "Systemd's run0",
+    "community.general.sesu": "CA Privileged Access Manager",
+    "community.general.sudosu": "Run tasks using sudo su -",
+    "containers.podman.podman_unshare": "Run tasks using podman unshare"
+}
+2026-11-27 15:48:20,216 p=1094989 u=kiksen n=ansible WARNING| [WARNING]: Deprecation warnings can be disabled by setting `deprecation_warnings=False` in ansible.cfg.
+
+2026-11-27 15:48:20,216 p=1094989 u=kiksen n=ansible INFO| [DEPRECATION WARNING]: oneline has been deprecated. Use another callback plugin, or vendor and/or move the oneline callback to a collection. This feature will be removed from ansible-core version 2.23.
+Origin: <unknown>
+
+oneline
+
+
+2026-11-27 15:48:20,217 p=1094989 u=kiksen n=ansible INFO| [DEPRECATION WARNING]: tree has been deprecated. Use another callback plugin, or vendor and/or move the tree callback to a collection. This feature will be removed from ansible-core version 2.23.
+Origin: <unknown>
+
+tree
+
+
+2026-11-27 15:48:21,066 p=1095085 u=kiksen n=ansible WARNING| [WARNING]: Collection at '/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible/_internal/ansible_collections/ansible/_protomatter' does not have a MANIFEST.json file, nor has it galaxy.yml: cannot detect version.
+
+2026-11-27 15:48:21,073 p=1095085 u=kiksen n=ansible INFO| {"/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible/_internal/ansible_collections": {"ansible._protomatter": {"version": "*"}}, "/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible_collections": {"amazon.aws": {"version": "12.0.0"}, "ansible.mariadb": {"version": "6.0.2"}, "ansible.mysql": {"version": "5.2.0"}, "ansible.netcommon": {"version": "8.7.1"}, "ansible.posix": {"version": "2.2.2"}, "ansible.utils": {"version": "6.1.1"}, "ansible.windows": {"version": "3.9.2"}, "arista.eos": {"version": "12.3.0"}, "azure.azcollection": {"version": "4.2.0"}, "check_point.mgmt": {"version": "7.0.1"}, "chocolatey.chocolatey": {"version": "1.6.0"}, "cisco.aci": {"version": "3.0.0"}, "cisco.intersight": {"version": "2.23.0"}, "cisco.ios": {"version": "11.6.0"}, "cisco.iosxr": {"version": "13.0.0"}, "cisco.meraki": {"version": "2.25.1"}, "cisco.mso": {"version": "3.0.0"}, "cisco.nxos": {"version": "13.0.0"}, "cisco.ucs": {"version": "1.16.0"}, "cloudscale_ch.cloud": {"version": "2.8.0"}, "community.aws": {"version": "12.0.0"}, "community.ciscosmb": {"version": "1.0.12"}, "community.clickhouse": {"version": "2.4.0"}, "community.crypto": {"version": "3.5.1"}, "community.dns": {"version": "4.3.1"}, "community.docker": {"version": "5.4.0"}, "community.general": {"version": "14.0.1"}, "community.grafana": {"version": "2.3.0"}, "community.hashi_vault": {"version": "7.1.0"}, "community.hrobot": {"version": "2.8.0"}, "community.library_inventory_filtering_v1": {"version": "1.1.5"}, "community.libvirt": {"version": "2.4.0"}, "community.mongodb": {"version": "1.8.1"}, "community.mysql": {"version": "5.0.2"}, "community.okd": {"version": "6.0.0"}, "community.postgresql": {"version": "5.1.1"}, "community.proxmox": {"version": "2.1.0"}, "community.proxysql": {"version": "1.8.0"}, "community.rabbitmq": {"version": "1.7.0"}, "community.routeros": {"version": "3.23.0"}, "community.sap_libs": {"version": "1.7.1"}, "community.sops": {"version": "2.5.1"}, "community.vmware": {"version": "7.0.0"}, "community.windows": {"version": "3.3.0"}, "community.zabbix": {"version": "4.2.0"}, "containers.podman": {"version": "1.21.2"}, "cyberark.conjur": {"version": "1.3.14"}, "dellemc.enterprise_sonic": {"version": "4.1.0"}, "dellemc.openmanage": {"version": "11.0.0"}, "dellemc.powerflex": {"version": "3.2.0"}, "dellemc.unity": {"version": "2.1.0"}, "everpure.flasharray": {"version": "1.46.0"}, "everpure.flashblade": {"version": "1.29.0"}, "f5networks.f5_modules": {"version": "1.45.0"}, "fortinet.fortimanager": {"version": "2.15.0"}, "fortinet.fortios": {"version": "2.6.0"}, "google.cloud": {"version": "1.15.0"}, "grafana.grafana": {"version": "6.1.0"}, "graphiant.naas": {"version": "26.10.0"}, "hetzner.hcloud": {"version": "7.2.0"}, "hitachivantara.vspone_block": {"version": "4.9.0"}, "hitachivantara.vspone_object": {"version": "1.2.0"}, "ibm.storage_virtualize": {"version": "3.5.0"}, "ieisystem.inmanage": {"version": "4.0.0"}, "infinidat.infinibox": {"version": "1.8.6"}, "infoblox.nios_modules": {"version": "1.10.0"}, "inspur.ispim": {"version": "2.2.4"}, "kaytus.ksmanage": {"version": "4.0.0"}, "kubernetes.core": {"version": "6.6.0"}, "kubevirt.core": {"version": "2.3.0"}, "lowlydba.sqlserver": {"version": "3.1.0"}, "microsoft.ad": {"version": "1.12.1"}, "microsoft.iis": {"version": "1.3.0"}, "netapp.ontap": {"version": "24.0.0"}, "netapp.storagegrid": {"version": "21.17.0"}, "netapp_eseries.santricity": {"version": "2.0.3"}, "netbox.netbox": {"version": "3.23.1"}, "ngine_io.cloudstack": {"version": "3.3.0"}, "openstack.cloud": {"version": "2.6.0"}, "ovirt.ovirt": {"version": "3.2.2"}, "pcg.alpaca_operator": {"version": "2.2.0"}, "purestorage.flasharray": {"version": "1.45.0"}, "purestorage.flashblade": {"version": "1.28.0"}, "ravendb.ravendb": {"version": "1.0.4"}, "splunk.es": {"version": "6.0.1"}, "telekom_mms.icinga_director": {"version": "2.6.1"}, "theforeman.foreman": {"version": "6.0.0"}, "vmware.vmware": {"version": "2.12.0"}, "vmware.vmware_rest": {"version": "5.0.0"}, "vultr.cloud": {"version": "1.14.1"}, "vyos.vyos": {"version": "6.2.0"}, "wti.remote": {"version": "1.0.11"}}}
+2026-11-27 15:48:22,826 p=1095143 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:48:22,826 p=1095143 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:48:22,827 p=1095147 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:48:22,827 p=1095147 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:48:22,838 p=1095156 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:48:22,838 p=1095156 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:48:22,839 p=1095149 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:48:22,839 p=1095163 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:48:22,840 p=1095149 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:48:22,840 p=1095163 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:48:22,841 p=1095146 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:48:22,841 p=1095146 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:48:22,847 p=1095139 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:48:22,847 p=1095139 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:48:22,861 p=1095162 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:48:22,862 p=1095162 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:48:22,861 p=1095165 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:48:22,863 p=1095165 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:48:22,865 p=1095151 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:48:22,865 p=1095151 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:48:22,879 p=1095167 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:48:22,879 p=1095167 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:48:22,879 p=1095140 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:48:22,879 p=1095140 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:48:22,885 p=1095155 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:48:22,886 p=1095155 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:48:22,888 p=1095152 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:48:22,888 p=1095152 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:48:22,910 p=1095158 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:48:22,911 p=1095158 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:48:22,918 p=1095166 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:48:22,919 p=1095166 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:48:22,980 p=1095156 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:48:22,981 p=1095143 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:48:22,987 p=1095156 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:48:22,989 p=1095143 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:48:22,990 p=1095163 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:48:22,991 p=1095146 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:48:22,992 p=1095149 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:48:22,999 p=1095149 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:48:22,999 p=1095146 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:48:23,000 p=1095163 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:48:23,012 p=1095165 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:48:23,018 p=1095151 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:48:23,019 p=1095147 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:48:23,019 p=1095165 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:48:23,021 p=1095162 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:48:23,024 p=1095139 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:48:23,026 p=1095147 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:48:23,029 p=1095162 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:48:23,032 p=1095139 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:48:23,036 p=1095151 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:48:23,042 p=1095167 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:48:23,049 p=1095155 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:48:23,053 p=1095140 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:48:23,054 p=1095167 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:48:23,056 p=1095152 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:48:23,058 p=1095155 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:48:23,062 p=1095140 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:48:23,064 p=1095152 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:48:23,083 p=1095158 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:48:23,089 p=1095166 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:48:23,091 p=1095158 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:48:23,097 p=1095166 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:48:23,112 p=1095143 u=kiksen n=ansible INFO| 1 plays in /tmp/playf3q4smrc.yml
+2026-11-27 15:48:23,115 p=1095143 u=kiksen n=ansible INFO| playbook: /tmp/playf3q4smrc.yml
+2026-11-27 15:48:23,115 p=1095156 u=kiksen n=ansible INFO| 1 plays in trunk_port.yaml
+2026-11-27 15:48:23,116 p=1095156 u=kiksen n=ansible WARNING| [WARNING]: Could not match supplied host pattern, ignoring: switch
+
+2026-11-27 15:48:23,118 p=1095156 u=kiksen n=ansible INFO| playbook: trunk_port.yaml
+2026-11-27 15:48:23,129 p=1095146 u=kiksen n=ansible INFO| 1 plays in policy_map.yaml
+2026-11-27 15:48:23,130 p=1095146 u=kiksen n=ansible WARNING| [WARNING]: Could not match supplied host pattern, ignoring: switch
+
+2026-11-27 15:48:23,131 p=1095146 u=kiksen n=ansible INFO| playbook: policy_map.yaml
+2026-11-27 15:48:23,135 p=1095151 u=kiksen n=ansible INFO| 1 plays in write_interface.yaml
+2026-11-27 15:48:23,136 p=1095151 u=kiksen n=ansible WARNING| [WARNING]: Could not match supplied host pattern, ignoring: switch
+
+2026-11-27 15:48:23,136 p=1095163 u=kiksen n=ansible INFO| 1 plays in access_port.yaml
+2026-11-27 15:48:23,137 p=1095162 u=kiksen n=ansible INFO| 1 plays in channel_facts.yaml
+2026-11-27 15:48:23,137 p=1095163 u=kiksen n=ansible WARNING| [WARNING]: Could not match supplied host pattern, ignoring: switch
+
+2026-11-27 15:48:23,137 p=1095151 u=kiksen n=ansible INFO| playbook: write_interface.yaml
+2026-11-27 15:48:23,137 p=1095162 u=kiksen n=ansible WARNING| [WARNING]: Could not match supplied host pattern, ignoring: switch
+
+2026-11-27 15:48:23,139 p=1095163 u=kiksen n=ansible INFO| playbook: access_port.yaml
+2026-11-27 15:48:23,139 p=1095162 u=kiksen n=ansible INFO| playbook: channel_facts.yaml
+2026-11-27 15:48:23,140 p=1095139 u=kiksen n=ansible INFO| 1 plays in /tmp/playix9sr1e_.yml
+2026-11-27 15:48:23,141 p=1095149 u=kiksen n=ansible INFO| 1 plays in trunk_channel.yaml
+2026-11-27 15:48:23,142 p=1095149 u=kiksen n=ansible WARNING| [WARNING]: Could not match supplied host pattern, ignoring: switch
+
+2026-11-27 15:48:23,142 p=1095139 u=kiksen n=ansible INFO| playbook: /tmp/playix9sr1e_.yml
+2026-11-27 15:48:23,143 p=1095149 u=kiksen n=ansible INFO| playbook: trunk_channel.yaml
+2026-11-27 15:48:23,153 p=1095147 u=kiksen n=ansible INFO| 1 plays in channel_remove.yaml
+2026-11-27 15:48:23,154 p=1095147 u=kiksen n=ansible WARNING| [WARNING]: Could not match supplied host pattern, ignoring: switch
+
+2026-11-27 15:48:23,156 p=1095147 u=kiksen n=ansible INFO| playbook: channel_remove.yaml
+2026-11-27 15:48:23,168 p=1095155 u=kiksen n=ansible INFO| 1 plays in read_interface.yaml
+2026-11-27 15:48:23,169 p=1095155 u=kiksen n=ansible WARNING| [WARNING]: Could not match supplied host pattern, ignoring: switch
+
+2026-11-27 15:48:23,171 p=1095155 u=kiksen n=ansible INFO| playbook: read_interface.yaml
+2026-11-27 15:48:23,179 p=1095165 u=kiksen n=ansible INFO| 1 plays in /tmp/play4w_9zck5.yml
+2026-11-27 15:48:23,181 p=1095165 u=kiksen n=ansible INFO| playbook: /tmp/play4w_9zck5.yml
+2026-11-27 15:48:23,181 p=1095167 u=kiksen n=ansible INFO| 1 plays in /tmp/play6klzvkmy.yml
+2026-11-27 15:48:23,183 p=1095167 u=kiksen n=ansible INFO| playbook: /tmp/play6klzvkmy.yml
+2026-11-27 15:48:23,188 p=1095152 u=kiksen n=ansible INFO| 1 plays in /tmp/play_rbz3cmv.yml
+2026-11-27 15:48:23,190 p=1095152 u=kiksen n=ansible INFO| playbook: /tmp/play_rbz3cmv.yml
+2026-11-27 15:48:23,193 p=1095158 u=kiksen n=ansible INFO| 1 plays in channel_member.yaml
+2026-11-27 15:48:23,194 p=1095158 u=kiksen n=ansible WARNING| [WARNING]: Could not match supplied host pattern, ignoring: switch
+
+2026-11-27 15:48:23,196 p=1095158 u=kiksen n=ansible INFO| playbook: channel_member.yaml
+2026-11-27 15:48:23,197 p=1095140 u=kiksen n=ansible INFO| 1 plays in /tmp/playgss5o16d.yml
+2026-11-27 15:48:23,200 p=1095140 u=kiksen n=ansible INFO| playbook: /tmp/playgss5o16d.yml
+2026-11-27 15:48:23,209 p=1095166 u=kiksen n=ansible INFO| 1 plays in /tmp/playhza0r_eb.yml
+2026-11-27 15:48:23,211 p=1095166 u=kiksen n=ansible INFO| playbook: /tmp/playhza0r_eb.yml
+2026-11-27 15:48:23,798 p=1095309 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:48:23,798 p=1095309 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:48:23,827 p=1095312 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:48:23,827 p=1095312 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:48:23,828 p=1095308 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:48:23,828 p=1095308 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:48:23,836 p=1095310 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:48:23,836 p=1095310 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:48:23,851 p=1095313 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:48:23,851 p=1095313 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:48:23,853 p=1095314 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:48:23,854 p=1095314 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:48:23,855 p=1095315 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:48:23,855 p=1095315 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:48:23,860 p=1095311 u=kiksen n=ansible INFO| ansible-playbook [core 2.22.0]
+  config file = /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg
+  configured module search path = ['/home/kiksen/repos/ansible-netconf-yang-examples/.ansible/modules', '/home/kiksen/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible
+  ansible collection location = /home/kiksen/repos/ansible-netconf-yang-examples/.ansible/collections:/home/kiksen/.ansible/collections:/usr/share/ansible/collections:/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages
+  executable location = /home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/ansible-playbook
+  python version = 3.14.7 (main, Aug 10 2026, 07:46:56) [GCC 16.1.1 20260728] (/home/kiksen/repos/ansible-netconf-yang-examples/.venv/bin/python)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.4 (with libyaml v0.2.6)
+2026-11-27 15:48:23,860 p=1095311 u=kiksen n=ansible INFO| Using /home/kiksen/repos/ansible-netconf-yang-examples/ansible.cfg as config file
+2026-11-27 15:48:23,875 p=1095309 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:48:23,882 p=1095309 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:48:23,912 p=1095312 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:48:23,917 p=1095312 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:48:23,924 p=1095308 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:48:23,929 p=1095310 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:48:23,930 p=1095308 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:48:23,934 p=1095310 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:48:23,946 p=1095315 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:48:23,948 p=1095313 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:48:23,950 p=1095315 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:48:23,951 p=1095314 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:48:23,952 p=1095311 u=kiksen n=ansible WARNING| [WARNING]: No inventory was parsed, only implicit localhost is available
+
+2026-11-27 15:48:23,953 p=1095313 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:48:23,956 p=1095314 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:48:23,957 p=1095311 u=kiksen n=ansible WARNING| [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+2026-11-27 15:48:23,962 p=1095309 u=kiksen n=ansible INFO| 1 plays in /tmp/playhe52u9_o.yml
+2026-11-27 15:48:23,963 p=1095309 u=kiksen n=ansible INFO| playbook: /tmp/playhe52u9_o.yml
+2026-11-27 15:48:23,978 p=1095312 u=kiksen n=ansible INFO| 1 plays in netbox2netconf.yaml
+2026-11-27 15:48:23,978 p=1095312 u=kiksen n=ansible WARNING| [WARNING]: Could not match supplied host pattern, ignoring: switches
+
+2026-11-27 15:48:23,979 p=1095312 u=kiksen n=ansible INFO| playbook: netbox2netconf.yaml
+2026-11-27 15:48:23,985 p=1095308 u=kiksen n=ansible INFO| 1 plays in example_all_roles.yaml
+2026-11-27 15:48:23,986 p=1095308 u=kiksen n=ansible WARNING| [WARNING]: Could not match supplied host pattern, ignoring: switch
+
+2026-11-27 15:48:23,987 p=1095308 u=kiksen n=ansible INFO| playbook: example_all_roles.yaml
+2026-11-27 15:48:24,005 p=1095310 u=kiksen n=ansible INFO| 1 plays in port_shutdown.yaml
+2026-11-27 15:48:24,006 p=1095310 u=kiksen n=ansible WARNING| [WARNING]: Could not match supplied host pattern, ignoring: switch
+
+2026-11-27 15:48:24,006 p=1095315 u=kiksen n=ansible INFO| 1 plays in interface_facts.yaml
+2026-11-27 15:48:24,007 p=1095315 u=kiksen n=ansible WARNING| [WARNING]: Could not match supplied host pattern, ignoring: switch
+
+2026-11-27 15:48:24,007 p=1095310 u=kiksen n=ansible INFO| playbook: port_shutdown.yaml
+2026-11-27 15:48:24,007 p=1095315 u=kiksen n=ansible INFO| playbook: interface_facts.yaml
+2026-11-27 15:48:24,012 p=1095314 u=kiksen n=ansible INFO| 1 plays in /tmp/playaxj47osy.yml
+2026-11-27 15:48:24,013 p=1095314 u=kiksen n=ansible INFO| playbook: /tmp/playaxj47osy.yml
+2026-11-27 15:48:24,016 p=1095311 u=kiksen n=ansible INFO| 1 plays in /tmp/playm87q8ri3.yml
+2026-11-27 15:48:24,017 p=1095311 u=kiksen n=ansible INFO| playbook: /tmp/playm87q8ri3.yml
+2026-11-27 15:48:24,026 p=1095313 u=kiksen n=ansible INFO| 1 plays in /tmp/playshyaljw6.yml
+2026-11-27 15:48:24,028 p=1095313 u=kiksen n=ansible INFO| playbook: /tmp/playshyaljw6.yml
+2026-11-27 15:48:24,837 p=1095370 u=kiksen n=ansible WARNING| [WARNING]: Collection at '/home/kiksen/repos/ansible-netconf-yang-examples/.venv/lib/python3.14/site-packages/ansible/_internal/ansible_collections/ansible/_protomatter' does not have a MANIFEST.json file, nor has it galaxy.yml: cannot detect version.
+
+2026-11-27 15:48:24,985 p=1095370 u=kiksen n=ansible INFO| {
+    "ansible.builtin.runas": "Run As user",
+    "ansible.builtin.su": "Substitute User",
+    "ansible.builtin.sudo": "Substitute User DO",
+    "ansible.netcommon.enable": "Switch to elevated permissions on a network device",
+    "community.general.doas": "Do As user",
+    "community.general.dzdo": "Centrify's Direct Authorize",
+    "community.general.ksu": "Kerberos substitute user",
+    "community.general.machinectl": "Systemd's machinectl privilege escalation",
+    "community.general.pbrun": "PowerBroker run",
+    "community.general.pfexec": "Profile based execution",
+    "community.general.pmrun": "Privilege Manager run",
+    "community.general.run0": "Systemd's run0",
+    "community.general.sesu": "CA Privileged Access Manager",
+    "community.general.sudosu": "Run tasks using sudo su -",
+    "containers.podman.podman_unshare": "Run tasks using podman unshare"
+}

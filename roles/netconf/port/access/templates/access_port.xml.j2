@@ -33,21 +33,22 @@
           <action>
             <trap/>
           </action>
+          <broadcast>
+            <level>
+              <threshold>
+                <rising-threshold>{{ port_access_storm_rising }}</rising-threshold>
+                <falling-threshold>{{ port_access_storm_falling }}</falling-threshold>
+              </threshold>
+            </level>
+          </broadcast>
           <multicast>
             <level>
               <threshold>
-                <rising-threshold>30.0</rising-threshold>
-                <falling-threshold>0.0</falling-threshold>
+                <rising-threshold>{{ port_access_storm_rising }}</rising-threshold>
+                <falling-threshold>{{ port_access_storm_falling }}</falling-threshold>
               </threshold>
             </level>
           </multicast>
-          <unicast>
-            <level>
-              <threshold>
-                <rising-threshold>3.0</rising-threshold>
-              </threshold>
-            </level>
-          </unicast>
         </storm-control>
 {% if port_access_no_cdp_enable %}
         <cdp xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-cdp">

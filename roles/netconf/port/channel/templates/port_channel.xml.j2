@@ -45,20 +45,22 @@
           <action>
             <trap/>
           </action>
+          <broadcast>
+            <level>
+              <threshold>
+                <rising-threshold>{{ port_channel_storm_rising }}</rising-threshold>
+                <falling-threshold>{{ port_channel_storm_falling }}</falling-threshold>
+              </threshold>
+            </level>
+          </broadcast>
           <multicast>
             <level>
               <threshold>
-                <rising-threshold>3.0</rising-threshold>
+                <rising-threshold>{{ port_channel_storm_rising }}</rising-threshold>
+                <falling-threshold>{{ port_channel_storm_falling }}</falling-threshold>
               </threshold>
             </level>
           </multicast>
-          <unicast>
-            <level>
-              <threshold>
-                <rising-threshold>3.0</rising-threshold>
-              </threshold>
-            </level>
-          </unicast>
         </storm-control>
       </{{ port_channel_if_type }}>
     </interface>

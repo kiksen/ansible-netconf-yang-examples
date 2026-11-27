@@ -24,7 +24,8 @@
                 </vlan-v2>
               </allowed>
 {% endif %}
-{% if port_channel_native_vlan is not none %}
+{# VLAN 1 is the default and not stored by the device, so it is not written. #}
+{% if port_channel_native_vlan is not none and port_channel_native_vlan | int != 1 %}
               <native>
                 <vlan>
                   <vlan-id>{{ port_channel_native_vlan }}</vlan-id>

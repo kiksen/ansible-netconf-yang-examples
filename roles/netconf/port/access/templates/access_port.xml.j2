@@ -11,11 +11,14 @@
 {% endif %}
         <switchport-config>
           <switchport>
+{# VLAN 1 is the default and not stored by the device, so it is not written. #}
+{% if port_access_vlan | int != 1 %}
             <access xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
               <vlan>
                 <vlan>{{ port_access_vlan }}</vlan>
               </vlan>
             </access>
+{% endif %}
             <mode xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
               <access/>
             </mode>

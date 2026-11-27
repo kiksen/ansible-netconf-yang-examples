@@ -17,7 +17,7 @@
           <number>{{ port_channel_member_number }}</number>
           <mode>{{ port_channel_member_mode }}</mode>
         </channel-group>
-{% if port_channel_member_service_policy_out is not one %}
+{% if port_channel_member_service_policy_out is not none %}
         <service-policy xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-policy">
           <output>{{ port_channel_member_service_policy_out }}</output>
         </service-policy>

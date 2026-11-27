@@ -3,7 +3,7 @@
 <config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
   <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
     <interface>
-      <{{ port_channel_if_type }}>
+      <{{ port_channel_if_type }} nc:operation="replace">
         <name>{{ port_channel_if_id }}</name>
         <description>{{ port_channel_description }}</description>
 {% if not port_channel_enabled %}

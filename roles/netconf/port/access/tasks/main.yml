@@ -1,34 +1,11 @@
 ---
-- name: "Read current interface config of {{ port_access_interface }}"
-  ansible.netcommon.netconf_get:
-    source: running
-    filter: "{{ lookup('ansible.builtin.template', 'get_filter.xml.j2') }}"
-    display: xml
-  register: port_access_current_result
-
-# A namespace is unique per element, so a substring match on the reply is enough.
-- name: "Collect problem elements present on {{ port_access_interface }}"
-  ansible.builtin.set_fact:
-    port_access_cleanup_present: >-
-      {{ port_access_cleanup_elements
-        | selectattr('namespace', 'in', port_access_current_result.stdout)
-        | list }}
-
-- name: "Remove problem elements on {{ port_access_interface }}"
-  ansible.netcommon.netconf_config:
-    target: running
-    default_operation: merge
-    get_filter: "{{ lookup('ansible.builtin.template', 'get_filter.xml.j2') }}"
-    content: "{{ lookup('ansible.builtin.template', 'cleaner.xml.j2') }}"
-  when: port_access_cleanup_present | length > 0
-  notify: netconf save config
 
 # get_filter limits the module's before/after get-config (changed detection) to this interface;
 # without it the module reads the whole running config twice per task (~20 s).
 - name: "Write access port with edit-config (replace in template) on {{ port_access_interface }}"
   ansible.netcommon.netconf_config:
     target: running
-    default_operation: merge
+    #default_operation: merge
     get_filter: "{{ lookup('ansible.builtin.template', 'get_filter.xml.j2') }}"
     content: "{{ lookup('ansible.builtin.template', 'access_port.xml.j2') }}"
   register: port_access_edit_result

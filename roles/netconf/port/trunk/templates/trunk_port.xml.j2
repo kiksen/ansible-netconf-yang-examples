@@ -6,7 +6,8 @@
 <config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
   <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
     <interface>
-      <{{ port_trunk_if_type }}>
+      <!-- GigabitEthernet1/0/5 needs the replace, so the entire interface is replaced, no matter what config is used -->
+      <{{ port_trunk_if_type }} nc:operation="replace">
         <name>{{ port_trunk_if_id }}</name>
         <description>{{ port_trunk_description }}</description>
 {% if not port_trunk_enabled %}
@@ -94,9 +95,9 @@
           <transmit nc:operation="remove"/>
 {% endif %}
         </lldp>
-        <service-policy xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-policy">
+        <!-- <service-policy xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-policy">
           <output>{{ port_trunk_service_policy_out }}</output>
-        </service-policy>
+        </service-policy> -->
         <vtp xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-vtp">false</vtp>
       </{{ port_trunk_if_type }}>
     </interface>

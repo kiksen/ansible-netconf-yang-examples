@@ -91,18 +91,18 @@ def open_session() -> Manager:
 
 def main() -> None:
     """Write the rendered config and report changed/unchanged or error details."""
-    payload = render("access_port.xml.j2")
+    payload = render("trunk.xml.j2")
     get_filter = render("get_filter.xml.j2")
     print(payload)
     with open_session() as session:
         before = get_running(session, get_filter)
-        present = cleanup_present(before)
+        # present = cleanup_present(before)
         before = pretty(before)
         try:
-            if present:
-                cleaner = render("cleaner.xml.j2", port_access_cleanup_present=present)
-                print(cleaner)
-                session.edit_config(target="running", config=cleaner)
+            # if present:
+            #     cleaner = render("cleaner.xml.j2", port_access_cleanup_present=present)
+            #     print(cleaner)
+            #     session.edit_config(target="running", config=cleaner)
             reply = session.edit_config(target="running", config=payload)
             print(pretty(reply.xml))
 
@@ -113,8 +113,8 @@ def main() -> None:
             return
         after = get_running(session, get_filter)
         print("OK:", reply.ok)
-        print("changed" if before != after else "unchanged")
-        print(pretty(after))
+        print("changed," if before != after else "unchanged")
+        print("after: ", pretty(after))
 
 
 if __name__ == "__main__":

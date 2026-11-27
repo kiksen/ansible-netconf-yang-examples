@@ -1,0 +1,42 @@
+<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
+	<native
+		xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+		<interface>
+			<GigabitEthernet   nc:operation="replace">
+				<name>1/0/5</name>
+				<description>AccessPoint</description>
+				<switchport-config>
+					<switchport>
+						<mode
+							xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+							<trunk/>
+						</mode>
+						<trunk
+							xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+							<native>
+								<vlan>
+									<vlan-id>920</vlan-id>
+								</vlan>
+							</native>
+						</trunk>
+					</switchport>
+				</switchport-config>
+				<ip>
+					<dhcp>
+						<snooping
+							xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-dhcp">
+							<trust/>
+						</snooping>
+					</dhcp>
+				</ip>
+				<service-policy
+					xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-policy">
+					<output>QUEUE-OUT</output>
+				</service-policy>
+				<vtp
+					xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-vtp">false
+				</vtp>
+			</GigabitEthernet>
+		</interface>
+	</native>
+</config>

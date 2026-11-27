@@ -3,4 +3,5 @@
 port_channel_member_mode: active
 port_channel_member_description: null
 port_channel_member_service_policy_out: QUEUE-OUT
+#port_channel_member_service_policy_out: null
 port_channel_member_enabled: true

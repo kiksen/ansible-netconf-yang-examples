@@ -1,0 +1,31 @@
+---
+# Example - call all fact roles except the interface facts and print the results.
+#   uv run ansible-playbook -i inventory/netbox_switch.py all_facts.yaml
+# Interface facts (netconf/port/facts, netconf/port/channel_facts) are left out on purpose,
+# see interface_facts.yaml and channel_facts.yaml.
+- name: Example - read all device facts per NETCONF
+  hosts: all
+  gather_facts: false
+
+  roles:
+    - role: netconf/system/facts
+    # Stack facts are disabled: the read runs into the command timeout (to be fixed).
+    # - role: netconf/system/stack
+
+  post_tasks:
+    - name: Show the version data
+      ansible.builtin.debug:
+        msg: "{{ system_facts_hostname }} {{ system_facts_version }}: {{ system_facts_system }}"
+
+    - name: Show the inventory
+      ansible.builtin.debug:
+        msg: >-
+          {{ item.dev_name | default('') }}: {{ item.hw_description | default('') }},
+          pid={{ item.part_number | default('') }}, sn={{ item.serial_number | default('') }}
+      loop: "{{ system_facts_inventory }}"
+      loop_control:
+        label: "{{ item.dev_name | default(item.hw_type | default('')) }}"
+
+    # - name: Show the stack members
+    #   ansible.builtin.debug:
+    #     var: system_stack_members

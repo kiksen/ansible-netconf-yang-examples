@@ -1,0 +1,17 @@
+---
+- name: Example - read the stack members per NETCONF
+  hosts: switch
+  gather_facts: false
+
+  roles:
+    - role: netconf/system/stack
+
+  post_tasks:
+    # First run: look at the raw reply to see which fields the device returns.
+    - name: Show the raw reply
+      ansible.builtin.debug:
+        var: system_stack_raw
+
+    - name: Show the stack members
+      ansible.builtin.debug:
+        var: system_stack_members

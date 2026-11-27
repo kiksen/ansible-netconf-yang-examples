@@ -1,0 +1,3 @@
+---
+# No parameters. Sets system_stack_all, system_stack_globals, system_stack_tables,
+# system_stack_members and system_stack_raw (the unparsed reply).

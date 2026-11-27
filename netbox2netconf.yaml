@@ -17,16 +17,31 @@
   vars:
     nb_ignored_types: [lag, virtual]
     nb_member_mode: active
+    nb_max_interface_age_seconds: 180
+
+  # tasks:
+  #   - name: Read the interfaces of the device from NetBox
+  #     ansible.builtin.set_fact:
+  #       nb_interfaces: >-
+  #         {{ query('netbox.netbox.nb_lookup', 'interfaces',
+  #                 api_filter='device=' ~ netbox_device,
+  #                 api_endpoint=lookup('ansible.builtin.env', 'NETBOX_ENDPOINT'),
+  #                 token=lookup('ansible.builtin.env', 'NETBOX_TOKEN'))
+  #           | map(attribute='value') | list }}
 
   tasks:
     - name: Read the interfaces of the device from NetBox
       ansible.builtin.set_fact:
         nb_interfaces: >-
           {{ query('netbox.netbox.nb_lookup', 'interfaces',
-                  api_filter='device=' ~ netbox_device,
+                  api_filter='device=' ~ netbox_device
+                    ~ (' last_updated__gte=' ~ nb_since if nb_max_interface_age_seconds > 0 else ''),
                   api_endpoint=lookup('ansible.builtin.env', 'NETBOX_ENDPOINT'),
                   token=lookup('ansible.builtin.env', 'NETBOX_TOKEN'))
             | map(attribute='value') | list }}
+      vars:
+        nb_since: "{{ '%Y-%m-%dT%H:%M:%SZ' | strftime(now(utc=true).timestamp() | int - nb_max_interface_age_seconds, utc=true) }}"
+
 
     - name: Sort the interfaces by role
       ansible.builtin.set_fact:

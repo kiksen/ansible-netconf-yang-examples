@@ -1,0 +1,21 @@
+---
+- name: Example - read show version and show inventory per NETCONF
+  hosts: switch
+  gather_facts: false
+
+  roles:
+    - role: netconf/system/facts
+
+  post_tasks:
+    - name: Show the version data
+      ansible.builtin.debug:
+        msg: "{{ system_facts_hostname }} {{ system_facts_version }}: {{ system_facts_system }}"
+
+    - name: Show the inventory
+      ansible.builtin.debug:
+        msg: >-
+          {{ item.dev_name | default('') }}: {{ item.hw_description | default('') }},
+          pid={{ item.part_number | default('') }}, sn={{ item.serial_number | default('') }}
+      loop: "{{ system_facts_inventory }}"
+      loop_control:
+        label: "{{ item.dev_name | default(item.hw_type | default('')) }}"

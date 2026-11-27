@@ -1,0 +1,3 @@
+---
+# No parameters. Sets system_facts_hostname, system_facts_version,
+# system_facts_system (show version) and system_facts_inventory (show inventory).

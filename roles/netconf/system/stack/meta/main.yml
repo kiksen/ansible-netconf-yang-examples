@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  role_name: stack
+  namespace: netconf_system
+  author: Christian Knoblauch
+  description: Reads the stack members (role, priority, state, MAC) via NETCONF (CISCO-STACKWISE-MIB)
+  license: MIT
+  min_ansible_version: "2.20"
+  platforms:
+    - name: IOS
+      versions:
+        - all
+
+dependencies: []

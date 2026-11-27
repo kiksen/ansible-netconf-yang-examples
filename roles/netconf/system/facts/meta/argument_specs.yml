@@ -1,0 +1,12 @@
+---
+argument_specs:
+  main:
+    short_description: Read the data of show version and show inventory
+    description:
+      - Has no parameters. Sets system_facts_hostname, system_facts_version,
+        system_facts_system and system_facts_inventory.
+      - system_facts_system is a dict of the device-system-data leaves (software_version,
+        boot_time, last_reboot_reason, ...).
+      - system_facts_inventory is a list with one dict per device-inventory entry (hw_type,
+        dev_name, hw_description, part_number, serial_number, ...).
+    options: {}

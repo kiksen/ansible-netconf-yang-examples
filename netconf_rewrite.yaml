@@ -16,7 +16,8 @@
 
   tasks:
 
-    - ansible.builtin.debug:
+    - name: Show all port facts
+      ansible.builtin.debug:
         msg: "{{ port_facts_all }}"
 
     - name: Write some standard vlans
@@ -48,8 +49,8 @@
         port_channel_allowed_vlans: >-
           {{ none if item.mode == 'access'
             else 'all' if item.mode == 'tagged-all'
-            else (item.tagged_vlans + item.tagged_vlan_ranges
-              + ([item.untagged_vlan] if item.untagged_vlan else [])) }}
+            else (item.tagged_vlans + item.tagged_vlan_ranges)
+              | with_native_vlan(item.untagged_vlan) }}
         port_channel_native_vlan: "{{ none if item.mode == 'access' else item.untagged_vlan }}"
         port_channel_enabled: "{{ item.enabled }}"
       # Channels without a switchport mode (e.g. Port-channel7) have nothing to normalize.
@@ -78,8 +79,8 @@
         port_trunk_description: "{{ item.description | default(item.interface, true) }}"
         port_trunk_allowed_vlans: >-
           {{ 'all' if item.mode == 'tagged-all'
-            else (item.tagged_vlans + item.tagged_vlan_ranges
-              + ([item.untagged_vlan] if item.untagged_vlan else [])) }}
+            else (item.tagged_vlans + item.tagged_vlan_ranges)
+              | with_native_vlan(item.untagged_vlan) }}
         port_trunk_native_vlan: "{{ item.untagged_vlan }}"
         port_trunk_no_cdp_enable: "{{ item.no_cdp_enable }}"
         port_trunk_no_lldp_transmit: "{{ item.no_lldp_transmit }}"

@@ -3,11 +3,21 @@ argument_specs:
   main:
     short_description: Read all ports and return them grouped by kind
     description:
-      - Always reads all kinds. Sets port_facts_all, port_facts_access, port_facts_trunk,
-        port_facts_member, port_facts_channel and port_facts_unconfigured.
-      - Every entry has interface, kind, mode (access, tagged, tagged-all), description, enabled (false when shut down),
-        untagged_vlan, voice_vlan, tagged_vlans, tagged_vlan_ranges, vlan_has_range, no_cdp_enable, no_lldp_transmit,
-        no_lldp_receive, channel_group and channel_group_mode.
+      - Has one option (below). Always reads all kinds with one get-config.
+      - "Return values (set with set_fact):"
+      - "port_facts_all (list of dict): every interface; fields are listed below."
+      - "port_facts_access (list of dict): entries of kind access."
+      - "port_facts_trunk (list of dict): entries of kind trunk."
+      - "port_facts_member (list of dict): entries of kind member (port-channel members)."
+      - "port_facts_channel (list of dict): entries of kind channel (Port-channel interfaces)."
+      - "port_facts_unconfigured (list of dict): entries of kind unconfigured (no switchport mode, no channel-group)."
+      - >-
+        Fields of every entry: interface (str), kind (str), mode (str or null; access, tagged,
+        tagged-all), description (str or null), enabled (bool, false when shut down),
+        untagged_vlan (int or null; the native VLAN on trunks), voice_vlan (int or null),
+        tagged_vlans (list of int or null; without the native VLAN), tagged_vlan_ranges (list of
+        str or null), vlan_has_range (bool), no_cdp_enable (bool), no_lldp_transmit (bool),
+        no_lldp_receive (bool), channel_group (int or null), channel_group_mode (str or null).
     options:
       port_facts_expand_vlans:
         type: bool

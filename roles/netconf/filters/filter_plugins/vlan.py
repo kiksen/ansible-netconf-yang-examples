@@ -62,9 +62,21 @@ def vlan_list(value: VlanInput) -> str:
     )
 
 
+def with_native_vlan(allowed: VlanInput, native: int | str | None) -> VlanInput:
+    """Jinja-Filter: ergaenzt die Native VLAN in der Allowed-Liste eines Trunks.
+
+    'all' bleibt 'all'; ohne Native VLAN bleibt die Liste unveraendert.
+    Zusammenfassen und Deduplizieren uebernimmt danach ``vlan_list``.
+    """
+    if allowed == "all" or native is None or native == "":
+        return allowed
+    items = allowed if isinstance(allowed, list) else [allowed]
+    return [*items, native]
+
+
 class FilterModule:
     """Registriert die Filter bei Ansible."""
 
     def filters(self) -> dict[str, object]:
         """Liefert die verfuegbaren Filter."""
-        return {"vlan_list": vlan_list}
+        return {"vlan_list": vlan_list, "with_native_vlan": with_native_vlan}

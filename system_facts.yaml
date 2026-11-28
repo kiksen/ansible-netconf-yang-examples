@@ -43,6 +43,6 @@
       loop_control:
         label: "{{ item.id }}"
 
-    - name: debug
+    - name: Show the VLAN facts
       ansible.builtin.debug:
         msg: "{{ system_facts_vlans }}"

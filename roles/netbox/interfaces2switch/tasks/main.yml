@@ -65,24 +65,10 @@
   ansible.builtin.include_role:
     name: netconf/qos/policy_map
 
+# The LAGs are written twice: before the members they only exist as interfaces; the switch stores
+# some port-channel settings (standalone-disable-config) only when the channel has members.
 - name: Create the LAG interfaces
-  ansible.builtin.include_role:
-    name: netconf/port/channel
-  vars:
-    port_channel_interface: "{{ item.name }}"
-    port_channel_description: "{{ item.description | default(item.name, true) }}"
-    port_channel_mode: "{{ 'access' if item.mode.value == 'access' else 'trunk' }}"
-    port_channel_access_vlan: "{{ item.untagged_vlan.vid if item.mode.value == 'access' else none }}"
-    port_channel_allowed_vlans: >-
-      {{ none if item.mode.value == 'access'
-        else 'all' if item.mode.value == 'tagged-all'
-        else item.tagged_vlans | map(attribute='vid') | sort | list }}
-    port_channel_native_vlan: >-
-      {{ none if item.mode.value == 'access' else (item.untagged_vlan or {}).vid | default(none) }}
-    port_channel_enabled: "{{ item.enabled }}"
-  loop: "{{ interfaces2switch_lags }}"
-  loop_control:
-    label: "{{ item.name }}"
+  ansible.builtin.include_tasks: write_lags.yml
 
 - name: Write the LAG members
   ansible.builtin.include_role:
@@ -96,6 +82,10 @@
   loop: "{{ interfaces2switch_members }}"
   loop_control:
     label: "{{ item.name }}"
+
+- name: Write the LAG interfaces again now that they have members
+  ansible.builtin.include_tasks: write_lags.yml
+  when: interfaces2switch_members | length > 0
 
 - name: Write the access ports
   ansible.builtin.include_role:
@@ -117,7 +107,8 @@
     port_trunk_description: "{{ item.description | default(item.name, true) }}"
     port_trunk_allowed_vlans: >-
       {{ 'all' if item.mode.value == 'tagged-all'
-        else item.tagged_vlans | map(attribute='vid') | sort | list }}
+        else item.tagged_vlans | map(attribute='vid') | sort | list
+          | with_native_vlan((item.untagged_vlan or {}).vid | default(none)) }}
     port_trunk_native_vlan: "{{ (item.untagged_vlan or {}).vid | default(none) }}"
     port_trunk_enabled: "{{ item.enabled }}"
   loop: "{{ interfaces2switch_trunk_ports }}"

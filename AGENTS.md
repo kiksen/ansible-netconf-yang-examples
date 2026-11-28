@@ -40,8 +40,8 @@
 ## Language
 - create all comments and documentation in english
 
-## python client
-- This client is only for testing. General changes are not done to python unless you are instructued to.
+## Python test client
+- This client is only for testing and exploring things manually. General changes are not done to python unless you are instructued to.
 
 ## Yang Models
-find all Cisco Yang Models in ./yanmodels as a reference. 
+- find all Cisco Yang Models in ./yanmodels as a reference. 

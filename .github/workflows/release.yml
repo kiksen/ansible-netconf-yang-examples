@@ -12,8 +12,8 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v5
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10
       - run: uv sync
       - run: uv run ruff check
       - run: uv run pytest
@@ -27,6 +27,6 @@ jobs:
       - name: Publish to Galaxy
         run: uv run ansible-galaxy collection publish dist/*.tar.gz --token "${{ secrets.GALAXY_API_KEY }}"
       - name: Create the GitHub release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           files: dist/*.tar.gz

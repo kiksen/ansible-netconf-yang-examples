@@ -1,7 +1,33 @@
 # kiksen.netconf
 
 Ansible collection with roles and Jinja filters that configure Cisco IOS-XE switches
-per NETCONF (`Cisco-IOS-XE-native` model).
+via NETCONF-YANG (`Cisco-IOS-XE-native` model).
+
+The IOS resource modules using SSH are still more powerful, but with NETCONF it is quite easy to build those roles,
+since NETCONF brings features like replacing or removing configuration without any extra programming or checking work.
+NETCONF is also much faster than the IOS resource modules.
+
+## Switch configuration
+
+NETCONF must be enabled on the switch, and the Ansible user needs privilege 15:
+
+```text
+aaa new-model
+aaa authentication login default local
+aaa authorization exec default local
+username <user> privilege 15 secret <password>
+!
+netconf-yang
+```
+
+NETCONF listens on TCP port 830 by default. Check it with `show netconf-yang status`.
+Point the inventory at it (see `examples/inventory.yaml`):
+
+```yaml
+ansible_connection: ansible.netcommon.netconf
+ansible_network_os: cisco.ios.ios
+ansible_port: 830
+```
 
 ## Install
 
@@ -19,15 +45,45 @@ ansible-galaxy collection install -r requirements.yml
 
 The controller needs the Python package `ncclient` (plus `lxml` for the `port_facts` filter).
 
-## Content
+## Content - Port roles
+
+These roles push one complete interface configuration to the device. This means you can change it entirely without losing
+connectivity. Change the templates if you want another configuration.
 
 | Role | Purpose |
 | --- | --- |
-| `kiksen.netconf.port_access` / `port_trunk` / `port_channel` / `port_channel_member` | Write ports (replace, so the port equals the template) |
-| `kiksen.netconf.port_shutdown` / `port_reset` / `port_channel_remove` | Shut down, reset, remove |
-| `kiksen.netconf.port_facts` / `port_channel_facts` / `neighbor_facts` / `system_facts` | Read data into `<role>_*` variables |
-| `kiksen.netconf.system_vlan` / `system_hostname` / `qos_policy_map` | System settings |
-| `kiksen.netconf.write_mem` | Handler `netconf save config` (write memory) |
+| `kiksen.netconf.port_access` | Write an access port (replace, so the port equals the template, no old configuration remains) |
+| `kiksen.netconf.port_trunk` | Write a physical port as trunk (replace), no old configuration remains |
+| `kiksen.netconf.port_channel` | Write a port-channel as trunk or access port (replace) |
+| `kiksen.netconf.port_channel_member` | Make a physical port a port-channel member |
+| `kiksen.netconf.port_channel_remove` | Remove a port-channel |
+| `kiksen.netconf.port_shutdown` | Shut down a port without touching its other settings |
+| `kiksen.netconf.port_reset` | Reset a port (shutdown, wait, no shutdown), e.g. to renew a DHCP lease |
+
+## Content - Port facts
+
+| Role | Purpose |
+| --- | --- |
+| `kiksen.netconf.port_facts` | Read all ports, grouped by kind of port. Useful to write existing device data to NetBox or other systems, or to rewrite the existing configuration with exactly the configuration from the Jinja templates defined here. |
+| `kiksen.netconf.port_channel_facts` | Read all port-channels as a list |
+
+The `*_facts` roles return their data in `<role>_*` variables.
+
+## Content - System facts
+
+| Role | Purpose |
+| --- | --- |
+| `kiksen.netconf.system_facts` | Read the output of show version, show inventory, the stack information and the active VLANs |
+| `kiksen.netconf.neighbor_facts` | Read the CDP and LLDP neighbors |
+
+## Content - System / Global configuration
+
+| Role | Purpose |
+| --- | --- |
+| `kiksen.netconf.system_vlan` | Write the VLAN list of the device (replace or merge) |
+| `kiksen.netconf.system_hostname` | Write the hostname of the device |
+| `kiksen.netconf.qos_policy_map` | Write class-maps and an egress policy-map |
+| `kiksen.netconf.write_mem` | Handler `netconf save config` (write memory), no parameters |
 
 Every role has its own `README.md` in `roles/<name>/` and a `meta/argument_specs.yml`
 (`ansible-doc -t role kiksen.netconf.port_access`) with parameters and return values.
@@ -104,6 +160,6 @@ For every release:
 
 Notes:
 
-- A published version can not be overwritten. Fix an error with the next patch version.
+- A published version cannot be overwritten. Fix an error with the next patch version.
 - If the release run fails before the publish step, delete the tag (`git push --delete origin v0.1.0`, `git tag -d v0.1.0`), fix the problem and tag again.
 - Manual upload without GitHub: `uv run ansible-galaxy collection publish kiksen-netconf-0.1.0.tar.gz --token <token>`.

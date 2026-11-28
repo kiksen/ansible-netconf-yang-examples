@@ -1,5 +1,5 @@
 ---
-- name: Trunk per NETCONF schreiben
+- name: Write a trunk per NETCONF
   hosts: switch
   gather_facts: false
 

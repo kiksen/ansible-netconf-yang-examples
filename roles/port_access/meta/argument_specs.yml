@@ -1,40 +1,40 @@
 ---
 argument_specs:
   main:
-    short_description: Access-Port per NETCONF schreiben
+    short_description: Write an access port per NETCONF
     options:
       port_access_interface:
         type: str
         required: true
-        description: Interface-Name, z.B. GigabitEthernet1/0/5 (auch Gi1/0/5).
+        description: Interface name, e.g. GigabitEthernet1/0/5 (Gi1/0/5 works too).
       port_access_vlan:
         type: int
         required: true
-        description: Access-VLAN.
+        description: Access VLAN.
       port_access_voice_vlan:
         type: int
         required: false
         default: null
-        description: Voice-VLAN. Ohne Angabe wird ein vorhandenes Voice-VLAN entfernt.
+        description: Voice VLAN. Without a value an existing voice VLAN is removed.
       port_access_description:
         type: str
         required: true
-        description: Interface-Description.
+        description: Interface description.
       port_access_no_cdp_enable:
         type: bool
         required: false
         default: null
-        description: CDP auf dem Port deaktivieren (cdp enable = false). Bei false/ohne Angabe wird die Einstellung entfernt.
+        description: Disable CDP on the port (cdp enable = false). With false or without a value the setting is removed.
       port_access_no_lldp_transmit:
         type: bool
         required: false
         default: null
-        description: LLDP-Senden deaktivieren (no lldp transmit). Bei false/ohne Angabe wird die Einstellung entfernt.
+        description: Disable LLDP transmit (no lldp transmit). With false or without a value the setting is removed.
       port_access_no_lldp_receive:
         type: bool
         required: false
         default: null
-        description: LLDP-Empfang deaktivieren (no lldp receive). Bei false/ohne Angabe wird die Einstellung entfernt.
+        description: Disable LLDP receive (no lldp receive). With false or without a value the setting is removed.
       port_access_service_policy_out:
         type: str
         required: false

@@ -6,4 +6,4 @@ argument_specs:
       port_channel_remove_interface:
         type: str
         required: true
-        description: Name des Port-Channels, z.B. Port-channel2. Andere Interface-Typen werden abgelehnt.
+        description: Name of the port-channel, e.g. Port-channel2. Other interface types are rejected.

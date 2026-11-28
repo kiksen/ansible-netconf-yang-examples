@@ -1,4 +1,4 @@
-"""Tests fuer den Filter rep_segment."""
+"""Tests for the filter rep_segment."""
 
 import pytest
 from ansible.errors import AnsibleFilterError
@@ -31,12 +31,12 @@ from interface import rep_segment
     ],
 )
 def test_rep_segment(name: str, expected: dict[str, int | bool]) -> None:
-    """Segment-ID kommt vom Port, edge/primary vom Switch."""
+    """The segment ID comes from the port, edge/primary from the switch."""
     assert rep_segment(name) == expected
 
 
 @pytest.mark.parametrize("name", ["Gi5", "foo", "Te3/0/1"])
 def test_rep_segment_invalid(name: str) -> None:
-    """Ohne Switch-Nummer oder ungueltig gibt es einen Fehler."""
+    """Without a switch number or with an invalid one an error is raised."""
     with pytest.raises(AnsibleFilterError):
         rep_segment(name)

@@ -1,4 +1,4 @@
-"""Jinja-Filter zum Normalisieren von VLAN-Listen und -Ranges."""
+"""Jinja filters to normalize VLAN lists and ranges."""
 
 from ansible.errors import AnsibleFilterError
 
@@ -9,35 +9,35 @@ type VlanInput = int | str | list[int | str]
 
 
 def _parse_token(token: str) -> tuple[int, int]:
-    """Wandelt '20' oder '20-30' in ein Intervall (lo, hi) um."""
+    """Convert '20' or '20-30' into an interval (lo, hi)."""
     low_text, sep, high_text = token.partition("-")
     try:
         low = int(low_text)
         high = int(high_text) if sep else low
     except ValueError as err:
-        raise ValueError(f"Ungueltige VLAN-Angabe: {token!r}") from err
+        raise ValueError(f"Invalid VLAN value: {token!r}") from err
     if not VLAN_MIN <= low <= high <= VLAN_MAX:
         raise ValueError(
-            f"VLAN-Bereich {token!r} ausserhalb von {VLAN_MIN}-{VLAN_MAX} "
-            "oder in falscher Reihenfolge"
+            f"VLAN-Bereich {token!r} outside of {VLAN_MIN}-{VLAN_MAX} "
+            "or in the wrong order"
         )
     return low, high
 
 
 def parse_vlans(value: VlanInput) -> list[tuple[int, int]]:
-    """Zerlegt VLAN-Angaben in sortierte, zusammengefasste Intervalle.
+    """Split VLAN values into sorted, merged intervals.
 
-    Erlaubt sind int, Strings wie '1,20-30' und Listen aus beidem.
-    Ueberlappende und direkt benachbarte Werte werden verschmolzen.
+    Accepts int, strings such as '1,20-30' and lists of both.
+    Overlapping and directly adjacent values are merged.
     """
     items = value if isinstance(value, list) else [value]
     intervals: list[tuple[int, int]] = []
     for item in items:
         if isinstance(item, bool):
-            raise TypeError(f"Ungueltige VLAN-Angabe: {item!r}")
+            raise TypeError(f"Invalid VLAN value: {item!r}")
         for token in str(item).replace(" ", "").split(","):
             if not token:
-                raise ValueError(f"Leere VLAN-Angabe in {value!r}")
+                raise ValueError(f"Empty VLAN value in {value!r}")
             intervals.append(_parse_token(token))
     merged: list[tuple[int, int]] = []
     for low, high in sorted(intervals):
@@ -49,9 +49,9 @@ def parse_vlans(value: VlanInput) -> list[tuple[int, int]]:
 
 
 def vlan_list(value: VlanInput) -> str:
-    """Jinja-Filter: normalisiert VLANs zu einem String wie '1,20-30,100'.
+    """Jinja filter: normalize VLANs to a string such as '1,20-30,100'.
 
-    Beispiel: ``[1, "20-30", 21, 100] | vlan_list`` ergibt ``"1,20-30,100"``.
+    Example: ``[1, "20-30", 21, 100] | vlan_list`` gives ``"1,20-30,100"``.
     """
     try:
         intervals = parse_vlans(value)
@@ -63,10 +63,10 @@ def vlan_list(value: VlanInput) -> str:
 
 
 def with_native_vlan(allowed: VlanInput, native: int | str | None) -> VlanInput:
-    """Jinja-Filter: ergaenzt die Native VLAN in der Allowed-Liste eines Trunks.
+    """Jinja filter: add the native VLAN to the allowed list of a trunk.
 
-    'all' bleibt 'all'; ohne Native VLAN bleibt die Liste unveraendert.
-    Zusammenfassen und Deduplizieren uebernimmt danach ``vlan_list``.
+    'all' stays 'all'; without a native VLAN the list is unchanged.
+    Merging and deduplication is done afterwards by ``vlan_list``.
     """
     if allowed == "all" or native is None or native == "":
         return allowed
@@ -75,8 +75,8 @@ def with_native_vlan(allowed: VlanInput, native: int | str | None) -> VlanInput:
 
 
 class FilterModule:
-    """Registriert die Filter bei Ansible."""
+    """Register the filters with Ansible."""
 
     def filters(self) -> dict[str, object]:
-        """Liefert die verfuegbaren Filter."""
+        """Return the available filters."""
         return {"vlan_list": vlan_list, "with_native_vlan": with_native_vlan}

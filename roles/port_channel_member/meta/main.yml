@@ -3,7 +3,7 @@ galaxy_info:
   role_name: port_channel_member
   namespace: kiksen
   author: Christian Knoblauch
-  description: Macht einen physischen Port per NETCONF zum Port-Channel-Mitglied
+  description: Makes a physical port a port-channel member per NETCONF
   license: MIT
   min_ansible_version: "2.20"
   platforms:

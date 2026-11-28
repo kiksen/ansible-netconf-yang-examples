@@ -1,5 +1,5 @@
 ---
-- name: Beispiel - alle Port-Rollen, teils mehrfach aufgerufen
+- name: Example - all port roles, some called several times
   hosts: switch
   gather_facts: false
 
@@ -11,17 +11,17 @@
         description: Arbeitsplatz
       - interface: GigabitEthernet1/0/3
         vlan: 123
-        description: Drucker  # ohne Voice-VLAN
+        description: Drucker  # without voice VLAN
       - interface: GigabitEthernet1/0/4
         vlan: 123
-        description: Drucker  # ohne Voice-VLAN
+        description: Drucker  # without voice VLAN
       - interface: GigabitEthernet1/0/5
         vlan: 123
-        description: Drucker  # ohne Voice-VLAN
+        description: Drucker  # without voice VLAN
 
 
   tasks:
-    - name: Access-Ports schreiben
+    - name: Write the access ports
       ansible.builtin.include_role:
         name: kiksen.netconf.port_access
       vars:

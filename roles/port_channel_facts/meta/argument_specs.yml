@@ -1,7 +1,7 @@
 ---
 argument_specs:
   main:
-    short_description: Liste aller Port-Channels vom Switch lesen
+    short_description: Read all port-channels of the switch as a list
     description:
       - "port_channel_facts_list (list of str): all port-channels, e.g. Port-channel1, Port-channel2."
       - The list is sorted by number.

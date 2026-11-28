@@ -1,4 +1,4 @@
-"""Jinja-Filter zum Zerlegen von Cisco-Interface-Namen."""
+"""Jinja filters to split Cisco interface names."""
 
 import re
 from enum import StrEnum
@@ -46,11 +46,11 @@ _ALIASES: dict[str, str] = {
 
 
 def normalize_type(name: str) -> str:
-    """Liefert die Cisco-Schreibweise eines Typs, z.B. 'port-CHANNEL' -> 'Port-channel'.
+    """Return the Cisco spelling of a type, e.g. 'port-CHANNEL' -> 'Port-channel'.
 
-    Gaengige Abkuerzungen wie 'Gi' oder 'po' werden aufgeloest.
+    Common abbreviations such as 'Gi' or 'po' are resolved.
 
-    Unbekannte Typen werden unveraendert zurueckgegeben.
+    Unknown types are returned unchanged.
     """
     key = name.lower()
     return _KNOWN_TYPES.get(key) or _ALIASES.get(key, name)
@@ -68,7 +68,7 @@ class Part(StrEnum):
 
 
 class Interface(NamedTuple):
-    """Zerlegter Interface-Name; nicht vorhandene Teile sind None."""
+    """Parsed interface name; missing parts are None."""
 
     type: str
     switch: str | None
@@ -79,12 +79,12 @@ class Interface(NamedTuple):
 
 
 def parse_interface(name: str, normalize: bool = True) -> Interface:
-    """Zerlegt z.B. 'GigabitEthernet1/2/3/4' in type, switch, slot, subslot, port und id.
+    """Split e.g. 'GigabitEthernet1/2/3/4' into type, switch, slot, subslot, port and id.
 
-    Die id ist der komplette Zahlenteil ('1/2/3/4', '1/0' oder '1').
-    Die Zahlen werden von rechts zugeordnet: port, subslot, slot, switch.
-    Mit normalize=False bleibt der Typ so, wie er geschrieben wurde.
-    'Gi1/0/5' hat damit switch=1, slot=0, port=5 und keinen subslot.
+    The id is the complete numeric part ('1/2/3/4', '1/0' or '1').
+    The numbers are assigned from the right: port, subslot, slot, switch.
+    With normalize=False the type stays as it was written.
+    So 'Gi1/0/5' has switch=1, slot=0, port=5 and no subslot.
     """
     match = _INTERFACE_RE.match(name.strip())
     if match is None:
@@ -105,12 +105,12 @@ def parse_interface(name: str, normalize: bool = True) -> Interface:
 
 
 def interface_part(name: str, part: str, normalize: bool = True) -> str | None:
-    """Jinja-Filter: gibt einen Teil des Interface-Namens zurueck.
+    """Jinja filter: return one part of the interface name.
 
-    Beispiel: ``"GigabitEthernet1/0/5" | interface_part("port")`` ergibt ``"5"``.
-    Fehlt der Teil im Namen, wird None zurueckgegeben.
-    Mit ``normalize=False`` wird der Typ nicht in die Cisco-Schreibweise
-    umgewandelt (keine Gross-/Kleinschreibung-Korrektur, keine Abkuerzungen).
+    Example: ``"GigabitEthernet1/0/5" | interface_part("port")`` gives ``"5"``.
+    If the part is missing in the name, None is returned.
+    With ``normalize=False`` the type is not converted to the Cisco spelling
+    (no case correction, no abbreviations).
     """
     try:
         wanted = Part(part)
@@ -120,7 +120,7 @@ def interface_part(name: str, part: str, normalize: bool = True) -> str | None:
 
 
 class RepSegment(NamedTuple):
-    """REP-Einstellungen, die aus einem Interface-Namen abgeleitet werden."""
+    """REP settings derived from an interface name."""
 
     id: int
     edge: bool
@@ -130,20 +130,20 @@ class RepSegment(NamedTuple):
 
 
 def rep_segment(name: str) -> dict[str, int | bool]:
-    """Jinja-Filter: leitet die REP-Segmentdaten aus dem Interface-Namen ab.
+    """Jinja filter: derive the REP segment data from the interface name.
 
-    Die Segment-ID ist die Port-Nummer ('1/0/5' -> 5). Die Rolle kommt vom Switch:
-    Switch 1 ist der aktive Flexlink+-Port (edge no-neighbor primary), Switch 2
-    der Standby-Port (edge no-neighbor preferred). Andere Switch-Nummern und
-    Namen ohne Switch-Nummer (z.B. 'Gi0') sind ungueltig.
+    The segment ID is the port number ('1/0/5' -> 5). The role comes from the switch:
+    switch 1 is the active Flexlink+ port (edge no-neighbor primary), switch 2
+    the standby port (edge no-neighbor preferred). Other switch numbers and
+    names without a switch number (e.g. 'Gi0') are invalid.
     """
     try:
         parsed = parse_interface(str(name))
         if parsed.switch is None:
-            raise ValueError(f"Interface ohne Switch-Nummer: {name!r}")
+            raise ValueError(f"Interface without a switch number: {name!r}")
         switch = int(parsed.switch)
         if switch not in (1, 2):
-            raise ValueError(f"REP nur fuer Switch 1 und 2 vorgesehen: {name!r}")
+            raise ValueError(f"REP is only intended for switch 1 and 2: {name!r}")
         segment = RepSegment(
             id=int(parsed.port),
             edge=True,
@@ -157,8 +157,8 @@ def rep_segment(name: str) -> dict[str, int | bool]:
 
 
 class FilterModule:
-    """Registriert die Filter bei Ansible."""
+    """Register the filters with Ansible."""
 
     def filters(self) -> dict[str, object]:
-        """Liefert die verfuegbaren Filter."""
+        """Return the available filters."""
         return {"interface_part": interface_part, "rep_segment": rep_segment}

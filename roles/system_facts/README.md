@@ -1,0 +1,30 @@
+# kiksen.netconf.system_facts
+
+Read the data of show version, show inventory and the stack
+
+Has no parameters.
+
+Return values (set with set_fact):
+
+system_facts_hostname (str): hostname from the native model.
+
+system_facts_version (str): IOS-XE version from the native model.
+
+system_facts_system (dict): the device-system-data leaves (software-version, boot-time, last-reboot-reason, ...).
+
+system_facts_inventory (list of dict): one dict per device-inventory entry (hw-type, dev-name, hw-description, part-number, serial-number, ...).
+
+system_facts_stack_members (list of dict): one dict per stack node (chassis-number, role, node-state, priority, mac-address, serial-number, stack-ports, ...), read from Cisco-IOS-XE-stack-oper.
+
+system_facts_stack_info (dict): size, ring-status, stack-mac-address and stack-boottime.
+
+system_facts_vlans (list of dict): one dict per VLAN (id, name, status, ports), read from Cisco-IOS-XE-vlan-oper. Suspended VLANs (1002-1005) are left out.
+
+## Example
+
+```yaml
+- ansible.builtin.include_role:
+    name: kiksen.netconf.system_facts
+```
+
+The full specification is in `meta/argument_specs.yml` (`ansible-doc -t role kiksen.netconf.system_facts`).

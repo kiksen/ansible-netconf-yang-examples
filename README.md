@@ -29,9 +29,20 @@ The controller needs the Python package `ncclient` (plus `lxml` for the `port_fa
 | `kiksen.netconf.system_vlan` / `system_hostname` / `qos_policy_map` | System settings |
 | `kiksen.netconf.write_mem` | Handler `netconf save config` (write memory) |
 
-Filters: `interface_part`, `rep_segment`, `vlan_list`, `with_native_vlan`, `port_facts`
-(use the FQCN, e.g. `{{ 'Gi1/0/5' | kiksen.netconf.interface_part('type') }}`).
-Parameters and return values of every role are in its `meta/argument_specs.yml`.
+Every role has its own `README.md` in `roles/<name>/` and a `meta/argument_specs.yml`
+(`ansible-doc -t role kiksen.netconf.port_access`) with parameters and return values.
+
+### Filters
+
+Always use the FQCN; short names do not resolve inside roles.
+
+| Filter | Example | Result |
+| --- | --- | --- |
+| `kiksen.netconf.interface_part` | `'Gi1/0/5' \| kiksen.netconf.interface_part('type')` | `GigabitEthernet` |
+| `kiksen.netconf.vlan_list` | `[1, 20, 21, 22] \| kiksen.netconf.vlan_list` | `1,20-22` |
+| `kiksen.netconf.with_native_vlan` | `[100, 200] \| kiksen.netconf.with_native_vlan(10)` | `[100, 200, 10]` (`all` stays `all`) |
+| `kiksen.netconf.rep_segment` | `'Gi1/0/1' \| kiksen.netconf.rep_segment` | REP segment of a port |
+| `kiksen.netconf.port_facts` | `xml \| kiksen.netconf.port_facts(expand=false)` | list of port facts |
 
 ## Example
 
@@ -45,7 +56,10 @@ Parameters and return values of every role are in its `meta/argument_specs.yml`.
         port_access_vlan: 10
 ```
 
-More playbooks and a lab inventory are in `examples/` (not part of the built collection).
+More playbooks and a lab inventory are in
+[`examples/`](https://github.com/kiksen/ansible-collection-netconf/tree/main/examples)
+(not part of the built collection), e.g. `access_port.yaml`, `trunk_port.yaml`,
+`trunk_channel.yaml`, `netconf_rewrite.yaml` and the facts playbooks.
 
 ## Development
 

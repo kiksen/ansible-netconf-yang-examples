@@ -1,4 +1,4 @@
-"""Tests fuer den Filter vlan_list."""
+"""Tests for the filter vlan_list."""
 
 import pytest
 from ansible.errors import AnsibleFilterError
@@ -19,7 +19,7 @@ from vlan import vlan_list, with_native_vlan
     ],
 )
 def test_vlan_list(value: int | str | list[int | str], expected: str) -> None:
-    """Normalisiert Einzelwerte, Ranges und Mischformen."""
+    """Normalizes single values, ranges and mixed forms."""
     assert vlan_list(value) == expected
 
 
@@ -27,9 +27,9 @@ def test_vlan_list(value: int | str | list[int | str], expected: str) -> None:
     "value", [0, 4095, "30-20", "abc", "1-", "1,,2", "", True, [1, None]]
 )
 def test_vlan_list_invalid(value: object) -> None:
-    """Ungueltige Angaben loesen AnsibleFilterError aus."""
+    """Invalid values raise AnsibleFilterError."""
     with pytest.raises(AnsibleFilterError):
-        vlan_list(value)  # type: ignore[arg-type]  # absichtlich ungueltig
+        vlan_list(value)  # type: ignore[arg-type]  # intentionally invalid
 
 
 @pytest.mark.parametrize(
@@ -46,6 +46,6 @@ def test_vlan_list_invalid(value: object) -> None:
 def test_with_native_vlan(
     allowed: int | str | list[int | str], native: int | None, expected: str
 ) -> None:
-    """Die Native VLAN landet in der Allowed-Liste, 'all' bleibt unveraendert."""
+    """The native VLAN ends up in the allowed list, 'all' stays unchanged."""
     result = with_native_vlan(allowed, native)
     assert (result if result == "all" else vlan_list(result)) == expected

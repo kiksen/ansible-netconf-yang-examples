@@ -1,5 +1,5 @@
 ---
-- name: Channel per NETCONF schreiben
+- name: Write a channel per NETCONF
   hosts: switch
   gather_facts: false
 

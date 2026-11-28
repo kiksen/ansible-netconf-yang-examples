@@ -3,7 +3,7 @@ galaxy_info:
   role_name: port_channel_remove
   namespace: kiksen
   author: Christian Knoblauch
-  description: Entfernt einen Port-Channel per NETCONF
+  description: Removes a port-channel per NETCONF
   license: MIT
   min_ansible_version: "2.20"
   platforms:

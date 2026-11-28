@@ -1,0 +1,12 @@
+---
+argument_specs:
+  main:
+    short_description: Read the CDP and LLDP neighbors
+    description:
+      - Has no parameters. Sets neighbor_facts_cdp and neighbor_facts_lldp.
+      - neighbor_facts_cdp is a list with one dict per CDP neighbor (device-name, local-intf-name,
+        port-id, platform-name, capability, ...), read from Cisco-IOS-XE-cdp-oper.
+      - neighbor_facts_lldp is a list with one dict per LLDP neighbor (device-id, local-interface,
+        connecting-interface, ttl, ...), read from Cisco-IOS-XE-lldp-oper.
+      - Both lists are empty when the device has no neighbors.
+    options: {}

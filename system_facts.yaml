@@ -1,5 +1,5 @@
 ---
-# All system facts in one example: show version, show inventory and the stack.
+# All system facts in one example: show version, show inventory, the stack and the VLANs.
 #   uv run ansible-playbook -i inventory.yaml system_facts.yaml
 # Interface facts have their own examples: interface_facts.yaml and channel_facts.yaml.
 - name: Example - read show version, show inventory and the stack per NETCONF
@@ -35,3 +35,14 @@
     - name: Show the stack status
       ansible.builtin.debug:
         var: system_facts_stack_info
+
+    - name: Show the VLANs
+      ansible.builtin.debug:
+        msg: "{{ item.id }} {{ item.name | default('') }} ({{ item.status | default('') }})"
+      loop: "{{ system_facts_vlans }}"
+      loop_control:
+        label: "{{ item.id }}"
+
+    - name: debug
+      ansible.builtin.debug:
+        msg: "{{ system_facts_vlans }}"

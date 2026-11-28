@@ -1,0 +1,30 @@
+---
+- name: Validate the VLAN list
+  ansible.builtin.assert:
+    that:
+      - system_vlan_list | length > 0
+      - system_vlan_list | map(attribute='vid') | select('lt', 1) | list | length == 0
+      - system_vlan_list | map(attribute='vid') | select('gt', 4094) | list | length == 0
+      - system_vlan_list | map(attribute='vid') | select('in', [1002, 1003, 1004, 1005]) | list | length == 0
+      - system_vlan_list | map(attribute='vid') | unique | list | length == system_vlan_list | length
+      - system_vlan_names | length == system_vlan_names | unique | list | length
+      - system_vlan_names | reject('match', '^[\x21-\x3e\x40-\x7e]{1,20}$') | list | length == 0
+      - system_vlan_list | rejectattr('vid', 'eq', 1) | selectattr('name', 'defined') | selectattr('name', 'eq', 'default') | list | length == 0
+    fail_msg: >-
+      Invalid system_vlan_list: it needs at least one VLAN, unique VLAN IDs 1-4094 without
+      1002-1005, unique names of 1-20 printable ASCII characters without whitespace or '?',
+      and the name default only for VLAN 1.
+    quiet: true
+  vars:
+    system_vlan_names: "{{ system_vlan_list | selectattr('name', 'defined') | map(attribute='name') | reject('none') | list }}"
+
+- name: "Write the VLAN list with edit-config, operation {{ system_vlan_operation }}"
+  ansible.netcommon.netconf_config:
+    target: running
+    get_filter: "{{ lookup('ansible.builtin.template', 'get_filter.xml.j2') }}"
+    content: "{{ lookup('ansible.builtin.template', 'vlan.xml.j2') }}"
+  register: system_vlan_edit_result
+  retries: 5
+  delay: 5
+  until: system_vlan_edit_result is not failed or 'locked' not in (system_vlan_edit_result.msg | default(''))
+  notify: netconf save config

@@ -32,7 +32,7 @@
     system_facts_native: "{{ system_facts_native_result.output.get('data', {}).get('native', {}) }}"
     system_facts_hardware: >-
       {{ system_facts_hardware_result.output.get('data', {})
-         .get('device-hardware-data', {}).get('device-hardware', {}) }}
+        .get('device-hardware-data', {}).get('device-hardware', {}) }}
     system_facts_items: "{{ system_facts_hardware.get('device-inventory', []) }}"
 
 # One stack node comes as a dict, several as a list; both are normalized to a list.
@@ -43,3 +43,19 @@
   vars:
     system_facts_stack_data: "{{ system_facts_stack_result.output.get('data', {}).get('stack-oper-data', {}) }}"
     system_facts_stack_nodes: "{{ system_facts_stack_data.get('stack-node', []) }}"
+
+- name: Read the VLANs
+  ansible.netcommon.netconf_get:
+    display: json
+    filter: "{{ lookup('ansible.builtin.template', 'get_filter_vlan.xml.j2') }}"
+  register: system_facts_vlan_result
+
+# One VLAN comes as a dict, several as a list; both are normalized to a list.
+# Suspended VLANs (1002-1005, the FDDI and token ring defaults) are dropped.
+- name: Build the VLAN facts
+  ansible.builtin.set_fact:
+    system_facts_vlans: >-
+      {{ ([system_facts_vlan_items] if system_facts_vlan_items is mapping else system_facts_vlan_items)
+        | rejectattr('status', 'eq', 'suspend') | list }}
+  vars:
+    system_facts_vlan_items: "{{ system_facts_vlan_result.output.get('data', {}).get('vlans', {}).get('vlan', []) }}"

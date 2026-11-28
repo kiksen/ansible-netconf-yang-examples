@@ -18,7 +18,21 @@
 
     - ansible.builtin.debug:
         msg: "{{ port_facts_all }}"
-        
+
+    - name: Write some standard vlans
+      ansible.builtin.include_role:
+        name: netconf/system/vlan
+      vars:
+        system_vlan_operation: merge
+        system_vlan_list:
+          - vid: 900
+            name: Clients_900
+          - vid: 950
+            name: Guest
+          - vid: 920
+            name: AccessPoint_920
+
+
     - name: Write the QoS policy-map referenced by the ports
       ansible.builtin.include_role:
         name: netconf/qos/policy_map

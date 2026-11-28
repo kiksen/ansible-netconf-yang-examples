@@ -4,8 +4,8 @@ argument_specs:
     short_description: Read the data of show version, show inventory and the stack
     description:
       - Has no parameters. Sets system_facts_hostname, system_facts_version,
-        system_facts_system, system_facts_inventory, system_facts_stack_members and
-        system_facts_stack_info.
+        system_facts_system, system_facts_inventory, system_facts_stack_members,
+        system_facts_stack_info and system_facts_vlans.
       - system_facts_system is a dict of the device-system-data leaves (software-version,
         boot-time, last-reboot-reason, ...).
       - system_facts_inventory is a list with one dict per device-inventory entry (hw-type,
@@ -14,4 +14,6 @@ argument_specs:
         node-state, priority, mac-address, serial-number, stack-ports, ...), read from
         Cisco-IOS-XE-stack-oper.
       - system_facts_stack_info is a dict with size, ring-status, stack-mac-address and stack-boottime.
+      - system_facts_vlans is a list with one dict per VLAN (id, name, status, ports), read from
+        Cisco-IOS-XE-vlan-oper. Suspended VLANs (1002-1005) are left out.
     options: {}

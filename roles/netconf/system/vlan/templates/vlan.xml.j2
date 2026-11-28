@@ -1,0 +1,17 @@
+<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+    <vlan{% if system_vlan_operation == 'replace' %} nc:operation="replace"{% endif %}>
+{% for system_vlan_item in system_vlan_list | sort(attribute='vid') %}
+{# VLAN 1 is the default and not stored by the device, so it is not written. #}
+{% if system_vlan_item.vid | int != 1 %}
+      <vlan-list xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-vlan">
+        <id>{{ system_vlan_item.vid }}</id>
+{% if system_vlan_item.name | default(none) is not none %}
+        <name>{{ system_vlan_item.name }}</name>
+{% endif %}
+      </vlan-list>
+{% endif %}
+{% endfor %}
+    </vlan>
+  </native>
+</config>

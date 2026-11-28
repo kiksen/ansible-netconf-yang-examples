@@ -1,0 +1,28 @@
+---
+# Neighbors are operational state: no source, so this is a <get>, not a <get-config>.
+# display json lets the module convert the reply, so no parser is needed.
+- name: Read the CDP neighbors
+  ansible.netcommon.netconf_get:
+    display: json
+    filter: "{{ lookup('ansible.builtin.template', 'get_filter_cdp.xml.j2') }}"
+  register: neighbor_facts_cdp_result
+
+- name: Read the LLDP neighbors
+  ansible.netcommon.netconf_get:
+    display: json
+    filter: "{{ lookup('ansible.builtin.template', 'get_filter_lldp.xml.j2') }}"
+  register: neighbor_facts_lldp_result
+
+# The converter returns a dict for one element, a list for several and an empty string for
+# no data at all; all cases are normalized to a list.
+- name: Build the neighbor facts
+  ansible.builtin.set_fact:
+    neighbor_facts_cdp: "{{ [neighbor_facts_cdp_items] if neighbor_facts_cdp_items is mapping else neighbor_facts_cdp_items }}"
+    neighbor_facts_lldp: "{{ [neighbor_facts_lldp_items] if neighbor_facts_lldp_items is mapping else neighbor_facts_lldp_items }}"
+  vars:
+    neighbor_facts_cdp_items: >-
+      {{ ((neighbor_facts_cdp_result.output.get('data') or {}).get('cdp-neighbor-details') or {})
+         .get('cdp-neighbor-detail') or [] }}
+    neighbor_facts_lldp_items: >-
+      {{ ((neighbor_facts_lldp_result.output.get('data') or {}).get('lldp-entries') or {})
+         .get('lldp-entry') or [] }}

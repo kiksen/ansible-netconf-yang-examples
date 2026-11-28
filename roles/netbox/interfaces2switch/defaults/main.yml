@@ -1,0 +1,6 @@
+---
+# Required: interfaces2switch_device (NetBox device name).
+# Environment: NETBOX_ENDPOINT, NETBOX_TOKEN (read-only).
+interfaces2switch_ignored_types: [lag, virtual]
+interfaces2switch_member_mode: active
+interfaces2switch_max_age_seconds: null

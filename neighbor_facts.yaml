@@ -1,0 +1,28 @@
+---
+# Read the CDP and LLDP neighbors of the switch per NETCONF.
+#   uv run ansible-playbook -i inventory.yaml neighbor_facts.yaml
+- name: Example - read the CDP and LLDP neighbors
+  hosts: switch
+  gather_facts: false
+
+  roles:
+    - role: netconf/neighbor/facts
+
+  post_tasks:
+    - name: Show the CDP neighbors
+      ansible.builtin.debug:
+        msg: >-
+          {{ item['local-intf-name'] | default('') }} -> {{ item['device-name'] | default('') }}
+          {{ item['port-id'] | default('') }} ({{ item['platform-name'] | default('') }})
+      loop: "{{ neighbor_facts_cdp }}"
+      loop_control:
+        label: "{{ item['device-name'] | default('') }}"
+
+    - name: Show the LLDP neighbors
+      ansible.builtin.debug:
+        msg: >-
+          {{ item['local-interface'] | default('') }} -> {{ item['device-id'] | default('') }}
+          {{ item['connecting-interface'] | default('') }}
+      loop: "{{ neighbor_facts_lldp }}"
+      loop_control:
+        label: "{{ item['device-id'] | default('') }}"

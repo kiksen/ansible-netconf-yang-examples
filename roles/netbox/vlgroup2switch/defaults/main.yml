@@ -1,0 +1,5 @@
+---
+# Required: vlgroup2switch_group_id (ID of the NetBox VLAN group).
+# Optional: vlgroup2switch_protected_vlans, VLAN IDs that are never removed from the switch.
+# Environment: NETBOX_ENDPOINT, NETBOX_TOKEN (read-only).
+vlgroup2switch_protected_vlans: []

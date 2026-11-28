@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  role_name: interfaces2switch
+  namespace: netbox
+  author: Christian Knoblauch
+  description: Reads the interfaces of a NetBox device and writes them to the switch with the NETCONF roles
+  license: MIT
+  min_ansible_version: "2.20"
+  platforms:
+    - name: IOS
+      versions:
+        - all
+
+dependencies: []

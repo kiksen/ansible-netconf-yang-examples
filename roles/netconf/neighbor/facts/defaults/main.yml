@@ -1,0 +1,2 @@
+---
+# No parameters. Sets neighbor_facts_cdp (CDP neighbors) and neighbor_facts_lldp (LLDP neighbors).

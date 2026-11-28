@@ -1,0 +1,33 @@
+---
+argument_specs:
+  main:
+    short_description: Write the interfaces of a NetBox device to the switch
+    description:
+      - NetBox is only read (environment NETBOX_ENDPOINT and NETBOX_TOKEN). On the switch the QoS
+        policy-map is written first, then the LAGs (type lag, Port-channelN, as trunk or access
+        port-channel), the LAG members, the access ports and the trunk ports.
+      - Ports without a NetBox mode and without a LAG are left alone, except disabled ones, which are
+        shut down. Management and stack ports and virtual interfaces are ignored.
+      - Port-channels are never removed; the playbook netbox2remove_channel.yaml does that.
+    options:
+      interfaces2switch_device:
+        type: str
+        required: true
+        description: Name of the NetBox device whose interfaces are written.
+      interfaces2switch_member_mode:
+        type: str
+        required: false
+        default: active
+        description: LACP mode written for all LAG members.
+      interfaces2switch_ignored_types:
+        type: list
+        elements: str
+        required: false
+        default: [lag, virtual]
+        description: NetBox interface types that are not written as physical ports.
+      interfaces2switch_max_age_seconds:
+        type: int
+        required: false
+        default: null
+        description: >-
+          Only interfaces changed in the last N seconds are read from NetBox; null or 0 reads all.

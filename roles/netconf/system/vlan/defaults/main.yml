@@ -1,0 +1,5 @@
+---
+# Required: system_vlan_list, a list of {vid: <id>, name: <name>}; name is optional.
+# system_vlan_operation: replace (default) replaces the whole native/vlan container, so VLANs that are
+# not in the list are removed. merge only adds and updates the listed VLANs and removes nothing.
+system_vlan_operation: replace

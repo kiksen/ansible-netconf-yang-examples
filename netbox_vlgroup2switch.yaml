@@ -1,0 +1,19 @@
+---
+# Write the active VLANs of a NetBox VLAN group to the switch (group 34 = vlg-Dahn).
+# NetBox is only read. The VLAN list of the switch is REPLACED: every VLAN that is not an active
+# member of the group is removed. Look first with check mode (-C), then run without it.
+#
+#   uv run ansible-playbook -i inventory.yaml netbox_vlgroup2switch.yaml -C
+#   uv run ansible-playbook -i inventory.yaml netbox_vlgroup2switch.yaml
+#
+# Environment: NETBOX_ENDPOINT, NETBOX_TOKEN (read-only).
+- name: Write a NetBox VLAN group to the switch
+  hosts: switch
+  gather_facts: false
+
+  tasks:
+    - name: Write the active VLANs of the VLAN group
+      ansible.builtin.include_role:
+        name: netbox/vlgroup2switch
+      vars:
+        vlgroup2switch_group_id: 34

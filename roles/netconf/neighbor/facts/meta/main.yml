@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  role_name: facts
+  namespace: netconf_neighbor
+  author: Christian Knoblauch
+  description: Reads the CDP and LLDP neighbors via NETCONF (Cisco-IOS-XE-cdp-oper, Cisco-IOS-XE-lldp-oper)
+  license: MIT
+  min_ansible_version: "2.20"
+  platforms:
+    - name: IOS
+      versions:
+        - all
+
+dependencies: []

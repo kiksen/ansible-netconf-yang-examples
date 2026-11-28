@@ -1,0 +1,32 @@
+---
+- name: "Read the VLANs of the NetBox VLAN group {{ vlgroup2switch_group_id }}"
+  ansible.builtin.set_fact:
+    vlgroup2switch_vlans: >-
+      {{ query('netbox.netbox.nb_lookup', 'vlans',
+              api_filter='group_id=' ~ vlgroup2switch_group_id,
+              api_endpoint=lookup('ansible.builtin.env', 'NETBOX_ENDPOINT'),
+              token=lookup('ansible.builtin.env', 'NETBOX_TOKEN'))
+        | map(attribute='value') | selectattr('status.value', 'eq', 'active') | list }}
+
+- name: Stop if the VLAN group has no active VLAN
+  ansible.builtin.assert:
+    that: vlgroup2switch_vlans | length > 0
+    fail_msg: "NetBox VLAN group {{ vlgroup2switch_group_id }} has no active VLAN; refusing to remove every VLAN"
+    quiet: true
+
+# The VLAN list is replaced on the switch, so a protected VLAN that is not in the group is added
+# as <vid>_protected. That name is unique and fits the name rules of netconf/system/vlan.
+- name: Write the active VLANs and the protected VLANs to the switch
+  ansible.builtin.include_role:
+    name: netconf/system/vlan
+  vars:
+    vlgroup2switch_group_vids: "{{ vlgroup2switch_vlans | map(attribute='vid') | list }}"
+    system_vlan_list: >-
+      {%- set vlgroup2switch_list = [] -%}
+      {%- for vlgroup2switch_vlan in vlgroup2switch_vlans -%}
+      {%- set _ = vlgroup2switch_list.append({'vid': vlgroup2switch_vlan.vid, 'name': vlgroup2switch_vlan.name}) -%}
+      {%- endfor -%}
+      {%- for vlgroup2switch_vid in vlgroup2switch_protected_vlans | difference(vlgroup2switch_group_vids) -%}
+      {%- set _ = vlgroup2switch_list.append({'vid': vlgroup2switch_vid, 'name': vlgroup2switch_vid ~ '_protected'}) -%}
+      {%- endfor -%}
+      {{- vlgroup2switch_list -}}

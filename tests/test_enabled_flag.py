@@ -126,3 +126,33 @@ def test_channel_trunk_mode_keeps_trunk_and_snooping() -> None:
     assert "<trunk/>" in xml
     assert "<vlan-id>101</vlan-id>" in xml
     assert "snooping" in xml
+
+
+def _render_vlans(vlans: list[dict[str, object]], operation: str = "replace") -> str:
+    """Render the VLAN template for the given VLAN list and operation."""
+    env = Environment(
+        loader=FileSystemLoader(_PORT_ROLES.parent / "system" / "vlan" / "templates"),
+        autoescape=False,
+    )
+    return env.get_template("vlan.xml.j2").render(
+        system_vlan_list=vlans, system_vlan_operation=operation
+    )
+
+
+def test_vlan_template_replaces_container_and_skips_vlan_1() -> None:
+    """The VLAN container is replaced, sorted by ID, and VLAN 1 is not written."""
+    xml = _render_vlans(
+        [{"vid": 200, "name": "Servers"}, {"vid": 1, "name": "default"}, {"vid": 100}]
+    )
+    assert '<vlan nc:operation="replace">' in xml
+    assert "<id>1</id>" not in xml
+    assert xml.index("<id>100</id>") < xml.index("<id>200</id>")
+    assert "<name>Servers</name>" in xml
+    assert xml.count("<name>") == 1
+
+
+def test_vlan_template_merge_has_no_replace() -> None:
+    """The merge operation leaves out the replace operation on the VLAN container."""
+    xml = _render_vlans([{"vid": 100, "name": "Clients"}], operation="merge")
+    assert "nc:operation" not in xml
+    assert "<id>100</id>" in xml

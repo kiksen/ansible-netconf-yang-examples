@@ -1,0 +1,32 @@
+---
+# Tag vX.Y.Z (must match version in galaxy.yml) -> test, build and publish to Galaxy.
+# Needs the repository secret GALAXY_API_KEY (Galaxy API token).
+name: Release
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync
+      - run: uv run ruff check
+      - run: uv run pytest
+      - run: uv run ansible-lint
+      - name: Check that the tag matches galaxy.yml
+        run: |
+          version=$(uv run python -c "import yaml; print(yaml.safe_load(open('galaxy.yml'))['version'])")
+          test "v${version}" = "${GITHUB_REF_NAME}"
+      - name: Build the collection
+        run: uv run ansible-galaxy collection build --output-path dist .
+      - name: Publish to Galaxy
+        run: uv run ansible-galaxy collection publish dist/*.tar.gz --token "${{ secrets.GALAXY_API_KEY }}"
+      - name: Create the GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.tar.gz

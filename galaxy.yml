@@ -36,6 +36,8 @@ build_ignore:
   - pyproject.toml
   - uv.lock
   - log
+  - dist
+  - .github
   - docs
   - examples
   - pyclient

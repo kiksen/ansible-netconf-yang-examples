@@ -1,13 +1,18 @@
----
-# - name: Validate trunk VLAN parameters
-#   ansible.builtin.assert:
-#     that:
-#       - >-
-#         port_channel_allowed_vlans == 'all' or
-#         (port_channel_allowed_vlans is sequence and port_channel_allowed_vlans is not string
-#         and port_channel_allowed_vlans | length > 0)
-#     fail_msg: "port_channel_allowed_vlans must be 'all' or a non-empty list of VLAN IDs"
-#     quiet: true
+- name: Validate the parameters of the port-channel mode
+  ansible.builtin.assert:
+    that:
+      - >-
+        port_channel_mode == 'access'
+        or (port_channel_allowed_vlans is not none and port_channel_access_vlan is none)
+      - >-
+        port_channel_mode != 'access'
+        or (port_channel_access_vlan is not none and port_channel_allowed_vlans is none
+        and port_channel_native_vlan is none)
+    fail_msg: >-
+      Mode trunk needs port_channel_allowed_vlans and no port_channel_access_vlan;
+      mode access needs port_channel_access_vlan and neither port_channel_allowed_vlans
+      nor port_channel_native_vlan.
+    quiet: true
 
 - name: "Write port-channel trunk with edit-config (replace in template) on {{ port_channel_interface }}"
   ansible.netcommon.netconf_config:

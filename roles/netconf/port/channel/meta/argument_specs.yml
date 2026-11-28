@@ -1,7 +1,7 @@
 ---
 argument_specs:
   main:
-    short_description: port-channel als Trunk per NETCONF schreiben
+    short_description: port-channel als Trunk oder Access-Port per NETCONF schreiben
     options:
       port_channel_interface:
         type: str
@@ -11,11 +11,23 @@ argument_specs:
         type: str
         required: true
         description: Interface-Description.
+      port_channel_mode:
+        type: str
+        required: false
+        default: trunk
+        choices: [trunk, access]
+        description: Switchport mode of the port-channel.
+      port_channel_access_vlan:
+        type: int
+        required: false
+        default: null
+        description: Access VLAN; required, and only allowed, for mode access.
       port_channel_allowed_vlans:
         type: raw
-        required: true
+        required: false
+        default: null
         description: >-
-          Erlaubte VLANs: der String all (NetBox tagged-all), eine Liste
+          Required for mode trunk, not allowed for access. Erlaubte VLANs: der String all (NetBox tagged-all), eine Liste
           (z.B. [100, 200, 300]), ein Range-String (z.B. 2-4094 oder 1,20-30)
           oder eine gemischte Liste (z.B. [1, "20-30", 100]). Gueltig 1-4094.
       port_channel_native_vlan:

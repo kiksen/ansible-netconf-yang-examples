@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+    <interface>
+      <Port-channel>
+        <name>30</name>
+        <switchport-config>
+          <switchport>
+            <access xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+              <vlan>
+                <vlan>123</vlan>
+              </vlan>
+            </access>
+            <mode xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+              <access/>
+            </mode>
+          </switchport>
+        </switchport-config>
+      </Port-channel>
+    </interface>
+  </native>
+</data>

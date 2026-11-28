@@ -1,5 +1,10 @@
 ---
-# Pflicht: port_channel_interface, port_channel_description, port_channel_allowed_vlans
+# Required: port_channel_interface, port_channel_description
+# mode trunk (default): port_channel_allowed_vlans is required, port_channel_native_vlan optional.
+# mode access: port_channel_access_vlan is required, the trunk parameters must not be set.
+port_channel_mode: trunk
+port_channel_allowed_vlans: null
+port_channel_access_vlan: null
 port_channel_native_vlan: null
 port_channel_enabled: true
 # Storm-control thresholds (percent), applied to both broadcast and multicast.

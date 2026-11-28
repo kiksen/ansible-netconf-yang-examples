@@ -42,6 +42,7 @@ class PortFacts:
     kind: Kind
     mode: Mode | None
     description: str | None
+    enabled: bool
     untagged_vlan: int | None
     voice_vlan: int | None
     tagged_vlans: list[int] | None
@@ -201,6 +202,7 @@ def _parse_interface(entry: Element, expand: bool) -> PortFacts:
         kind=kind,
         mode=mode,
         description=_text(entry, "{*}description"),
+        enabled=entry.find("{*}shutdown") is None,
         untagged_vlan=untagged,
         voice_vlan=_int(switchport, "{*}voice/{*}vlan/{*}vlan"),
         tagged_vlans=tagged,

@@ -9,8 +9,24 @@
 {% if not port_channel_enabled %}
         <shutdown/>
 {% endif %}
+        <port-channel>
+        <standalone-disable-config>false</standalone-disable-config>
+        </port-channel>
         <switchport-config>
           <switchport>
+{% if port_channel_mode == 'access' %}
+{# VLAN 1 is the default and not stored by the device, so it is not written. #}
+{% if port_channel_access_vlan | int != 1 %}
+            <access xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+              <vlan>
+                <vlan>{{ port_channel_access_vlan }}</vlan>
+              </vlan>
+            </access>
+{% endif %}
+            <mode xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+              <access/>
+            </mode>
+{% else %}
             <mode xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
               <trunk/>
             </mode>
@@ -33,8 +49,10 @@
               </native>
 {% endif %}
             </trunk>
+{% endif %}
           </switchport>
         </switchport-config>
+{% if port_channel_mode != 'access' %}
         <ip>
           <dhcp>
             <snooping xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-dhcp">
@@ -42,6 +60,7 @@
             </snooping>
           </dhcp>
         </ip>
+{% endif %}
         <storm-control>
           <action>
             <trap/>

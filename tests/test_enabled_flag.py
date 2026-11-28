@@ -49,6 +49,8 @@ def _render(
     env.filters["vlan_list"] = lambda vlans: ",".join(str(v) for v in vlans)
     defaults = {
         "native_vlan": None,
+        "mode": "trunk",
+        "access_vlan": None,
         "voice_vlan": None,
         "description": None,
         "no_cdp_enable": None,
@@ -94,3 +96,33 @@ def test_shutdown_role_template() -> None:
     assert "<shutdown/>" in xml
     assert "<name>1/1/1</name>" in xml
     assert "description" not in xml
+
+
+def test_channel_access_mode_has_no_trunk_or_snooping() -> None:
+    """An access port-channel writes the access VLAN, no trunk block and no DHCP trust."""
+    xml = _render(
+        "channel",
+        "port_channel.xml.j2",
+        "port_channel",
+        {"interface": "Po30", "mode": "access", "access_vlan": 123},
+        enabled=True,
+    )
+    assert "<access/>" in xml
+    assert "<vlan>123</vlan>" in xml
+    assert "<trunk" not in xml
+    assert "snooping" not in xml
+    assert "<storm-control>" in xml
+
+
+def test_channel_trunk_mode_keeps_trunk_and_snooping() -> None:
+    """The default mode still writes the trunk block and DHCP snooping trust."""
+    xml = _render(
+        "channel",
+        "port_channel.xml.j2",
+        "port_channel",
+        {"interface": "Po2", "allowed_vlans": [10], "native_vlan": 101},
+        enabled=True,
+    )
+    assert "<trunk/>" in xml
+    assert "<vlan-id>101</vlan-id>" in xml
+    assert "snooping" in xml

@@ -183,3 +183,11 @@ def test_access_and_tagged_all_have_no_ranges(
     for name in ("GigabitEthernet1/0/2", "GigabitEthernet1/0/8"):
         assert ports[name]["tagged_vlan_ranges"] is None
         assert ports[name]["vlan_has_range"] is False
+
+
+def test_enabled_flag_follows_shutdown_element() -> None:
+    """A port is disabled only when it carries a shutdown element."""
+    xml = _wrap("")
+    assert port_facts(xml)[0]["enabled"] is True
+    shut = xml.replace("<name>1/0/9</name>", "<name>1/0/9</name><shutdown/>")
+    assert port_facts(shut)[0]["enabled"] is False

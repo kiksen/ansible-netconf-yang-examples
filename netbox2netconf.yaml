@@ -10,6 +10,10 @@
 #     (mode tagged / tagged-all). Ports without a NetBox mode and without a LAG are left alone,
 #     except disabled ones: they are shut down (role netconf/port/shutdown).
 #   - management and stack ports are ignored.
+#   - port-channels on the switch that are not in NetBox are removed (role netconf/port/channel_remove,
+#     which also strips the channel-group from their members) before the LAGs and members are
+#     written. The check uses all NetBox LAGs, not only the recently updated ones.
+#     Switch off with -e nb_remove_stale_channels=false.
 - name: Write NetBox interfaces to the switch
   hosts: switches
   gather_facts: false
@@ -18,6 +22,7 @@
     nb_ignored_types: [lag, virtual]
     nb_member_mode: active
     nb_max_interface_age_seconds: 180
+    nb_remove_stale_channels: true
 
   # tasks:
   #   - name: Read the interfaces of the device from NetBox
@@ -92,6 +97,34 @@
     - name: Write the QoS policy-map referenced by the ports
       ansible.builtin.include_role:
         name: netconf/qos/policy_map
+
+    # The age filter above hides unchanged LAGs, so the stale check reads all LAGs again.
+    - name: Remove the port-channels that are not in NetBox
+      when: nb_remove_stale_channels | bool
+      block:
+        - name: Read the names of all LAGs of the device from NetBox
+          ansible.builtin.set_fact:
+            nb_lag_names: >-
+              {{ query('netbox.netbox.nb_lookup', 'interfaces',
+                      api_filter='device=' ~ netbox_device ~ ' type=lag',
+                      api_endpoint=lookup('ansible.builtin.env', 'NETBOX_ENDPOINT'),
+                      token=lookup('ansible.builtin.env', 'NETBOX_TOKEN'))
+                | map(attribute='value.name') | list }}
+
+        - name: Read the port-channels of the switch
+          ansible.builtin.include_role:
+            name: netconf/port/channel_facts
+
+        - name: Find the port-channels that are not in NetBox
+          ansible.builtin.set_fact:
+            nb_stale_channels: "{{ port_channel_facts_list | difference(nb_lag_names) }}"
+
+        - name: Remove the stale port-channels
+          ansible.builtin.include_role:
+            name: netconf/port/channel_remove
+          vars:
+            port_channel_remove_interface: "{{ item }}"
+          loop: "{{ nb_stale_channels }}"
 
     - name: Create the LAG interfaces
       ansible.builtin.include_role:

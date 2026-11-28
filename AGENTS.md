@@ -42,3 +42,6 @@
 
 ## python client
 - This client is only for testing. General changes are not done to python unless you are instructued to.
+
+## Yang Models
+find all Cisco Yang Models in ./yanmodels as a reference. 

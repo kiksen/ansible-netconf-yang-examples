@@ -1,0 +1,20 @@
+---
+# One read for all interfaces; the filter parses the reply, no regex in Jinja.
+- name: Read all interfaces
+  ansible.netcommon.netconf_get:
+    source: running
+    display: xml
+    filter: "{{ lookup('ansible.builtin.template', 'get_filter.xml.j2') }}"
+  register: port_facts_get_result
+
+- name: Build the port facts
+  ansible.builtin.set_fact:
+    port_facts_all: "{{ port_facts_get_result.stdout | kiksen.netconf.port_facts(expand=port_facts_expand_vlans) }}"
+
+- name: Group the port facts by kind
+  ansible.builtin.set_fact:
+    port_facts_access: "{{ port_facts_all | selectattr('kind', 'eq', 'access') | list }}"
+    port_facts_trunk: "{{ port_facts_all | selectattr('kind', 'eq', 'trunk') | list }}"
+    port_facts_member: "{{ port_facts_all | selectattr('kind', 'eq', 'member') | list }}"
+    port_facts_channel: "{{ port_facts_all | selectattr('kind', 'eq', 'channel') | list }}"
+    port_facts_unconfigured: "{{ port_facts_all | selectattr('kind', 'eq', 'unconfigured') | list }}"

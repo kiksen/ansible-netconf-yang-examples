@@ -1,0 +1,88 @@
+{% set port_channel_if_type = port_channel_interface | kiksen.netconf.interface_part('type') %}
+{% set port_channel_if_id = port_channel_interface | kiksen.netconf.interface_part('id') %}
+<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+    <interface>
+      <{{ port_channel_if_type }} nc:operation="replace">
+        <name>{{ port_channel_if_id }}</name>
+        <description>{{ port_channel_description }}</description>
+{% if not port_channel_enabled %}
+        <shutdown/>
+{% endif %}
+        <port-channel>
+        <standalone-disable-config>false</standalone-disable-config>
+        </port-channel>
+        <switchport-config>
+          <switchport>
+{% if port_channel_mode == 'access' %}
+{# VLAN 1 is the default and not stored by the device, so it is not written. #}
+{% if port_channel_access_vlan | int != 1 %}
+            <access xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+              <vlan>
+                <vlan>{{ port_channel_access_vlan }}</vlan>
+              </vlan>
+            </access>
+{% endif %}
+            <mode xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+              <access/>
+            </mode>
+{% else %}
+            <mode xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+              <trunk/>
+            </mode>
+            <trunk xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-switch">
+{% if port_channel_allowed_vlans != 'all' %}
+              <allowed>
+                <vlan-v2>
+                  <vlan-choices>
+                    <vlans>{{ port_channel_allowed_vlans | kiksen.netconf.vlan_list }}</vlans>
+                  </vlan-choices>
+                </vlan-v2>
+              </allowed>
+{% endif %}
+{# VLAN 1 is the default and not stored by the device, so it is not written. #}
+{% if port_channel_native_vlan is not none and port_channel_native_vlan | int != 1 %}
+              <native>
+                <vlan>
+                  <vlan-id>{{ port_channel_native_vlan }}</vlan-id>
+                </vlan>
+              </native>
+{% endif %}
+            </trunk>
+{% endif %}
+          </switchport>
+        </switchport-config>
+{% if port_channel_mode != 'access' %}
+        <ip>
+          <dhcp>
+            <snooping xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-dhcp">
+              <trust/>
+            </snooping>
+          </dhcp>
+        </ip>
+{% endif %}
+        <storm-control>
+          <action>
+            <trap/>
+          </action>
+          <broadcast>
+            <level>
+              <threshold>
+                <rising-threshold>{{ port_channel_storm_rising }}</rising-threshold>
+                <falling-threshold>{{ port_channel_storm_falling }}</falling-threshold>
+              </threshold>
+            </level>
+          </broadcast>
+          <multicast>
+            <level>
+              <threshold>
+                <rising-threshold>{{ port_channel_storm_rising }}</rising-threshold>
+                <falling-threshold>{{ port_channel_storm_falling }}</falling-threshold>
+              </threshold>
+            </level>
+          </multicast>
+        </storm-control>
+      </{{ port_channel_if_type }}>
+    </interface>
+  </native>
+</config>

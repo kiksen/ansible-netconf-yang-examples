@@ -1,0 +1,45 @@
+---
+namespace: kiksen
+name: netconf
+version: 0.1.0
+readme: README.md
+authors:
+  - Christian Knoblauch
+description: Roles and filters to configure Cisco IOS-XE switches per NETCONF (Cisco-IOS-XE-native)
+license:
+  - MIT
+license_file: LICENSE
+tags:
+  - cisco
+  - networking
+  - netconf
+  - iosxe
+dependencies:
+  ansible.netcommon: ">=8.0.0"
+  cisco.ios: ">=11.0.0"
+repository: https://github.com/kiksen/ansible-collection-netconf
+documentation: https://github.com/kiksen/ansible-collection-netconf#readme
+homepage: https://github.com/kiksen/ansible-collection-netconf
+issues: https://github.com/kiksen/ansible-collection-netconf/issues
+# Only the collection content goes into the tarball.
+build_ignore:
+  - .git*
+  - .ansible
+  - .claude
+  - .venv
+  - .ruff_cache
+  - .pytest_cache
+  - .mypy_cache
+  - .ansible-lint
+  - ansible.cfg
+  - AGENTS.md
+  - pyproject.toml
+  - uv.lock
+  - log
+  - docs
+  - examples
+  - pyclient
+  - tests
+  - xml_example
+  - yangmodels
+  - "*.tar.gz"

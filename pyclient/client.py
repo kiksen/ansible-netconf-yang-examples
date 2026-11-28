@@ -17,7 +17,7 @@ PORT: int = 830
 USER: str = "test"
 PASSWORD: str = "test"
 
-# Variables of the role netconf/port/access
+# Variables of the role kiksen.netconf.port_access
 PARAMS: dict[str, object] = {
     "port_access_interface": "GigabitEthernet1/0/5",
     "port_access_vlan": 123,

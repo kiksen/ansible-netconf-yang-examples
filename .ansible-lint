@@ -1,6 +1,4 @@
 ---
-# Role variables are prefixed with the role path (port_access_*), not only the
-# last directory name (access_*), so the generic prefix rule does not apply.
-skip_list:
-  - var-naming[no-role-prefix]
-  - role-name[path]  # nested role path (netconf/port/access) is intended
+exclude_paths:
+  - .venv/
+  - yangmodels/

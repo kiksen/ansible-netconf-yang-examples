@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  role_name: system_vlan
+  namespace: kiksen
+  author: Christian Knoblauch
+  description: Writes the VLAN list of the device per NETCONF (Cisco-IOS-XE-vlan, replace)
+  license: MIT
+  min_ansible_version: "2.20"
+  platforms:
+    - name: IOS
+      versions:
+        - all
+
+dependencies:
+  - role: kiksen.netconf.write_mem

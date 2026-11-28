@@ -6,7 +6,7 @@ import pytest
 from interface import interface_part, rep_segment
 from jinja2 import Environment, FileSystemLoader
 
-_PORT_ROLES = Path(__file__).parent.parent / "roles" / "netconf" / "port"
+_ROLES = Path(__file__).parent.parent / "roles"
 
 # role directory, template, variable prefix, extra variables needed to render
 _CASES = [
@@ -42,11 +42,13 @@ def _render(
 ) -> str:
     """Render a role template with the given enabled value."""
     env = Environment(
-        loader=FileSystemLoader(_PORT_ROLES / role / "templates"), autoescape=False
+        loader=FileSystemLoader(_ROLES / f"port_{role}" / "templates"), autoescape=False
     )
-    env.filters["interface_part"] = interface_part
-    env.filters["rep_segment"] = rep_segment
-    env.filters["vlan_list"] = lambda vlans: ",".join(str(v) for v in vlans)
+    env.filters["kiksen.netconf.interface_part"] = interface_part
+    env.filters["kiksen.netconf.rep_segment"] = rep_segment
+    env.filters["kiksen.netconf.vlan_list"] = lambda vlans: ",".join(
+        str(v) for v in vlans
+    )
     defaults = {
         "native_vlan": None,
         "mode": "trunk",
@@ -131,7 +133,7 @@ def test_channel_trunk_mode_keeps_trunk_and_snooping() -> None:
 def _render_vlans(vlans: list[dict[str, object]], operation: str = "replace") -> str:
     """Render the VLAN template for the given VLAN list and operation."""
     env = Environment(
-        loader=FileSystemLoader(_PORT_ROLES.parent / "system" / "vlan" / "templates"),
+        loader=FileSystemLoader(_ROLES / "system_vlan" / "templates"),
         autoescape=False,
     )
     return env.get_template("vlan.xml.j2").render(

@@ -12,3 +12,8 @@ wheels/
 # Ansible logs
 log/
 yangmodels/
+# Built collection archives and local test data
+*.tar.gz
+.ruff_cache/
+.pytest_cache/
+.ansible/

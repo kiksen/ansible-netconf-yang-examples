@@ -5,7 +5,7 @@ from pathlib import Path
 import pytest
 import yaml
 
-ROLES = sorted(Path(__file__).parents[1].glob("roles/netconf/*/facts"))
+ROLES = sorted(Path(__file__).parents[1].glob("roles/*_facts"))
 
 
 def _set_facts(tasks: list[dict[str, object]]) -> set[str]:
@@ -18,7 +18,7 @@ def _set_facts(tasks: list[dict[str, object]]) -> set[str]:
     return names
 
 
-@pytest.mark.parametrize("role", ROLES, ids=lambda path: path.parent.name)
+@pytest.mark.parametrize("role", ROLES, ids=lambda path: path.name)
 def test_return_values_documented(role: Path) -> None:
     """Every set_fact variable appears in the description of the argument spec."""
     tasks = yaml.safe_load((role / "tasks/main.yml").read_text())

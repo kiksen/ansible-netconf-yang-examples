@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  role_name: system_hostname
+  namespace: kiksen
+  author: Christian Knoblauch
+  description: Writes the hostname of the device per NETCONF
+  license: MIT
+  min_ansible_version: "2.20"
+  platforms:
+    - name: IOS
+      versions:
+        - all
+
+dependencies:
+  - role: kiksen.netconf.write_mem

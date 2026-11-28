@@ -1,0 +1,8 @@
+---
+argument_specs:
+  main:
+    short_description: Liste aller Port-Channels vom Switch lesen
+    description:
+      - "port_channel_facts_list (list of str): all port-channels, e.g. Port-channel1, Port-channel2."
+      - The list is sorted by number.
+    options: {}

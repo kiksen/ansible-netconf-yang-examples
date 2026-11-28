@@ -1,9 +1,0 @@
-{% set port_access_if_type = port_access_interface | interface_part('type') %}
-{% set port_access_if_id = port_access_interface | interface_part('id') %}
-<native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
-  <interface>
-    <{{ port_access_if_type }}>
-      <name>{{ port_access_if_id }}</name>
-    </{{ port_access_if_type }}>
-  </interface>
-</native>

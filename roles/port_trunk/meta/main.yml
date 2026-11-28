@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  role_name: port_trunk
+  namespace: kiksen
+  author: Christian Knoblauch
+  description: Konfiguriert physical port als Trunk per NETCONF (Cisco-IOS-XE-native)
+  license: MIT
+  min_ansible_version: "2.20"
+  platforms:
+    - name: IOS
+      versions:
+        - all
+
+dependencies:
+  - role: kiksen.netconf.write_mem

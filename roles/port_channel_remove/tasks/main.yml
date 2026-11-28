@@ -1,0 +1,44 @@
+---
+- name: Validate that the interface is a port-channel
+  ansible.builtin.assert:
+    that:
+      - port_channel_remove_interface | kiksen.netconf.interface_part('type') == 'Port-channel'
+    fail_msg: "port_channel_remove_interface must be a Port-channel, got {{ port_channel_remove_interface }}"
+    quiet: true
+
+- name: "Find the members of {{ port_channel_remove_interface }}"
+  ansible.netcommon.netconf_get:
+    source: running
+    display: xml
+    filter: "/native/interface/*[channel-group/number='{{ port_channel_remove_interface | kiksen.netconf.interface_part('id') }}']"
+  register: port_channel_remove_members_result
+
+- name: Build the member list
+  ansible.builtin.set_fact:
+    port_channel_remove_member_list: >-
+      {{ port_channel_remove_members_result.stdout
+         | regex_findall('<([A-Za-z]+)><name>([^<]+)</name>')
+         | map('join') | list }}
+
+- name: "Remove the channel-group from the members of {{ port_channel_remove_interface }}"
+  ansible.netcommon.netconf_config:
+    target: running
+    default_operation: merge
+    content: "{{ lookup('ansible.builtin.template', 'channel_remove_members.xml.j2') }}"
+  register: port_channel_remove_members_edit_result
+  retries: 5
+  delay: 5
+  until: port_channel_remove_members_edit_result is not failed or 'locked' not in (port_channel_remove_members_edit_result.msg | default(''))
+  when: port_channel_remove_member_list | length > 0
+  notify: netconf save config
+
+- name: "Remove port-channel with edit-config (merge) on {{ port_channel_remove_interface }}"
+  ansible.netcommon.netconf_config:
+    target: running
+    default_operation: merge
+    content: "{{ lookup('ansible.builtin.template', 'channel_remove.xml.j2') }}"
+  register: port_channel_remove_edit_result
+  retries: 5
+  delay: 5
+  until: port_channel_remove_edit_result is not failed or 'locked' not in (port_channel_remove_edit_result.msg | default(''))
+  notify: netconf save config

@@ -1,0 +1,9 @@
+{% set port_trunk_if_type = port_trunk_interface | kiksen.netconf.interface_part('type') %}
+{% set port_trunk_if_id = port_trunk_interface | kiksen.netconf.interface_part('id') %}
+<native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+  <interface>
+    <{{ port_trunk_if_type }}>
+      <name>{{ port_trunk_if_id }}</name>
+    </{{ port_trunk_if_type }}>
+  </interface>
+</native>

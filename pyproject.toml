@@ -26,7 +26,5 @@ dev = [
 
 [tool.pytest.ini_options]
 pythonpath = [
-    "roles/netconf/filters/filter_plugins",
-    "roles/netconf/port/facts/filter_plugins",
-    "inventory",
+    "plugins/filter",
 ]

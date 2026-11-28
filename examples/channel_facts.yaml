@@ -1,0 +1,12 @@
+---
+- name: Channel_facts per NETCONF
+  hosts: switch
+  gather_facts: false
+
+  roles:
+    - role: kiksen.netconf.port_channel_facts
+
+  post_tasks:
+    - name: Show the port-channel list
+      ansible.builtin.debug:
+        var: port_channel_facts_list

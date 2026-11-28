@@ -1,0 +1,26 @@
+{% set port_channel_member_if_type = port_channel_member_interface | kiksen.netconf.interface_part('type') %}
+{% set port_channel_member_if_id = port_channel_member_interface | kiksen.netconf.interface_part('id') %}
+<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0" xmlns:nc="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+    <interface>
+      <{{ port_channel_member_if_type }} nc:operation="replace">
+        <name>{{ port_channel_member_if_id }}</name>
+{% if port_channel_member_description is not none %}
+        <description>{{ port_channel_member_description }}</description>
+{% endif %}
+{% if not port_channel_member_enabled %}
+        <shutdown/>
+{% endif %}
+        <channel-group xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-ethernet">
+          <number>{{ port_channel_member_number }}</number>
+          <mode>{{ port_channel_member_mode }}</mode>
+        </channel-group>
+{% if port_channel_member_service_policy_out is not none %}
+        <service-policy xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-policy">
+          <output>{{ port_channel_member_service_policy_out }}</output>
+        </service-policy>
+{% endif %}
+      </{{ port_channel_member_if_type }}>
+    </interface>
+  </native>
+</config>

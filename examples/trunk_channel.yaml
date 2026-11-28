@@ -1,0 +1,15 @@
+---
+- name: Channel per NETCONF schreiben
+  hosts: switch
+  gather_facts: false
+
+  vars:
+    port_channel_interface: Port-channel2
+    port_channel_description: Uplink
+    # port_channel_allowed_vlans: [100, 200, 300]  # or: all
+    port_channel_allowed_vlans: 5,100-200,204-205
+    port_channel_native_vlan: 101  # remove or set to null for no native VLAN
+
+  roles:
+    - role: kiksen.netconf.port_channel
+#  | map('string') | join(',')

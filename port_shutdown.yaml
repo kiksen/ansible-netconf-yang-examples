@@ -1,8 +1,0 @@
----
-- name: Shut down ports
-  hosts: switch
-  gather_facts: false
-
-  roles:
-    - role: netconf/port/shutdown
-      port_shutdown_interface: GigabitEthernet1/1/1

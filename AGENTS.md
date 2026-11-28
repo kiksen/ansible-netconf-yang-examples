@@ -1,25 +1,24 @@
 # AGENTS.md - Ansible NETCONF roles
 
 ## Toolchain
-- Use **uv**: `uv sync`, `uv run ansible-playbook ...`. Never call a globally installed `ansible-playbook`; it lacks `ncclient`.
+- Use **uv**: `uv sync`, `uv run ansible-playbook -i examples/inventory.yaml examples/<playbook>.yaml`. Never call a globally installed `ansible-playbook`; it lacks `ncclient`.
 - Lint with `uv run ansible-lint`. Run `uv run ruff check` and `uv run pytest` for the Python filter plugins.
 
 ## Layout
-- Roles live in `roles/<area>/<object>/<variant>/`, e.g. `roles/netconf/port/access`. Reference them with the full path: `role: netconf/port/access`.
+- This repo is the Ansible collection `kiksen.netconf`. Roles are flat: `roles/<area>_<object>/`, e.g. `roles/port_access`. Reference them with the FQCN: `role: kiksen.netconf.port_access`.
+- Playbooks and the lab inventory live in `examples/` and are not part of the built collection (`build_ignore` in `galaxy.yml`). NetBox roles live in the collection `kiksen.netbox` (own repo).
 - Every role has `meta/main.yml`, `meta/argument_specs.yml`, `defaults/main.yml`, `tasks/main.yml` and a Jinja template in `templates/`.
 - Example XML (output of `read_interface.yaml -e dump=<name>`) goes in `xml_example/`. Build templates from these files.
-- Custom Jinja filters live in the role that uses them (`roles/<area>/<object>/<variant>/filter_plugins/`). Filters shared by several roles live in the role `netconf/filters`, which those roles list as a dependency.
+- Jinja filters live in `plugins/filter/`. Always use the FQCN in roles and playbooks (`| kiksen.netconf.vlan_list`); short names do not resolve.
 
 ## Variable naming
-- **Every** variable defined by a role starts with the role path joined by underscores, without the first directory: `roles/netconf/port/access` -> `port_access_`.
+- **Every** variable defined by a role starts with the role name: `roles/port_access` -> `port_access_`.
   - Parameters: `port_access_interface`, `port_access_vlan`, `port_access_voice_vlan`, `port_access_description`.
   - Registered results: `port_access_<what>_result`, e.g. `port_access_edit_result`.
   - Variables set with `set_fact` or `{% set %}` in templates: `port_access_<what>`.
 - After the prefix use a short, descriptive snake_case noun. Never use generic names like `result`, `data`, `vlan`, `tmp`.
 - Optional parameters default to `null` in `defaults/main.yml`. Required parameters have no default and are marked `required: true` in `argument_specs.yml`.
 - Playbooks pass role parameters under their prefixed names; do not rename them in playbooks.
-- The lint rule `var-naming[no-role-prefix]` is skipped in `.ansible-lint` because it expects only the last directory name (`access_`). Keep the full prefix anyway.
-- `role-name[path]` is skipped too: the nested role path is intended.
 - Task names are English; a Jinja expression may only appear at the end of a name (`name[template]`).
 
 ## NETCONF conventions

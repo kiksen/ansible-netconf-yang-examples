@@ -1,7 +1,0 @@
----
-- name: Write the QoS policy-map per NETCONF
-  hosts: switch
-  gather_facts: false
-
-  roles:
-    - role: netconf/qos/policy_map

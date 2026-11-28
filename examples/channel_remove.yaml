@@ -1,0 +1,10 @@
+---
+- name: Channel_remove per NETCONF
+  hosts: switch
+  gather_facts: false
+
+  vars:
+    port_channel_remove_interface: Port-channel2
+
+  roles:
+    - role: kiksen.netconf.port_channel_remove

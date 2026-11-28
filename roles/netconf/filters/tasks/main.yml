@@ -1,5 +1,0 @@
----
-# Intentionally empty: this role only provides filter_plugins/.
-# Roles that use the filters list it as a dependency.
-- name: Load the shared filters
-  ansible.builtin.meta: noop

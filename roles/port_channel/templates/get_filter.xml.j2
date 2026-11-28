@@ -1,0 +1,9 @@
+{% set port_channel_if_type = port_channel_interface | kiksen.netconf.interface_part('type') %}
+{% set port_channel_if_id = port_channel_interface | kiksen.netconf.interface_part('id') %}
+<native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+  <interface>
+    <{{ port_channel_if_type }}>
+      <name>{{ port_channel_if_id }}</name>
+    </{{ port_channel_if_type }}>
+  </interface>
+</native>

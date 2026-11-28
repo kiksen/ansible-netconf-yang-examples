@@ -2,7 +2,7 @@
 
 This guide is for an agent that builds a **second reader** for older IOS devices
 that have no NETCONF. The output must be **identical** to the output of the role
-`netconf/port/facts` (IOS-XE, NETCONF), so that downstream code (NetBox sync,
+`kiksen.netconf.port_facts` (IOS-XE, NETCONF), so that downstream code (NetBox sync,
 reports) does not care where the data came from.
 
 Scope: the input is **already parsed** (TextFSM records that contain all the
@@ -10,7 +10,7 @@ information listed in section 3). This guide does **not** cover parsing the
 device output. It only defines how the parsed information maps to the result
 (sections 1 to 5) and how to verify it (section 7).
 
-Reference implementation: `roles/netconf/port/facts/filter_plugins/port_facts.py`
+Reference implementation: `plugins/filter/port_facts.py`
 (filter `port_facts`) and its tests `tests/test_port_facts.py`. Reference input
 and output: `xml_example/all_interfaces.xml`.
 
@@ -258,9 +258,9 @@ Empty physical port (`interface GigabitEthernet1/0/1` with no lines):
   (for example a small function or Jinja logic).
 - The VLAN handling of rule 4.4 is the part most likely to drift. Its exact
   semantics are in `expand_vlans` and `split_ranges` in
-  `roles/netconf/port/facts/filter_plugins/port_facts.py` (constant
+  `plugins/filter/port_facts.py` (constant
   `MIN_RANGE = 4`); reproduce them exactly.
-- Use the same fact and variable names as `netconf/port/facts`
+- Use the same fact and variable names as `kiksen.netconf.port_facts`
   (`port_facts_all`, `port_facts_access`, `port_facts_trunk`,
   `port_facts_member`, `port_facts_channel`, `port_facts_unconfigured`,
   `port_facts_expand_vlans`), so playbooks can swap the role.

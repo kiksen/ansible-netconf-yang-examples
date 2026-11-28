@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  role_name: port_channel_facts
+  namespace: kiksen
+  author: Christian Knoblauch
+  description: Liest alle Port-Channels per NETCONF aus und liefert sie als Liste
+  license: MIT
+  min_ansible_version: "2.20"
+  platforms:
+    - name: IOS
+      versions:
+        - all
+
+dependencies: []

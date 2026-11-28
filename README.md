@@ -74,3 +74,36 @@ ansible-galaxy collection build
 ```
 
 Related collection: `kiksen.netbox` (reads NetBox and calls these roles).
+
+## Release and upload to Galaxy
+
+A release is published to Galaxy by GitHub Actions (`.github/workflows/release.yml`) when a tag `vX.Y.Z` is pushed.
+Normal pushes and pull requests only run the tests (`ci.yml`) and never upload.
+
+One-time setup:
+
+1. Log in at <https://galaxy.ansible.com> with GitHub (the namespace `kiksen` is created automatically).
+2. Create an API token there (*Collections -> API token*).
+3. Add it to the GitHub repository as the secret `GALAXY_API_KEY`
+   (*Settings -> Secrets and variables -> Actions -> New repository secret*).
+
+For every release:
+
+1. Raise `version` in `galaxy.yml` (semantic versioning) and describe the change in `CHANGELOG.md`.
+2. Check locally: `uv run ruff check && uv run pytest && uv run ansible-lint`.
+3. Optional: build the package and look at its content: `uv run ansible-galaxy collection build` and `tar tzf kiksen-netconf-0.1.0.tar.gz`.
+4. Commit and push to `main`, wait until the `CI` workflow is green.
+5. Tag and push the tag (the tag must match `version` in `galaxy.yml`, otherwise the release fails):
+
+   ```bash
+   git tag v0.1.0
+   git push origin v0.1.0
+   ```
+
+6. Watch the run under *Actions -> Release*. On success the collection is on Galaxy and a GitHub release with the tarball exists.
+
+Notes:
+
+- A published version can not be overwritten. Fix an error with the next patch version.
+- If the release run fails before the publish step, delete the tag (`git push --delete origin v0.1.0`, `git tag -d v0.1.0`), fix the problem and tag again.
+- Manual upload without GitHub: `uv run ansible-galaxy collection publish kiksen-netconf-0.1.0.tar.gz --token <token>`.
